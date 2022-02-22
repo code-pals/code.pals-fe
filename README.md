@@ -1,7 +1,5 @@
-# react-template
+# Installations:
 
-A starter template for React projects at Alchemy Code Lab. We'll be using this in the "Advanced React" portion of the program.
-
-## Getting Started
-
-Click "Use this template" to create a new repo with your user as the owner. Then clone down the newly created repo and get hacking!
+npm i react-router-dom@5
+npm i @chakra-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^6
+npm install react-icons --save
