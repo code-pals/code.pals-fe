@@ -97,7 +97,12 @@ export default function socialProfileWithImageHorizontal() {
                 bg: 'gray.200',
               }}
             >
-              LinkedIn
+              <Link
+                href={'https://www.linkedin.com/in/marvinlambert/'}
+                underline="none"
+              >
+                LinkedIn
+              </Link>
             </Button>
             <Button
               flex={1}
@@ -115,7 +120,12 @@ export default function socialProfileWithImageHorizontal() {
                 bg: 'blue.500',
               }}
             >
-              Github
+              <Link
+                href={'https://github.com/franklyhollywood'}
+                underline="none"
+              >
+                Github
+              </Link>
             </Button>
           </Stack>
         </Stack>

@@ -106,12 +106,14 @@ export default function withAction() {
                   }
                 />
               </MenuButton>
-              {/* <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
+              <MenuList>
+                <Link href={'/profile'} underline="none">
+                  Profile
+                </Link>
+                {/* <MenuItem>Link 2</MenuItem>
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList> */}
+                <MenuItem>Link 3</MenuItem> */}
+              </MenuList>
             </Menu>
           </Flex>
         </Flex>
