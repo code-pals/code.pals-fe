@@ -17,6 +17,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { useUser } from '../../context/UserContext.js';
 
 const Links = ['Home', 'Create', 'Messages', 'Login', 'About Us'];
 
@@ -37,6 +38,7 @@ const NavLink = ({ children }) => (
 
 export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { user, getUser, logIn, logOut } = useUser();
 
   return (
     <>
@@ -65,9 +67,15 @@ export default function withAction() {
               <Link href={'/messages'} underline="none">
                 Messages
               </Link>
-              <Link href={'/login'} underline="none">
-                Login
-              </Link>
+              {!user.id ? (
+                <Link href={'/login'} underline="none" onClick={logIn}>
+                  Login
+                </Link>
+              ) : (
+                <Link href={'/login'} underline="none" onClick={logOut}>
+                  Logout
+                </Link>
+              )}
               <Link href={'/aboutus'} underline="none">
                 About Us
               </Link>

@@ -7,9 +7,11 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
-import { logIn } from '../services/users';
+import { useUser } from '../../context/UserContext';
 
 export default function Login() {
+  const { user, getUser, logIn, logOut } = useUser();
+
   return (
     <Flex
       w={'full'}

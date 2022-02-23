@@ -1,9 +1,16 @@
-export default function users() {
-  return <div>users</div>;
+async function fetchUser() {
+  try {
+    const res = await fetch('http://localhost:7890/api/v1/users/me/', {
+      credentials: 'include',
+    });
+    if (res.statusCode >= 400) {
+      return {};
+    }
+    const user = await res.json();
+    return user;
+  } catch (e) {
+    return {};
+  }
 }
 
-async function logIn() {
-  window.location.assign(`${process.env.URL}/api/v1/users/login`);
-}
-//This is an export
-export { logIn };
+export { fetchUser };
