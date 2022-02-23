@@ -14,6 +14,8 @@ import Results from './views/Results/Results.jsx';
 import DirectMessages from './views/DirectMessages/DirectMessages.jsx';
 import AboutUs from './views/AboutUs/AboutUs.jsx';
 import Header from './components/Header/Header.jsx';
+import OauthReturn from './views/OauthReturn/OauthReturn.jsx';
+import { UserProvider } from './context/UserContext.js';
 //import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App() {
@@ -42,6 +44,9 @@ function App() {
           </Route>
           <Route exact path="/aboutus">
             <AboutUs />
+          </Route>
+          <Route exact path="/oauthreturn">
+            <OauthReturn />
           </Route>
         </Switch>
       </Router>
