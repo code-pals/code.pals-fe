@@ -9,7 +9,13 @@ import {
 } from '@chakra-ui/react';
 
 import SearchBar from '../../components/SearchBar/SearchBar.jsx';
+import CodeBox from '../../components/CodeBox/CodeBox.jsx';
 
 export default function Results() {
-  return <SearchBar />;
+  return (
+    <>
+      <SearchBar />;
+      <CodeBox />
+    </>
+  );
 }
