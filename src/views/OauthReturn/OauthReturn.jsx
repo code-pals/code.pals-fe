@@ -10,8 +10,9 @@ export default function OauthReturn() {
   useEffect(() => {
     (async () => {
       const user = await fetchUser();
+      console.log(user);
       setUser(user);
-      history.push('/home');
+      history.push('/');
     })();
   }, []);
 
