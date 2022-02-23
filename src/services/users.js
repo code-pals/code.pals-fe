@@ -9,6 +9,7 @@ async function fetchUser() {
     const user = await res.json();
     return user;
   } catch (e) {
+    console.log('EEEEEE', e);
     return {};
   }
 }
