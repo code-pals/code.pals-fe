@@ -7,6 +7,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
+import { logIn } from '../services/users';
 
 export default function Login() {
   return (
@@ -23,7 +24,7 @@ export default function Login() {
         w={'full'}
         justify={'center'}
         px={useBreakpointValue({ base: 4, md: 8 })}
-        bgGradient={'linear(to-r, blackAlpha.700, transparent)'}
+        bgGradient={'linear(to-r, blackAlpha.800, transparent)'}
       >
         <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
           <Text
@@ -41,18 +42,11 @@ export default function Login() {
               rounded={'full'}
               color={'white'}
               _hover={{ bg: 'blue.500' }}
+              rightIcon={<FaGithub />}
+              onClick={logIn}
             >
               Log in with Github
-              <FaGithub />
             </Button>
-            {/* <Button
-              bg={'whiteAlpha.300'}
-              rounded={'full'}
-              color={'white'}
-              _hover={{ bg: 'whiteAlpha.500' }}
-            >
-              Show me more
-            </Button> */}
           </Stack>
         </Stack>
       </VStack>
