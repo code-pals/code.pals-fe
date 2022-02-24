@@ -35,8 +35,8 @@ export default function Login() {
             lineHeight={1.2}
             fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}
           >
-            Code.pals lets you find others to code with, and get some Great
-            ideas for projects too!
+            Code.pals Lets You Find Others To Code With, And Get Some Great
+            Ideas For Projects Too!
           </Text>
           <Stack direction={'row'}>
             <Button
