@@ -9,7 +9,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-export default function blogPostWithImage() {
+export default function blogPostWithImage({ board }) {
   return (
     <Center py={6}>
       <Box
@@ -51,9 +51,9 @@ export default function blogPostWithImage() {
             fontSize={'2xl'}
             fontFamily={'body'}
           >
-            Title
+            {board.title}
           </Heading>
-          <Text color={'gray.500'}>Post Question: </Text>
+          <Text color={'gray.500'}>{board.summary} </Text>
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
           <Avatar
@@ -61,8 +61,10 @@ export default function blogPostWithImage() {
             alt={'Author'}
           />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>Username</Text>
-            <Text color={'gray.500'}>Feb 08, 2021 · Comments</Text>
+            <Text fontWeight={600}>{board.created_by}</Text>
+            <Text color={'gray.500'}>
+              {board.created.slice(0, 10)} · Comments
+            </Text>
           </Stack>
         </Stack>
       </Box>
