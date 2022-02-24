@@ -4,16 +4,16 @@ import {
   Heading,
   Text,
   Stack,
-  Image,
   Avatar,
+  Image,
   useColorModeValue,
 } from '@chakra-ui/react';
 
-export default function CodeBox() {
+export default function PostHomeBox({ post }) {
   return (
     <Center py={6}>
       <Box
-        maxW={'445px'}
+        maxW={'222px'}
         w={'full'}
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
@@ -22,7 +22,7 @@ export default function CodeBox() {
         overflow={'hidden'}
       >
         <Box
-          h={'210px'}
+          h={'105px'}
           bg={'gray.100'}
           mt={-6}
           mx={-6}
@@ -31,7 +31,7 @@ export default function CodeBox() {
         >
           <Image
             src={
-              'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2378&q=80'
+              'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
             }
             layout={'fill'}
           />
@@ -44,16 +44,16 @@ export default function CodeBox() {
             fontSize={'sm'}
             letterSpacing={1.1}
           >
-            {/* Blog */}
+            Blog
           </Text>
           <Heading
             color={useColorModeValue('gray.700', 'white')}
             fontSize={'2xl'}
             fontFamily={'body'}
           >
-            Boost your conversion rate
+            {post.title}
           </Heading>
-          <Text color={'gray.500'}>Title:</Text>
+          <Text color={'gray.500'}>Post Question: {post.question} </Text>
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
           <Avatar
@@ -61,8 +61,10 @@ export default function CodeBox() {
             alt={'Author'}
           />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>Username</Text>
-            <Text color={'gray.500'}>What Are you looking</Text>
+            <Text fontWeight={600}>{post.username}</Text>
+            <Text color={'gray.500'}>
+              {post.created.slice(0, 10)} · Comments
+            </Text>
           </Stack>
         </Stack>
       </Box>

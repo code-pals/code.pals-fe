@@ -29,7 +29,7 @@ export default function socialProfileWithImageHorizontal() {
             objectFit="cover"
             boxSize="100%"
             src={
-              'https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80'
+              'https://images.unsplash.com/photo-1616004655123-818cbd4b3143?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80'
             }
           />
         </Flex>
@@ -42,7 +42,7 @@ export default function socialProfileWithImageHorizontal() {
           pt={2}
         >
           <Heading fontSize={'2xl'} fontFamily={'body'}>
-            Estefani Baughman
+            Name
           </Heading>
           {/* <Text fontWeight={600} color={'gray.500'} size="sm" mb={4}>
             @lindsey_jam3s
@@ -52,7 +52,7 @@ export default function socialProfileWithImageHorizontal() {
             color={useColorModeValue('gray.700', 'gray.400')}
             px={3}
           >
-            Favorite thing about coding: Shared learning experiences
+            Quote
           </Text>
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             <Badge
@@ -98,7 +98,7 @@ export default function socialProfileWithImageHorizontal() {
               }}
             >
               <Link
-                href={'https://www.linkedin.com/in/estefani-baughman/'}
+                href={'https://www.linkedin.com/in/amitsheth9/'}
                 underline="none"
               >
                 LinkedIn
@@ -120,7 +120,7 @@ export default function socialProfileWithImageHorizontal() {
                 bg: 'blue.500',
               }}
             >
-              <Link href={'https://github.com/HonduranCoder'} underline="none">
+              <Link href={'https://github.com/AmitSheth9'} underline="none">
                 Github
               </Link>
             </Button>
