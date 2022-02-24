@@ -16,7 +16,7 @@ export default function Profile() {
   return (
     <>
       <Container mt="10px" centerContent>
-        <h1> Preferred Name </h1>
+        <h1> Username </h1>
         <h3> Pronouns </h3>
         <h3> Years of Experience </h3>
         <h2> Tech Stack </h2>
