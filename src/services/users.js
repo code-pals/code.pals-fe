@@ -1,6 +1,6 @@
 async function fetchUser() {
   try {
-    const res = await fetch('http://localhost:7890/api/v1/users/me/', {
+    const res = await fetch(`${process.env.URL}/api/v1/users/me/`, {
       credentials: 'include',
     });
     if (res.statusCode >= 400) {
