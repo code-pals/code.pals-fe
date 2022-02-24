@@ -1,9 +1,9 @@
-import CreateForm from '../../components/CreateForm/CreateForm.jsx';
+import PostForm from '../../components/PostForm/PostForm.jsx';
 
-export default function Create() {
+export default function Post() {
   return (
     <>
-      <CreateForm />
+      <PostForm />
     </>
   );
 }
