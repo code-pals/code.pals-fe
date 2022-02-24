@@ -39,6 +39,7 @@ const NavLink = ({ children }) => (
 export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, getUser, logIn, logOut } = useUser();
+  console.log('USER3', user);
 
   return (
     <>
@@ -67,18 +68,19 @@ export default function withAction() {
               <Link href={'/messages'} underline="none">
                 Messages
               </Link>
-              {!user.id ? (
-                <Link href={'/login'} underline="none" onClick={logIn}>
+              {!user.github ? (
+                <Link href={'/login'} underline="none">
                   Login
                 </Link>
               ) : (
-                <Link href={'/login'} underline="none" onClick={logOut}>
+                <Link href={'/'} underline="none" onClick={logOut}>
                   Logout
                 </Link>
               )}
               <Link href={'/aboutus'} underline="none">
                 About Us
               </Link>
+              {user.github}
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
@@ -108,6 +110,7 @@ export default function withAction() {
               </MenuButton>
               <MenuList>
                 <Link href={'/profile'} underline="none">
+                  {user.github}
                   Profile
                 </Link>
                 {/* <MenuItem>Link 2</MenuItem>
