@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { fetchUser } from '../services/users';
+
 const request = require('superagent');
 
 const UserContext = createContext();
@@ -12,9 +13,7 @@ const UserProvider = ({ children }) => {
     (async () => {
       const fetchedUser = await fetchUser();
       console.log(fetchedUser);
-      if (!!fetchedUser?.id) {
-        setUser(fetchedUser);
-      }
+      setUser(fetchedUser);
       setLoading(false);
     })();
   }, []);
