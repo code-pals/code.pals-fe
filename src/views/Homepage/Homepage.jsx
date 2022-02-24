@@ -20,8 +20,8 @@ export default function Homepage() {
     <>
       <SearchBar />
       {posts.map((post) => (
-        <div key={post.post_id}>
-          <PostHomeBox post={post} key={post.post_id} />
+        <div key={post.postId}>
+          <PostHomeBox post={post} key={post.postId} />
         </div>
       ))}
     </>

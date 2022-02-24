@@ -79,5 +79,8 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^5.3.0",
     "superagent": "^7.1.1"
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }
