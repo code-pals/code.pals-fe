@@ -15,10 +15,16 @@ import {
   Center,
   Link,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import Profile from './Profile';
 
 export default function CreateProfile() {
+  const [username, setUserName] = useState;
+  const [pronouns, setPronouns] = useState;
+  const [years, setYears] = useState;
+  const [language, setLanguage] = useState;
+
   const history = useHistory();
 
   function formHandler(e) {
@@ -39,6 +45,7 @@ export default function CreateProfile() {
                     id="username"
                     type="username"
                     placeholder="User Name"
+                    value={username}
                   />
                   <br />
                   <Select placeholder="Select pronouns">
