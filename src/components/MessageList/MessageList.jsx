@@ -6,7 +6,7 @@ export default function MessageList() {
       <ListItem>Email 1</ListItem>
       <ListItem>Email 2</ListItem>
       <ListItem>Email 3</ListItem>
-      <ListItem>EMail 4</ListItem>
+      <ListItem>Email 4</ListItem>
     </List>
   );
 }
