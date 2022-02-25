@@ -58,7 +58,7 @@ export default function BoardHomeBox({ board }) {
           >
             Title: {board.title}
           </Heading>
-          <Text color={'gray.500'}>Summary: {board.summary} </Text>Goal: {board.goal}
+          <Text color={'gray.500'}>Board Summary: {board.summary} </Text>Goal: {board.goal}
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
           <Avatar
@@ -66,9 +66,9 @@ export default function BoardHomeBox({ board }) {
             alt={'Author'}
           />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>{board.createdBy}</Text>
+            <Text fontWeight={600}>{board.username}</Text>
             <Text color={'gray.500'}>
-              {board.github}<br/>
+              <br/>
               {board.created.slice(0, 10)} · Comments
             </Text>
           </Stack>

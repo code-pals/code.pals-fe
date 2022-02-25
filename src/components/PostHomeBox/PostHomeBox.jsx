@@ -63,7 +63,7 @@ export default function PostHomeBox({ post }) {
             alt={'Author'}
           />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>{post.github}</Text>
+            <Text fontWeight={600}>{post.username}</Text>
             <Text color={'gray.500'}>
               {post.created.slice(0, 10)} · Comments
             </Text>

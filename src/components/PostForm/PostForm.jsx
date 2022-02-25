@@ -54,14 +54,6 @@ export default function PostForm() {
       <Container centerContent>
         <form onSubmit={handleSubmit}>
           <FormControl as="fieldset">
-            <FormLabel as="legend">Create A Post or Board</FormLabel>
-            <RadioGroup defaultValue="Itachi">
-              <HStack spacing="24px">
-                <Radio value="Post">Post</Radio>
-                <Radio value="Board">Board</Radio>
-              </HStack>
-            </RadioGroup>
-            <FormHelperText>Select</FormHelperText>
             <FormLabel htmlFor="title">Title</FormLabel>
             <Input
               id="title"
