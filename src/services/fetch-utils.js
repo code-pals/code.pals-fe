@@ -30,7 +30,16 @@ export async function createBoard(board) {
 }
 export async function getUserById(id) {
   const response = await request
-  .get(`${url}/users/id`);
+  .get(`${url}/users/${id}`);
+
+  return response;
+}
+export async function postUserData(id, user) {
+  console.log(user);
+  const response = await request
+  .patch(`${url}/users/profile/${id}`)
+  .send(user)
+  .withCredentials();
 
   return response;
 }
