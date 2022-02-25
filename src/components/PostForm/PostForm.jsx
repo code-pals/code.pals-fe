@@ -14,7 +14,7 @@ import {
   Center,
 } from '@chakra-ui/react';
 import SubmitButton from '../SubmitButton/SubmitButton.jsx';
-import { createPost } from '../../services/fetch-utils.js';
+import { createPost, getById } from '../../services/fetch-utils.js';
 import { useUser } from '../../context/UserContext.js';
 import { useHistory } from 'react-router';
 
@@ -26,6 +26,8 @@ export default function PostForm() {
 
   const { user } = useUser();
   console.log(user, 'USER');
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +41,9 @@ export default function PostForm() {
         };
         const response = await createPost(postObj);
         console.log(response.body);
+
+        
+        history.push('/')
       } else {
         history.push('/login');
       }

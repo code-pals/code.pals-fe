@@ -17,7 +17,7 @@ import Header from './components/Header/Header.jsx';
 import OauthReturn from './views/OauthReturn/OauthReturn.jsx';
 import { UserProvider } from './context/UserContext.js';
 import CreateProfile from './views/Profile/CreateProfile.jsx';
-//import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -34,9 +34,9 @@ function App() {
           <Route exact path="/profile">
             <Profile />
           </Route>
-          <Route exact path="/create">
+          <PrivateRoute exact path="/create">
             <Create />
-          </Route>
+          </PrivateRoute>
           <Route exact path="/messages">
             <DirectMessages />
           </Route>
