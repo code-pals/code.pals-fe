@@ -22,12 +22,17 @@ import { postUserData } from '../../services/fetch-utils';
 // import Profile from './Profile';
 
 export default function CreateProfile() {
+  const [username, setUserName] = useState;
+  const [pronouns, setPronouns] = useState;
+  const [years, setYears] = useState;
+  const [language, setLanguage] = useState;
+
   const history = useHistory();
   const [username, setUsername] = useState('');
   const [pronouns, setPronouns] = useState('');
   const [experience, setExperience] = useState('');
   const [techStack, setTechStack] = useState([]);
-  const {user} = useUser();
+  const { user } = useUser();
 
   async function formHandler(e) {
     e.preventDefault();
@@ -35,7 +40,7 @@ export default function CreateProfile() {
       username: username,
       pronouns: pronouns,
       experience: experience,
-    }
+    };
     const id = user.userId;
     console.log(id);
     const response = await postUserData(id, userObj);
@@ -55,14 +60,15 @@ export default function CreateProfile() {
                   <Input
                     id="username"
                     placeholder="User Name"
-                    onChange={(e)=>setUsername(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                     value={username}
                   />
                   <br />
-                  <Select 
-                  placeholder="Select pronouns"
-                  onChange={(e)=> setPronouns(e.target.value)}
-                  value={pronouns}>
+                  <Select
+                    placeholder="Select pronouns"
+                    onChange={(e) => setPronouns(e.target.value)}
+                    value={pronouns}
+                  >
                     <option value="option1">He/Him/His</option>
                     <option value="option2">She/Her/Hers</option>
                     <option value="option3">They/Them/Their</option>
@@ -70,17 +76,18 @@ export default function CreateProfile() {
                     <option value="option3">Not Listed</option>
                   </Select>
                   <br />
-                  <Select 
-                  placeholder="Select Years of Experience"
-                  onChange={(e)=>setExperience(e.target.value)}
-                  value={experience}>
+                  <Select
+                    placeholder="Select Years of Experience"
+                    onChange={(e) => setExperience(e.target.value)}
+                    value={experience}
+                  >
                     <option value="option1">Less than 1</option>
                     <option value="option2">1 - 3</option>
                     <option value="option3">3 - 6</option>
                     <option value="option3">6 plus</option>
                   </Select>
                   <br />
-                 {/* <CheckboxGroup colorScheme="green">
+                  {/* <CheckboxGroup colorScheme="green">
                     <Stack spacing={[1, 5]} direction={['column', 'row']}>
                       <Checkbox value="JavaScript">JavaScript</Checkbox>
                       <Checkbox value="C++">C++</Checkbox>
@@ -98,7 +105,7 @@ export default function CreateProfile() {
                       <Checkbox value=".net">.Net</Checkbox>
                     </Stack>
                   </CheckboxGroup>*/}
-                 
+
                   <br />
                   <Button
                     bg={'blue.400'}
