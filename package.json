@@ -4,7 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "jest": {
-    "setupFiles": ["dotenv/config"],
+    "setupFiles": [
+      "dotenv/config"
+    ],
     "setupFilesAfterEnv": [
       "@testing-library/jest-dom/extend-expect",
       "<rootDir>/src/setupTests.js"
@@ -65,7 +67,20 @@
     "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
+    "@chakra-ui/icon": "^2.0.5",
+    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/react": "^1.8.5",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "framer-motion": "^6.2.7",
+    "next-images": "^1.8.4",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-router-dom": "^5.3.0",
+    "superagent": "^7.1.1"
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }
