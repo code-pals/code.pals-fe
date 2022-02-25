@@ -40,7 +40,7 @@ export default function PostForm() {
           question: question,
         };
         const response = await createPost(postObj);
-        console.log(response.body);
+        console.log('response', response.body);
 
         
         history.push('/')

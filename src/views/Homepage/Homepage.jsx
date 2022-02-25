@@ -12,13 +12,14 @@ export default function Homepage() {
   useEffect(() => {
     const getPostsAndBoards = async () => {
       const response = await getAllPosts();
+
       setPosts(response.body);
       const resBoards = await getAllBoards();
       setBoards(resBoards.body);
     };
     getPostsAndBoards();
   }, []);
-  console.log(posts);
+  console.log('postsuseffect', posts);
   console.log('boards', boards);
 
   return (
@@ -30,8 +31,8 @@ export default function Homepage() {
         </div>
       ))}
       {boards.map((board) => (
-        <div key={board.boardId}>
-          <BoardHomeBox board={board} key={board.boardId}/>
+        <div key={board.board_id}>
+          <BoardHomeBox board={board} key={board.board_id}/>
         </div>
       ))}
     </>
