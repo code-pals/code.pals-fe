@@ -8,8 +8,11 @@ import {
   Image,
   useColorModeValue,
 } from '@chakra-ui/react';
-
+import { useUser } from '../../context/UserContext';
 export default function PostHomeBox({ post }) {
+  const { user } = useUser();
+
+  console.log('post',post);
   return (
     <Center py={6}>
       <Box
@@ -57,7 +60,7 @@ export default function PostHomeBox({ post }) {
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
           <Avatar
-            src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
+            src={user.avatar}
             alt={'Author'}
           />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>

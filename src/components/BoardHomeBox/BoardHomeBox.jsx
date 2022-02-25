@@ -8,8 +8,12 @@ import {
   Image,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useUser } from '../../context/UserContext';
+//get user from database by id
+//and then get the avatar
 
-export default function blogPostWithImage({ board }) {
+export default function BoardHomeBox({ board }) {
+  const { user } = useUser();
   return (
     <Center py={6}>
       <Box
@@ -36,6 +40,7 @@ export default function blogPostWithImage({ board }) {
             layout={'fill'}
           />
         </Box>
+        <Text color={'gray.500'}></Text> {board.group_size}
         <Stack>
           <Text
             color={'green.500'}
@@ -44,7 +49,7 @@ export default function blogPostWithImage({ board }) {
             fontSize={'sm'}
             letterSpacing={1.1}
           >
-            Blog
+            {board.group_size}
           </Text>
           <Heading
             color={useColorModeValue('gray.700', 'white')}
@@ -53,15 +58,15 @@ export default function blogPostWithImage({ board }) {
           >
             {board.title}
           </Heading>
-          <Text color={'gray.500'}>{board.summary} </Text>
+          <Text color={'gray.500'}>{board.summary} </Text>{board.goal}
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
           <Avatar
-            src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
+            src={user.avatar}
             alt={'Author'}
           />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>{board.created_by}</Text>
+            <Text fontWeight={600}>{board.createdBy}</Text>
             <Text color={'gray.500'}>
               {board.created.slice(0, 10)} · Comments
             </Text>
