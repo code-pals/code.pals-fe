@@ -7,6 +7,7 @@ export default function Post() {
 
   return (
     <>
+    
       <PostForm />
       <BoardForm />
     </>

@@ -12,7 +12,6 @@ import { useUser } from '../../context/UserContext';
 export default function PostHomeBox({ post }) {
   const { user } = useUser();
 
-  console.log('post',post);
   return (
     <Center py={6}>
       <Box
@@ -60,11 +59,11 @@ export default function PostHomeBox({ post }) {
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
           <Avatar
-            src={user.avatar}
+            src={post.avatar}
             alt={'Author'}
           />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>{post.username}</Text>
+            <Text fontWeight={600}>{post.github}</Text>
             <Text color={'gray.500'}>
               {post.created.slice(0, 10)} · Comments
             </Text>

@@ -49,25 +49,26 @@ export default function BoardHomeBox({ board }) {
             fontSize={'sm'}
             letterSpacing={1.1}
           >
-            {board.group_size}
+            Group Size: {board.group_size}
           </Text>
           <Heading
             color={useColorModeValue('gray.700', 'white')}
             fontSize={'2xl'}
             fontFamily={'body'}
           >
-            {board.title}
+            Title: {board.title}
           </Heading>
-          <Text color={'gray.500'}>{board.summary} </Text>{board.goal}
+          <Text color={'gray.500'}>Summary: {board.summary} </Text>Goal: {board.goal}
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
           <Avatar
-            src={user.avatar}
+            src={board.avatar}
             alt={'Author'}
           />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
             <Text fontWeight={600}>{board.createdBy}</Text>
             <Text color={'gray.500'}>
+              {board.github}<br/>
               {board.created.slice(0, 10)} · Comments
             </Text>
           </Stack>
