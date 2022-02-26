@@ -33,6 +33,7 @@ export default function SearchBar() {
 
 console.log(comments, posts);
   return (
+    <>
     <Center>
       <Box m="20px" width="50%">
         <Stack spacing={4}>
@@ -56,7 +57,10 @@ console.log(comments, posts);
           </form>
         </Stack>
       </Box>
-      {posts.map((post) => {
+     
+    </Center>
+    <div>
+       {posts.map((post) => {
        return ( <PostHomeBox post={post} />
       )})}
 
@@ -65,7 +69,7 @@ console.log(comments, posts);
 
      
       )})}
-    </Center>
-    
+    </div>
+    </>
   );
 }
