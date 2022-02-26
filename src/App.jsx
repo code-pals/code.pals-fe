@@ -19,6 +19,7 @@ import { UserProvider } from './context/UserContext.js';
 import CreateProfile from './views/Profile/CreateProfile.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PostDetails from './views/PostDetails/PostDetails.jsx';
+import SearchBar from './components/SearchBar/SearchBar.jsx';
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
             <DirectMessages />
           </Route>
           <Route exact path="/results">
-            <Results />
+            <SearchBar />
           </Route>
           <Route exact path="/aboutus">
             <AboutUs />
