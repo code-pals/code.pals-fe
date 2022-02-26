@@ -62,3 +62,10 @@ export async function createComment(comment) {
 
   return response;
 }
+export async function searchPostsAndComments(keyword) {
+  console.log(keyword, 'keys')
+  const response = await request
+  .get(`${url}/comments?keyword=${keyword}`);
+
+  return response;
+}
