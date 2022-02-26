@@ -19,6 +19,10 @@ import { UserProvider } from './context/UserContext.js';
 import CreateProfile from './views/Profile/CreateProfile.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PostDetails from './views/PostDetails/PostDetails.jsx';
+import GroupChatList from './views/GroupChat/GroupChatList.jsx';
+import GroupChat from './views/GroupChat/GroupChat.jsx';
+import SendMessageForm from './views/GroupChat/SendMessageForm.jsx';
+import NewGroupChat from './views/GroupChat/NewGroupChat.jsx';
 
 function App() {
   return (
@@ -55,6 +59,12 @@ function App() {
           </Route>
           <Route exact path="/postdetails/:id">
             <PostDetails />
+          </Route>
+          <Route exact path="/boardroom">
+            <GroupChat />
+            <GroupChatList />
+            <SendMessageForm />
+            <NewGroupChat />
           </Route>
         </Switch>
       </Router>
