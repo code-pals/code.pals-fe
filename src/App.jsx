@@ -56,9 +56,6 @@ function App() {
           <Route exact path="/postdetails/:id">
             <PostDetails />
           </Route>
-          <Route exact path="/boarddetails/:id">
-            <BoardDetails />
-          </Route>
         </Switch>
       </Router>
     </div>

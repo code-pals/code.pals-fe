@@ -7,6 +7,7 @@ import { fetchUser } from '../../services/users.js';
 export default function OauthReturn() {
   let history = useHistory();
   const { setUser } = useUser();
+
   useEffect(() => {
     (async () => {
       const user = await fetchUser();
