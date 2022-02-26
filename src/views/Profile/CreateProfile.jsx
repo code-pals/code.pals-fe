@@ -22,11 +22,6 @@ import { postUserData } from '../../services/fetch-utils';
 // import Profile from './Profile';
 
 export default function CreateProfile() {
-  const [username, setUserName] = useState;
-  const [pronouns, setPronouns] = useState;
-  const [years, setYears] = useState;
-  const [language, setLanguage] = useState;
-
   const history = useHistory();
   const [username, setUsername] = useState('');
   const [pronouns, setPronouns] = useState('');
