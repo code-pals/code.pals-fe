@@ -19,7 +19,7 @@ import {
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { useUser } from '../../context/UserContext.js';
 
-const Links = ['Home', 'Create', 'Messages', 'Login', 'About Us'];
+const Links = ['Home', 'Create', 'Messages', 'Login', 'Search', 'About Us'];
 
 const NavLink = ({ children }) => (
   <Link
@@ -79,6 +79,9 @@ export default function withAction() {
                   Logout
                 </Link>
               )}
+              <Link href={'/results'} underline="none">
+                Search
+              </Link>
               <Link href={'/aboutus'} underline="none">
                 About Us
               </Link>
