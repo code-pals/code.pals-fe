@@ -27,8 +27,6 @@ export default function PostForm() {
   const { user } = useUser();
   console.log(user, 'USER');
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -42,8 +40,7 @@ export default function PostForm() {
         const response = await createPost(postObj);
         console.log('response', response.body);
 
-        
-        history.push('/')
+        history.push(`/postdetails/${response.body.postId}`);
       } else {
         history.push('/login');
       }

@@ -19,8 +19,8 @@ import GithubBox from '../../components/GithubBox/GithubBox.jsx';
 export default function Profile() {
   return (
     <>
-      <CodeBox /> <CodeBox />
       <GithubBox />
+      <CodeBox /> <CodeBox />
     </>
   );
 }
