@@ -18,6 +18,7 @@ import OauthReturn from './views/OauthReturn/OauthReturn.jsx';
 import { UserProvider } from './context/UserContext.js';
 import CreateProfile from './views/Profile/CreateProfile.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PostDetails from './views/PostDetails/PostDetails.jsx';
 
 function App() {
   return (
@@ -51,6 +52,12 @@ function App() {
           </Route>
           <Route exact path="/createprofile">
             <CreateProfile />
+          </Route>
+          <Route exact path="/postdetails/:id">
+            <PostDetails />
+          </Route>
+          <Route exact path="/boarddetails/:id">
+            <BoardDetails />
           </Route>
         </Switch>
       </Router>

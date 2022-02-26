@@ -7,8 +7,7 @@ export async function getAllPosts() {
   return response;
 }
 export async function getAllBoards() {
-  const response = await request
-  .get(`${url}/boards`);
+  const response = await request.get(`${url}/boards`);
 
   return response;
 }
@@ -22,15 +21,44 @@ export async function createPost(post) {
 }
 export async function createBoard(board) {
   const response = await request
-  .post(`${url}/boards`)
-  .send(board)
-  .withCredentials();
+    .post(`${url}/boards`)
+    .send(board)
+    .withCredentials();
 
   return response;
 }
 export async function getUserById(id) {
+  const response = await request.get(`${url}/users/${id}`);
+
+  return response;
+}
+export async function postUserData(id, user) {
+  console.log(user);
   const response = await request
-  .get(`${url}/users/id`);
+    .patch(`${url}/users/profile/${id}`)
+    .send(user)
+    .withCredentials();
+
+  return response;
+}
+
+export async function getPostById(id) {
+  const response = await request.get(`${url}/posts/${id}`);
+
+  return response;
+}
+
+export async function getCommentsByPost(id) {
+  const response = await request.get(`${url}/comments/${id}`);
+
+  return response;
+}
+
+export async function createComment(comment) {
+  const response = await request
+    .post(`${url}/comments`)
+    .send(comment)
+    .withCredentials();
 
   return response;
 }

@@ -27,8 +27,6 @@ export default function PostForm() {
   const { user } = useUser();
   console.log(user, 'USER');
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -40,10 +38,9 @@ export default function PostForm() {
           question: question,
         };
         const response = await createPost(postObj);
-        console.log(response.body);
+        console.log('response', response.body);
 
-        
-        history.push('/')
+        history.push(`/postdetails/${response.body.postId}`);
       } else {
         history.push('/login');
       }
@@ -54,14 +51,6 @@ export default function PostForm() {
       <Container centerContent>
         <form onSubmit={handleSubmit}>
           <FormControl as="fieldset">
-            <FormLabel as="legend">Create A Post or Board</FormLabel>
-            <RadioGroup defaultValue="Itachi">
-              <HStack spacing="24px">
-                <Radio value="Post">Post</Radio>
-                <Radio value="Board">Board</Radio>
-              </HStack>
-            </RadioGroup>
-            <FormHelperText>Select</FormHelperText>
             <FormLabel htmlFor="title">Title</FormLabel>
             <Input
               id="title"
