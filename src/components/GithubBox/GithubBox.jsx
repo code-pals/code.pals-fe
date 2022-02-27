@@ -7,11 +7,13 @@ import {
   Stack,
   Image,
 } from '@chakra-ui/react';
+import { useUser } from '../../context/UserContext.js';
 
 const IMAGE =
   'https://images.unsplash.com/photo-1618401479427-c8ef9465fbe1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2343&q=80';
 
 export default function ProductSimple() {
+  const { user } = useUser();
   return (
     <>
       <Center py={12}>
@@ -57,20 +59,22 @@ export default function ProductSimple() {
               src={IMAGE}
             />
           </Box>
-          <Stack pt={10} align={'center'}>
+          <Stack pt={10} align={'left'}>
             <Text
               color={'gray.500'}
               fontSize={'sm'}
               textTransform={'uppercase'}
             >
-              Github Stats
+              Github Stats:
             </Text>
             <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-              Repos:
+              {user.github}
+              <br />
+              Repos: {user.repos}
             </Heading>
-            <Stack direction={'row'} align={'center'}>
+            <Stack direction={'row'} align={'left'}>
               <Text fontWeight={800} fontSize={'xl'}>
-                Member Since:
+                Member Since:{user.memberSince}
               </Text>
             </Stack>
           </Stack>
