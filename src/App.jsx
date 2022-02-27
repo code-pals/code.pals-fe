@@ -57,12 +57,6 @@ function App() {
           <Route exact path="/postdetails/:id">
             <PostDetails />
           </Route>
-          <Route exact path="/boardroom">
-            <GroupChat />
-            <GroupChatList />
-            <SendMessageForm />
-            <NewGroupChat />
-          </Route>
         </Switch>
       </Router>
     </div>
