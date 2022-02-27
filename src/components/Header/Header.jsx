@@ -62,23 +62,18 @@ export default function withAction() {
               <Link href={'/'} underline="none">
                 Home
               </Link>
-              {!user.github ? <Link href={'/login'}> Create </Link> :
               <Link href={'/create'} underline="none">
                 Create
-              </Link>}
-              {!user.github ? <Link href={'/login'}> Messages </Link> :
+              </Link>
               <Link href={'/messages'} underline="none">
                 Messages
-              </Link>}
-              {!user.github ? (
-                <Link href={'/login'} underline="none">
-                  Login
-                </Link>
-              ) : (
-                <Link href={'/'} underline="none" onClick={logOut}>
-                  Logout
-                </Link>
-              )}
+              </Link>
+              <Link href={'/login'} underline="none">
+                Login
+              </Link>
+              <Link href={'/'} underline="none" onClick={logOut}>
+                Logout
+              </Link>
               <Link href={'/results'} underline="none">
                 Search
               </Link>
@@ -106,12 +101,7 @@ export default function withAction() {
                 cursor={'pointer'}
                 minW={0}
               >
-                <Avatar
-                  size={'sm'}
-                  src={
-                    user.avatar
-                  }
-                />
+                <Avatar size={'sm'} src={user.avatar} />
               </MenuButton>
               <MenuList>
                 <Link href={'/profile'} underline="none">

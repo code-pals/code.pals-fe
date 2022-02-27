@@ -1,6 +1,6 @@
 import {
   BrowserRouter as Router,
-  NavLink,
+  // NavLink,
   Route,
   Switch,
 } from 'react-router-dom';
@@ -20,45 +20,50 @@ import CreateProfile from './views/Profile/CreateProfile.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PostDetails from './views/PostDetails/PostDetails.jsx';
 import SearchBar from './components/SearchBar/SearchBar.jsx';
+import { ChakraProvider } from '@chakra-ui/react';
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Homepage />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-          <PrivateRoute exact path="/create">
-            <Create />
-          </PrivateRoute>
-          <Route exact path="/messages">
-            <DirectMessages />
-          </Route>
-          <Route exact path="/results">
-            <SearchBar />
-          </Route>
-          <Route exact path="/aboutus">
-            <AboutUs />
-          </Route>
-          <Route exact path="/oauthreturn">
-            <OauthReturn />
-          </Route>
-          <Route exact path="/createprofile">
-            <CreateProfile />
-          </Route>
-          <Route exact path="/postdetails/:id">
-            <PostDetails />
-          </Route>
-        </Switch>
-      </Router>
+      <UserProvider>
+        <ChakraProvider>
+          <Header />
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <Homepage />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+              <Route exact path="/create">
+                <Create />
+              </Route>
+              <Route exact path="/messages">
+                <DirectMessages />
+              </Route>
+              <Route exact path="/results">
+                <SearchBar />
+              </Route>
+              <Route exact path="/aboutus">
+                <AboutUs />
+              </Route>
+              <Route exact path="/oauthreturn">
+                <OauthReturn />
+              </Route>
+              <Route exact path="/createprofile">
+                <CreateProfile />
+              </Route>
+              <Route exact path="/postdetails/:id">
+                <PostDetails />
+              </Route>
+            </Switch>
+          </Router>
+        </ChakraProvider>
+      </UserProvider>
     </div>
   );
 }
