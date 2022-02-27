@@ -24,11 +24,11 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <UserProvider>
         <ChakraProvider>
           <Header />
-          <Router>
+          
             <Switch>
               <Route exact path="/">
                 <Homepage />
@@ -61,10 +61,9 @@ function App() {
                 <PostDetails />
               </Route>
             </Switch>
-          </Router>
         </ChakraProvider>
       </UserProvider>
-    </div>
+      </Router>
   );
 }
 

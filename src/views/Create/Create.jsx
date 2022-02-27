@@ -1,6 +1,6 @@
 import BoardForm from '../../components/BoardForm/BoardForm.jsx';
 import PostForm from '../../components/PostForm/PostForm.jsx';
-// import { useUser } from '../../context/UserContext.js';
+ import { useUser } from '../../context/UserContext.js';
 import { useState, useEffect } from 'react';
 import {
   FormControl,
@@ -19,7 +19,7 @@ import {
 // import { createPost, getById } from '../../services/fetch-utils.js';
 // import { useHistory } from 'react-router';
 export default function Post() {
-  // const { user } = useUser();
+  const { user } = useUser();
   const [radioValue, setRadioValue] = useState('Post');
   console.log(radioValue);
 
