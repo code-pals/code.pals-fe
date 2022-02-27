@@ -22,12 +22,16 @@ import PostDetails from './views/PostDetails/PostDetails.jsx';
 import SearchBar from './components/SearchBar/SearchBar.jsx';
 import { ChakraProvider } from '@chakra-ui/react';
 
+
 function App() {
   return (
     <div className="App">
-   
-        <Header />
+     
+        <ChakraProvider>
+        
           <Router>
+          <UserProvider>
+          <Header />
             <Switch>
               <Route exact path="/">
                 <Homepage />
@@ -60,8 +64,10 @@ function App() {
                 <PostDetails />
               </Route>
             </Switch>
+            </UserProvider>
           </Router>
-        
+          </ChakraProvider>
+      
     </div>
   );
 }
