@@ -13,6 +13,7 @@ import {
 export default function PostDetails() {
   const { id } = useParams();
   const { user } = useUser();
+  const storedUser = JSON.parse(localStorage.getItem('storageUser'));
 
 
   const [post, setPost] = useState('');
@@ -61,7 +62,7 @@ export default function PostDetails() {
     const replySubmit = async (e) => {
       e.preventDefault();
       const replyObj = {
-        commenter: user.userId,
+        commenter: storedUser.userId,
         postId: post.postId,
         comment: replyComment,
         parent: comment.commentId,
@@ -103,6 +104,7 @@ export default function PostDetails() {
           <Button type="submit">Button</Button>
         </form>
         <br />
+        {/* .sort(function(a,b){return a.created - b.created})} */}
         {comments.map((comment) => {
           return (
         <div key={comment.commentId}style={{display: 'flex'}}>

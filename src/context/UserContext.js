@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
 
-  useEffect(() => {
+ /* useEffect(() => {
     (async () => {
       const fetchedUser = await fetchUser();
       console.log(fetchedUser);
@@ -17,7 +17,7 @@ const UserProvider = ({ children }) => {
       setLoading(false);
     })();
   }, []);
-
+*/
   async function logIn() {
     window.location.assign(`${process.env.URL}/api/v1/users/login`);
   }
@@ -26,7 +26,10 @@ const UserProvider = ({ children }) => {
     const res = await request
       .delete(`${process.env.URL}/api/v1/users/sessions`)
       .withCredentials();
-    setUser({});
+
+    localStorage.removeItem('storageUser'); 
+    setUser({})
+    ;
     history.push('/');
   }
 

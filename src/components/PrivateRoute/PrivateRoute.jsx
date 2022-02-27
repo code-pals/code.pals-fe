@@ -4,11 +4,13 @@ import { useUser } from '../../context/UserContext';
 export default function PrivateRoute({ children, ...rest }) {
   const { user } = useUser();
   console.log('PRIVATEROUTEPAGE', user.github);
+  const userObj = localStorage.getItem('storageUser');
+  console.log(userObj);
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        user.github ? (
+        userObj ? (
           children
         ) : (
           <Redirect

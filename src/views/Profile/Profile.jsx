@@ -17,40 +17,46 @@ import CodeBox from '../../components/CodeBox/CodeBox.jsx';
 import GithubBox from '../../components/GithubBox/GithubBox.jsx';
 import { UserContext, useUser } from '../../context/UserContext.js';
 import { getAllBoards, getAllPosts } from '../../services/fetch-utils.js';
+import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
+
 
 export default function Profile() {
-  const [userPosts, setUserPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
   const [userBoards, setUserBoards] = useState([]);
   const { user } = useUser();
+  const storedUser = JSON.parse(localStorage.getItem('storageUser'));
+  console.log('storedUser',storedUser);
 
   useEffect(() => {
     const getPostsAndBoards = async () => {
       const response = await getAllPosts();
       console.log(response);
-      const allPosts = response.body;
+      setAllPosts(response.body);
       const postsByUser = allPosts.filter((post) => {
-        console.log(post);
-        post.postedBy === user.userId;
+        Number(post.postedBy) === Number(storedUser.userId);
       });
       console.log('POSTSBYUSER', postsByUser);
-      setUserPosts(postsByUser);
+      
+
 
       const resBoards = await getAllBoards();
       const allBoards = resBoards.body;
       const boardsByUser = allBoards.filter(
-        (board) => board.created_by === user.userId
+        (board) => board.created_by === storedUser.userId
       );
       setUserBoards(boardsByUser);
     };
     getPostsAndBoards();
   }, []);
 
+  //const newPosts = allPosts.filter(post => post.postedBy === storedUser.userId);
+  //console.log('newposts', newPosts);
   return (
     <>
       <GithubBox />
-      {userPosts.map((post) => (
+      {allPosts.filter(post => post.postedBy === storedUser.userId).map((post) => (
         <div key={post.postId}>
-          <PostHomeBox post={post} />
+          <PostHomeBox key={post.postId} post={post} />
         </div>
       ))}
       <CodeBox /> <CodeBox />

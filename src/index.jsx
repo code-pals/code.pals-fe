@@ -7,7 +7,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 render(
   <React.StrictMode>
+       <UserProvider>
+        <ChakraProvider>
     <App />
+    </ChakraProvider>
+      </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -19,6 +19,7 @@ import {
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { useUser } from '../../context/UserContext.js';
 
+
 const Links = ['Home', 'Create', 'Messages', 'Login', 'Search', 'About Us'];
 
 const NavLink = ({ children }) => (
@@ -39,6 +40,9 @@ const NavLink = ({ children }) => (
 export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, getUser, logIn, logOut } = useUser();
+  const storedU = localStorage.getItem('storageUser');
+  const storedUser = JSON.parse(storedU);
+  console.log('headerStoredUser', storedUser);
   console.log('USER3', user);
 
   return (
@@ -101,11 +105,12 @@ export default function withAction() {
                 cursor={'pointer'}
                 minW={0}
               >
-                <Avatar size={'sm'} src={user.avatar} />
+              {storedUser ? <Avatar size={'sm'} src={storedUser.avatar} />
+              : ''}
               </MenuButton>
               <MenuList>
                 <Link href={'/profile'} underline="none">
-                  {user.github}
+                  {storedUser.github}'s<br/>
                   Profile
                 </Link>
                 {/* <MenuItem>Link 2</MenuItem>
