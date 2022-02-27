@@ -55,17 +55,17 @@ export default function SearchBar() {
         </Box>
       </Center>
       <div>
-        {posts.map((post) => {
-          <div key={post.postId}>
-          return <PostHomeBox key={post.post_id} post={post} />;
-          </div>
-        })}
-
-        {comments.map((comment) => {
-          <div key={comment.commentId}>
-          return <CommentBox key={comment.commentId} comment={comment} />;
-          </div>
-        })}
+      {posts.map((post) => (
+        <div key={post.postId}>
+          <PostHomeBox post={post} key={post.postId} />
+        </div>
+      ))}
+       
+       {comments.map((comment) => (
+        <div key={comment.commentId}>
+          <CommentBox comment={comment} key={comment.commentId} />
+        </div>
+      ))}
       </div>
     </>
   );

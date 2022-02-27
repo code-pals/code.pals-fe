@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchUser } from '../services/users';
 
 const request = require('superagent');
@@ -6,10 +7,13 @@ const request = require('superagent');
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
+  
 
- /* useEffect(() => {
+
+  useEffect(() => {
     (async () => {
       const fetchedUser = await fetchUser();
       console.log(fetchedUser);
@@ -17,7 +21,7 @@ const UserProvider = ({ children }) => {
       setLoading(false);
     })();
   }, []);
-*/
+
   async function logIn() {
     window.location.assign(`${process.env.URL}/api/v1/users/login`);
   }
@@ -27,7 +31,7 @@ const UserProvider = ({ children }) => {
       .delete(`${process.env.URL}/api/v1/users/sessions`)
       .withCredentials();
 
-    localStorage.removeItem('storageUser'); 
+    //localStorage.removeItem('storageUser'); 
     setUser({})
     ;
     history.push('/');
@@ -38,9 +42,12 @@ const UserProvider = ({ children }) => {
     [user]
   );
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
-};
-
+  if(loading) {
+    return <h2>Loading...</h2>
+  } else {
+    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  }
+}
 const useUser = () => {
   const context = useContext(UserContext);
   if (context === undefined) {
