@@ -25,9 +25,8 @@ import { ChakraProvider } from '@chakra-ui/react';
 function App() {
   return (
     <div className="App">
-      <UserProvider>
-        <ChakraProvider>
-          <Header />
+   
+        <Header />
           <Router>
             <Switch>
               <Route exact path="/">
@@ -39,12 +38,12 @@ function App() {
               <Route exact path="/profile">
                 <Profile />
               </Route>
-              <Route exact path="/create">
+              <PrivateRoute exact path="/create">
                 <Create />
-              </Route>
-              <Route exact path="/messages">
+              </PrivateRoute>
+              <PrivateRoute exact path="/messages">
                 <DirectMessages />
-              </Route>
+              </PrivateRoute>
               <Route exact path="/results">
                 <SearchBar />
               </Route>
@@ -62,8 +61,7 @@ function App() {
               </Route>
             </Switch>
           </Router>
-        </ChakraProvider>
-      </UserProvider>
+        
     </div>
   );
 }
