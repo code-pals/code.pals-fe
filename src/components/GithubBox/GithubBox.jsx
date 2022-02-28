@@ -9,11 +9,9 @@ import {
 } from '@chakra-ui/react';
 import { useUser } from '../../context/UserContext.js';
 
-const IMAGE =
-  'https://images.unsplash.com/photo-1618401479427-c8ef9465fbe1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2343&q=80';
-
 export default function ProductSimple() {
   const { user } = useUser();
+
   return (
     <>
       <Center py={12}>
@@ -41,7 +39,7 @@ export default function ProductSimple() {
               pos: 'absolute',
               top: 5,
               left: 0,
-              backgroundImage: `url(${IMAGE})`,
+              backgroundImage: `url(${user.avatar})`,
               filter: 'blur(15px)',
               zIndex: -1,
             }}
@@ -56,7 +54,7 @@ export default function ProductSimple() {
               height={230}
               width={282}
               objectFit={'cover'}
-              src={IMAGE}
+              src={user.avatar}
             />
           </Box>
           <Stack pt={10} align={'left'}>
@@ -74,7 +72,7 @@ export default function ProductSimple() {
             </Heading>
             <Stack direction={'row'} align={'left'}>
               <Text fontWeight={800} fontSize={'xl'}>
-                Member Since:{user.memberSince}
+                Member Since: {user.memberSince.slice(0, 10)}
               </Text>
             </Stack>
           </Stack>
