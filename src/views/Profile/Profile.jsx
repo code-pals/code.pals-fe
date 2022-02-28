@@ -19,13 +19,12 @@ import { UserContext, useUser } from '../../context/UserContext.js';
 import { getAllBoards, getAllPosts } from '../../services/fetch-utils.js';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 
-
 export default function Profile() {
   const [allPosts, setAllPosts] = useState([]);
   const [userBoards, setUserBoards] = useState([]);
   const { user } = useUser();
   const storedUser = JSON.parse(localStorage.getItem('storageUser'));
-  console.log('storedUser',storedUser);
+  console.log('storedUser', storedUser);
 
   useEffect(() => {
     const getPostsAndBoards = async () => {
@@ -36,13 +35,11 @@ export default function Profile() {
         Number(post.postedBy) === Number(storedUser.userId);
       });
       console.log('POSTSBYUSER', postsByUser);
-      
-
 
       const resBoards = await getAllBoards();
       const allBoards = resBoards.body;
       const boardsByUser = allBoards.filter(
-        (board) => board.created_by === storedUser.userId
+        (board) => board.created_by === user.userId
       );
       setUserBoards(boardsByUser);
     };
@@ -54,11 +51,13 @@ export default function Profile() {
   return (
     <>
       <GithubBox />
-      {allPosts.filter(post => post.postedBy === storedUser.userId).map((post) => (
-        <div key={post.postId}>
-          <PostHomeBox key={post.postId} post={post} />
-        </div>
-      ))}
+      {allPosts
+        .filter((post) => post.postedBy === user.userId)
+        .map((post) => (
+          <div key={post.postId}>
+            <PostHomeBox key={post.postId} post={post} />
+          </div>
+        ))}
       <CodeBox /> <CodeBox />
     </>
   );
