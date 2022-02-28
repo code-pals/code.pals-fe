@@ -69,7 +69,7 @@ export default function BoardHomeBox({ board }) {
               <Text fontWeight={600}>{board.username}</Text>
               <Text color={'gray.500'}>
                 <br />
-                {board.created.slice(0, 10)} · Comments
+                {board.created?.slice(0, 10)}
               </Text>
             </Stack>
           </Stack>

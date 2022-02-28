@@ -16,6 +16,7 @@ import {
   NumberInputStepper,
   NumberDecrementStepper,
   NumberIncrementStepper,
+  Text,
 } from '@chakra-ui/react';
 import { createBoard } from '../../services/fetch-utils.js';
 import { useUser } from '../../context/UserContext.js';
