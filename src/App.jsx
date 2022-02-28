@@ -20,7 +20,12 @@ import CreateProfile from './views/Profile/CreateProfile.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import SearchBar from './components/SearchBar/SearchBar.jsx';
 import { ChakraProvider } from '@chakra-ui/react';
+import Chat from './views/Chat/Chat/Chat.js';
+import JoinBoard from './views/Chat/Board/JoinBoard.js';
+import { io } from 'socket.io-client';
+import BoardChat from './views/Chat/Board/BoardChat.jsx';
 
+const socket = io.connect('http://localhost:7890');
 function App() {
   return (
     <div className="App">
@@ -59,6 +64,12 @@ function App() {
               <Route exact path="/postdetails/:id">
                 <PostDetails />
               </Route>
+              <Route exact path="/chat">
+                <JoinBoard socket={socket} />
+              </Route>
+              <Route exact path="/chat/:roomname/:username">
+                <BoardChat socket={socket} />
+                </Route>
               <Route exact path="/boarddetails/:id">
                 <BoardDetails />
               </Route>
