@@ -1,17 +1,20 @@
 import { process } from '../Action/Index'
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux';
-import './chat.scss'
+//import './chat.scss'
+import { useUser } from '../../../context/UserContext';
+
 
 export default function Chat({ username, roomname, socket }) {
   const [text, setText] = useState('');
   const [messages, setMessages] = useState([]);
+  const { user } = useUser();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     socket.on('message', (data) =>{
-    console.log(data);
+    console.log('datadatadata', data);
     let temp = messages;
     temp.push({
       userId: data.userId,
@@ -22,6 +25,10 @@ export default function Chat({ username, roomname, socket }) {
 
   });
   }, [socket])
+  useEffect(() => {
+    socket.emit('joinRoom', { username: user.github, roomname });
+   
+  }, [])
   
   const sendData = () => {
     if (text !== '') {
@@ -35,14 +42,17 @@ export default function Chat({ username, roomname, socket }) {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth'});
   };
 
-  useEffect(scrollToBottom, [messsages]);
+  useEffect(scrollToBottom, [messages]);
 
   console.log(messages, 'messages');
+  console.log('sockettext', socket.text)
+  console.log('chat component', username, roomname, socket);
   return (
     <div className='chat'>
       <div className='user-name'>
         <h2>
-          {username} <span style={{ fontSize: '0.7rem'}}>in {roomname}</span>
+          {username} 
+          <img src={user.avatar}/><span style={{ fontSize: '0.7rem'}}>in {roomname}</span>
         </h2>
       </div>
       <div className='chat-message'>
