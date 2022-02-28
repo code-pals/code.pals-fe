@@ -24,7 +24,9 @@ import { ChakraProvider } from '@chakra-ui/react';
 import Chat from './views/Chat/Chat/Chat.js';
 import Home from './views/Chat/Home/Home.js';
 import Appmain from './views/Chat/Appmain.jsx';
+import { io } from 'socket.io-client';
 
+const socket = io.connect('http://localhost:7891');
 function App() {
   return (
     <div className="App">
@@ -63,11 +65,10 @@ function App() {
               <Route exact path="/postdetails/:id">
                 <PostDetails />
               </Route>
-              <Route path='/chat'>
+              <Route path="/chat">
                 <Home socket={socket} />
               </Route>
-              <Route path='/chat/:roomname/:username'
-                component={Appmain} />
+              <Route path="/chat/:roomname/:username" component={Appmain} />
             </Switch>
           </UserProvider>
         </Router>

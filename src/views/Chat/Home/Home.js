@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './home.scss';
+import { useUser } from '../../../context/UserContext';
+// import './home.scss';
 
 export default function Home({ socket }) {
-  const [username, setUsername] = useState('');
+  const { user } = useUser();
   const [roomname, setRoomname] = useState('');
 
   const sendData = () => {
-    if (username !== '' && roomname !== '') {
-      socket.emit('joinRoom', { username, roomname });
+    if (user.userId !== '' && roomname !== '') {
+      console.log(user.userId, roomname);
+      socket.emit('joinRoom', { user_id: user.userId, roomname });
     } else {
       alert('username and roomname are must!!');
       window.location.reload();
@@ -18,18 +20,14 @@ export default function Home({ socket }) {
   return (
     <>
       <h1>Welcome to the chat.</h1>
-      <input
-        placeholder="Input Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+      <h2>{user.github}</h2>
       <input
         placeholder="Input Room"
         value={roomname}
         onChange={(e) => setRoomname(e.target.value)}
       />
 
-      <Link to={`/chat/${roomname}/${username}`}>
+      <Link to={`/chat/${roomname}/${user.github}`}>
         <button onClick={sendData}>Join.</button>
       </Link>
     </>
