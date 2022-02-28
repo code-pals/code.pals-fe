@@ -62,16 +62,16 @@ export default function PostHomeBox({ post }) {
           <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
             <Avatar src={post.avatar} alt={'Author'} />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-              <Link to={`/profile`}>
+             {/* <Link to={`/profile`}> */}
                 <Text fontWeight={600}>{post.username}</Text>
-              </Link>
+
               <Text color={'gray.500'}>
                 {post.created.slice(0, 10)} · Comments
               </Text>
             </Stack>
           </Stack>
-        </Box>
-      </Link>
+        </Box></Link>
+      
     </Center>
   );
 }

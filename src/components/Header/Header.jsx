@@ -4,7 +4,6 @@ import {
   Flex,
   Avatar,
   HStack,
-  Link,
   IconButton,
   Button,
   Menu,
@@ -17,7 +16,9 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext.js';
+
 
 const Links = ['Home', 'Create', 'Messages', 'Login', 'Search', 'About Us'];
 
@@ -30,7 +31,7 @@ const NavLink = ({ children }) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
-    href={'#'}
+    to={'#'}
   >
     {children}
   </Link>
@@ -39,6 +40,9 @@ const NavLink = ({ children }) => (
 export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, getUser, logIn, logOut } = useUser();
+  //const storedU = localStorage.getItem('storageUser');
+  //const storedUser = JSON.parse(storedU);
+  //console.log('headerStoredUser', storedUser);
   console.log('USER3', user);
 
   return (
@@ -59,25 +63,27 @@ export default function withAction() {
               spacing={4}
               display={{ base: 'none', md: 'flex' }}
             >
-              <Link href={'/'} underline="none">
+              <Link to={'/'} underline="none">
                 Home
               </Link>
-              <Link href={'/create'} underline="none">
+              <Link to={'/create'} underline="none">
                 Create
               </Link>
-              <Link href={'/messages'} underline="none">
+              <Link to={'/messages'} underline="none">
                 Messages
               </Link>
-              <Link href={'/login'} underline="none">
+              {!user.github ?
+              <Link to={'/login'} underline="none">
                 Login
               </Link>
-              <Link href={'/'} underline="none" onClick={logOut}>
+              :
+              <Link to={'/'} underline="none" onClick={logOut}>
                 Logout
-              </Link>
-              <Link href={'/results'} underline="none">
+              </Link>}
+              <Link to={'/results'} underline="none">
                 Search
               </Link>
-              <Link href={'/aboutus'} underline="none">
+              <Link to={'/aboutus'} underline="none">
                 About Us
               </Link>
               {user.github}
@@ -101,11 +107,12 @@ export default function withAction() {
                 cursor={'pointer'}
                 minW={0}
               >
-                <Avatar size={'sm'} src={user.avatar} />
+              {user.avatar ? <Avatar size={'sm'} src={user.avatar} />
+              : ''}
               </MenuButton>
               <MenuList>
-                <Link href={'/profile'} underline="none">
-                  {user.github}
+                <Link to={'/profile'} underline="none">
+                  {user.github}'s<br/>
                   Profile
                 </Link>
                 {/* <MenuItem>Link 2</MenuItem>

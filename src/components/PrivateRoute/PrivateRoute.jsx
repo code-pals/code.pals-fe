@@ -3,7 +3,7 @@ import { useUser } from '../../context/UserContext';
 
 export default function PrivateRoute({ children, ...rest }) {
   const { user } = useUser();
-  console.log('PRIVATEROUTEPAGE', user.github);
+  const userObj = localStorage.getItem('storageUser');
   return (
     <Route
       {...rest}
