@@ -1,64 +1,64 @@
 import { Box, Button, Input } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CodeBox from '../../components/CodeBox/CodeBox.jsx';
 import {
   createComment,
-  getCommentsByPost,
-  getPostById,
+  getCommentsByBoard,
+  getBoardById,
 } from '../../services/fetch-utils.js';
 
 export default function BoardDetails() {
   const { id } = useParams();
 
-  const [post, setPost] = useState('');
+  const [board, setBoard] = useState('');
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
+  // const [comments, setComments] = useState([]);
+  // const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
-    const singlePost = async () => {
-      const returnPost = await getPostById(id);
-      console.log('RETURNPOST', returnPost);
-      setPost(returnPost.body);
+    const singleBoard = async () => {
+      const returnBoard = await getBoardById(id);
+      console.log('RETURNBOARD', returnBoard);
+      setBoard(returnBoard.body);
       setLoading(false);
     };
-    singlePost();
+    singleBoard();
   }, [id]);
-  console.log('POSTPOST', post);
+  console.log('BOARDBOARD', board);
 
-  useEffect(() => {
-    const commentFunc = async () => {
-      const returnComments = await getCommentsByPost(id);
-      console.log('RETURNCOMMENtS', returnComments);
-      setComments(returnComments.body);
-    };
-    commentFunc();
-  }, [comments]);
+  // useEffect(() => {
+  //   const commentFunc = async () => {
+  //     const returnComments = await getCommentsByBoard(id);
+  //     console.log('RETURNCOMMENtS', returnComments);
+  //     setComments(returnComments.body);
+  //   };
+  //   commentFunc();
+  // }, [comments]);
 
-  async function commentSubmit(e) {
-    e.preventDefault();
-    const commentObj = {
-      commenter: post.postedBy,
-      postId: post.postId,
-      comment: newComment,
-      parent: null,
-      favorited: false,
-    };
-    const response = await createComment(commentObj);
-    console.log('RESPONSEOBJ', response);
-  }
+  // async function commentSubmit(e) {
+  //   e.preventDefault();
+  //   const commentObj = {
+  //     commenter: board.created_by,
+  //     board_id: board.board_id,
+  //     comment: newComment,
+  //     parent: null,
+  //     favorited: false,
+  //   };
+  //   const response = await createComment(commentObj);
+  //   console.log('RESPONSEOBJ', response);
+  // }
   return (
     <>
       <Box>
-        {post.title}
+        {board.title}
         <br />
-        {post.code}
+        {board.summary}
         <br />
-        {post.question}
+        {board.goal}
         <br />
+        {board.group_size}
         <br />
-        <form onSubmit={commentSubmit}>
+        {/* <form onSubmit={commentSubmit}>
           <Input
             type="text"
             placeholder="Comments"
@@ -66,11 +66,11 @@ export default function BoardDetails() {
             onChange={(e) => setNewComment(e.target.value)}
           ></Input>
           <Button type="submit">Button</Button>
-        </form>
-        <br />
+        </form> */}
+        {/* <br />
         {comments.map((comment) => {
           return <div>{comment.comment}</div>;
-        })}
+        })} */}
       </Box>
     </>
   );
