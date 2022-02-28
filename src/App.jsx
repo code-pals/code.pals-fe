@@ -21,17 +21,15 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PostDetails from './views/PostDetails/PostDetails.jsx';
 import SearchBar from './components/SearchBar/SearchBar.jsx';
 import { ChakraProvider } from '@chakra-ui/react';
-
+import Chat from './views/Chat/Chat/Chat.js';
 
 function App() {
   return (
     <div className="App">
-     
-        <ChakraProvider>
-        
-          <Router>
+      <ChakraProvider>
+        <Router>
           <UserProvider>
-          <Header />
+            <Header />
             <Switch>
               <Route exact path="/">
                 <Homepage />
@@ -64,10 +62,9 @@ function App() {
                 <PostDetails />
               </Route>
             </Switch>
-            </UserProvider>
-          </Router>
-          </ChakraProvider>
-      
+          </UserProvider>
+        </Router>
+      </ChakraProvider>
     </div>
   );
 }
