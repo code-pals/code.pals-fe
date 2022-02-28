@@ -22,6 +22,8 @@ import PostDetails from './views/PostDetails/PostDetails.jsx';
 import SearchBar from './components/SearchBar/SearchBar.jsx';
 import { ChakraProvider } from '@chakra-ui/react';
 import Chat from './views/Chat/Chat/Chat.js';
+import Home from './views/Chat/Home/Home.js';
+import Appmain from './views/Chat/Appmain.jsx';
 
 function App() {
   return (
@@ -61,6 +63,11 @@ function App() {
               <Route exact path="/postdetails/:id">
                 <PostDetails />
               </Route>
+              <Route path='/chat'>
+                <Home socket={socket} />
+              </Route>
+              <Route path='/chat/:roomname/:username'
+                component={Appmain} />
             </Switch>
           </UserProvider>
         </Router>
