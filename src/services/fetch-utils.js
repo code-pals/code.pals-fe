@@ -22,7 +22,7 @@ export async function getAllBoards() {
 
 export async function getBoardById(id) {
   const response = await request.get(`${url}/boards/${id}`);
-
+  console.log(response.body, 'BOARDBYID');
   return response;
 }
 
