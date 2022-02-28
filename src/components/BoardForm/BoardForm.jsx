@@ -1,35 +1,39 @@
-import React from 'react'
+import React from 'react';
 import { useState, useEffect } from 'react';
 import {
   FormControl,
   FormLabel,
-  RadioGroup,
   HStack,
-  Radio,
   Button,
   FormErrorMessage,
   FormHelperText,
-  Input,
   Image,
+  Input,
   Container,
   Center,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
 } from '@chakra-ui/react';
-import SubmitButton from '../SubmitButton/SubmitButton.jsx';
 import { createBoard } from '../../services/fetch-utils.js';
 import { useUser } from '../../context/UserContext.js';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function BoardForm() {
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
   const [goal, setGoal] = useState('');
-  const [groupSize, setGroupSize] = useState('');
+  const [groupSize, setGroupSize] = useState(1);
   const history = useHistory();
 
   const { user } = useUser();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(title, summary, goal, groupSize);
     try {
       if (user) {
         const boardObj = {
@@ -40,7 +44,7 @@ export default function BoardForm() {
         };
         const response = await createBoard(boardObj);
         console.log(response.body);
-        history.push('/')
+        history.push(`/boarddetails/${id}`);
       } else {
         history.push('/login');
       }
@@ -51,7 +55,6 @@ export default function BoardForm() {
       <Container centerContent>
         <form onSubmit={handleSubmit}>
           <FormControl as="fieldset">
-           
             <FormLabel htmlFor="title">Project Title</FormLabel>
             <Input
               id="title"
@@ -79,12 +82,19 @@ export default function BoardForm() {
               value={goal}
               onChange={(e) => setGoal(e.target.value)}
             />
-            <FormLabel htmlFor="looking">What is your group size?</FormLabel>
-             <Input
-              id="size"
-              value={groupSize}
-              onChange={(e) => setGroupSize(e.target.value)}
-            />
+            <FormLabel htmlFor="amount">What is your group size?</FormLabel>
+            <FormLabel htmlFor="amount">Amount</FormLabel>
+            <NumberInput max={20} min={1}>
+              <NumberInputField
+                id="amount"
+                onChange={(e) => setGroupSize(e.target.value)}
+                value={groupSize}
+              />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
             <Button type="submit">Submit</Button>
           </FormControl>
         </form>

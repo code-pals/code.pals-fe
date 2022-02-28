@@ -6,8 +6,35 @@ export async function getAllPosts() {
   const response = await request.get(`${url}/posts`);
   return response;
 }
+export async function createBoard(board) {
+  const response = await request
+    .post(`${url}/boards`)
+    .send(board)
+    .withCredentials();
+
+  return response;
+}
 export async function getAllBoards() {
   const response = await request.get(`${url}/boards`);
+
+  return response;
+}
+
+export async function getBoardById(id) {
+  const response = await request.get(`${url}/boards/${id}`);
+
+  return response;
+}
+
+export async function getCommentsByBoard(id) {
+  const response = await request.get(`${url}/boards/${id}`);
+
+  return response;
+}
+
+export async function searchBoardsAndComments(keyword) {
+  console.log(keyword, 'keys');
+  const response = await request.get(`${url}/comments?keyword=${keyword}`);
 
   return response;
 }
@@ -17,14 +44,6 @@ export async function createPost(post) {
     .post(`${url}/posts`)
     .send(post)
     .withCredentials();
-  return response;
-}
-export async function createBoard(board) {
-  const response = await request
-    .post(`${url}/boards`)
-    .send(board)
-    .withCredentials();
-
   return response;
 }
 export async function getUserById(id) {
@@ -63,9 +82,8 @@ export async function createComment(comment) {
   return response;
 }
 export async function searchPostsAndComments(keyword) {
-  console.log(keyword, 'keys')
-  const response = await request
-  .get(`${url}/comments?keyword=${keyword}`);
+  console.log(keyword, 'keys');
+  const response = await request.get(`${url}/comments?keyword=${keyword}`);
 
   return response;
 }
