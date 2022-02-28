@@ -7,10 +7,10 @@ import {
 import Homepage from './views/Homepage/Homepage.jsx';
 import Login from './views/Login/Login';
 import Create from './views/Create/Create.jsx';
-//import BoardDetails from './views/BoardDetails/BoardDetails.jsx';
-//import PostDetails from './views/PostDetails/PostDetails.jsx';
+import BoardDetails from './views/BoardDetails/BoardDetails.jsx';
+import PostDetails from './views/PostDetails/PostDetails.jsx';
 import Profile from './views/Profile/Profile.jsx';
-import Results from './views/Results/Results.jsx';
+//import Results from './views/Results/Results.jsx';
 import DirectMessages from './views/DirectMessages/DirectMessages.jsx';
 import AboutUs from './views/AboutUs/AboutUs.jsx';
 import Header from './components/Header/Header.jsx';
@@ -18,7 +18,6 @@ import OauthReturn from './views/OauthReturn/OauthReturn.jsx';
 import { UserProvider } from './context/UserContext.js';
 import CreateProfile from './views/Profile/CreateProfile.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import PostDetails from './views/PostDetails/PostDetails.jsx';
 import SearchBar from './components/SearchBar/SearchBar.jsx';
 import { ChakraProvider } from '@chakra-ui/react';
 import Chat from './views/Chat/Chat/Chat.js';
@@ -65,10 +64,16 @@ function App() {
               <Route exact path="/postdetails/:id">
                 <PostDetails />
               </Route>
+<<<<<<< HEAD
               <Route path="/chat">
                 <Home socket={socket} />
               </Route>
               <Route path="/chat/:roomname/:username" component={Appmain} />
+=======
+              <Route exact path="/boarddetails/:id">
+                <BoardDetails />
+              </Route>
+>>>>>>> a1cc981e50ef086abc327be361fb87b01dee076d
             </Switch>
           </UserProvider>
         </Router>

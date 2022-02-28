@@ -71,9 +71,6 @@ export default function withAction() {
               <Link to={'/create'} underline="none">
                 Create
               </Link>
-              <Link to={'/messages'} underline="none">
-                Messages
-              </Link>
               {!user.github ? (
                 <Link to={'/login'} underline="none">
                   Login
@@ -132,9 +129,30 @@ export default function withAction() {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {Links.map((link) => (
+              <Link to={'/'} underline="none">
+                Home
+              </Link>
+              <Link to={'/create'} underline="none">
+                Create
+              </Link>
+              {!user.github ? (
+                <Link to={'/login'} underline="none">
+                  Login
+                </Link>
+              ) : (
+                <Link to={'/'} underline="none" onClick={logOut}>
+                  Logout
+                </Link>
+              )}
+              <Link to={'/results'} underline="none">
+                Search
+              </Link>
+              <Link to={'/aboutus'} underline="none">
+                About Us
+              </Link>
+              {/* {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
-              ))}
+              ))} */}
             </Stack>
           </Box>
         ) : null}
