@@ -13,12 +13,13 @@ import {
   MenuDivider,
   useDisclosure,
   useColorModeValue,
+  useColorMode,
   Stack,
 } from '@chakra-ui/react';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext.js';
-
 
 const Links = ['Home', 'Create', 'Messages', 'Login', 'Search', 'About Us'];
 
@@ -38,6 +39,7 @@ const NavLink = ({ children }) => (
 );
 
 export default function withAction() {
+  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, getUser, logIn, logOut } = useUser();
   //const storedU = localStorage.getItem('storageUser');
@@ -72,14 +74,15 @@ export default function withAction() {
               <Link to={'/messages'} underline="none">
                 Messages
               </Link>
-              {!user.github ?
-              <Link to={'/login'} underline="none">
-                Login
-              </Link>
-              :
-              <Link to={'/'} underline="none" onClick={logOut}>
-                Logout
-              </Link>}
+              {!user.github ? (
+                <Link to={'/login'} underline="none">
+                  Login
+                </Link>
+              ) : (
+                <Link to={'/'} underline="none" onClick={logOut}>
+                  Logout
+                </Link>
+              )}
               <Link to={'/results'} underline="none">
                 Search
               </Link>
@@ -99,6 +102,9 @@ export default function withAction() {
             >
               Action
             </Button> */}
+            <Button onClick={toggleColorMode} mr="10px">
+              {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            </Button>
             <Menu>
               <MenuButton
                 as={Button}
@@ -107,12 +113,12 @@ export default function withAction() {
                 cursor={'pointer'}
                 minW={0}
               >
-              {user.avatar ? <Avatar size={'sm'} src={user.avatar} />
-              : ''}
+                {user.avatar ? <Avatar size={'sm'} src={user.avatar} /> : ''}
               </MenuButton>
               <MenuList>
                 <Link to={'/profile'} underline="none">
-                  {user.github}'s<br/>
+                  {user.github}'s
+                  <br />
                   Profile
                 </Link>
                 {/* <MenuItem>Link 2</MenuItem>
