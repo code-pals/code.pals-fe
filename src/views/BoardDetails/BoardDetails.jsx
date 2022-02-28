@@ -21,7 +21,7 @@ export default function BoardDetails() {
 
   return (
     <>
-      <BoardHomeBox board={board} />
+      <BoardHomeBox board={board} goals={board.goal} />
       {/* {board.title}
         {board.summary}
         {board.goal}
