@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useUser } from '../../../context/UserContext';
 // import './home.scss';
 
-export default function Home({ socket }) {
+export default function JoinBoard({ socket }) {
   const { user } = useUser();
   const [roomname, setRoomname] = useState('');
+  const history = useHistory();
 
   const sendData = () => {
     if (user.userId !== '' && roomname !== '') {
-      console.log(user.userId, roomname);
-      socket.emit('joinRoom', { user_id: user.userId, roomname });
+     history.push(`/chat/${roomname}/${user.github}`)
     } else {
       alert('username and roomname are must!!');
       window.location.reload();
@@ -27,9 +28,9 @@ export default function Home({ socket }) {
         onChange={(e) => setRoomname(e.target.value)}
       />
 
-      <Link to={`/chat/${roomname}/${user.github}`}>
+      
         <button onClick={sendData}>Join.</button>
-      </Link>
+ 
     </>
   );
 }
