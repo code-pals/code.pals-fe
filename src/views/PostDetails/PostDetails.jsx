@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NestedComments from '../../components/NestedComments/NestedComments.jsx';
 import { useUser } from '../../context/UserContext.js';
-// import CodeBox from '../../components/CodeBox/CodeBox.jsx';
+import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import {
   createComment,
   getCommentsByPost,
@@ -15,7 +15,7 @@ export default function PostDetails() {
   const { user } = useUser();
   const storedUser = JSON.parse(localStorage.getItem('storageUser'));
 
-  const [post, setPost] = useState('');
+  const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
@@ -26,9 +26,11 @@ export default function PostDetails() {
     const singlePost = async () => {
       const returnPost = await getPostById(id);
       console.log('RETURNPOST', returnPost);
+      console.log(returnPost.body);
       setPost(returnPost.body);
       const returnComments = await getCommentsByPost(id);
       console.log('RETURNCOMMENtS', returnComments.body);
+      console.log(post);
       setComments(returnComments.body);
       setLoading(false);
     };
@@ -85,54 +87,47 @@ export default function PostDetails() {
   };
 
   console.log('replycomment', replyComment);
+  console.log(post, 'POSTPOST');
   return (
     <>
-      <Box>
-        {post.title}
-        <br />
-        {post.code}
-        <br />
-        {post.question}
-        <br />
-        <br />
-        <form onSubmit={commentSubmit}>
-          <Input
-            type="text"
-            placeholder="Comments"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          ></Input>
-          <Button type="submit">Button</Button>
-        </form>
-        <br />
-        {/* .sort(function(a,b){return a.created - b.created})} */}
-        {comments.map((comment) => {
-          return (
-            <div key={comment.commentId} style={{ display: 'flex' }}>
-              <Avatar src={comment.avatar} alt={'Author'} />
-              <br />
-              <div>{comment.comment}</div>
-              <br />
-              <div>By: {comment.username}</div>
-              <br />
-              <div>Created: {comment.created.slice(0, 10)}</div>
-              <button onClick={() => handleReply(comment.commentId)}>
-                Reply
-              </button>
-              <div>
-                {activeId === comment.commentId && showInput
-                  ? displayInput(comment)
-                  : ''}
-              </div>
+      <PostHomeBox post={post} />
+      <form onSubmit={commentSubmit}>
+        <Input
+          type="text"
+          placeholder="Comments"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        ></Input>
+        <Button type="submit">Button</Button>
+      </form>
+      <br />
+      {/* .sort(function(a,b){return a.created - b.created})} */}
+      {comments.map((comment) => {
+        return (
+          <div key={comment.commentId} style={{ display: 'flex' }}>
+            <Avatar src={comment.avatar} alt={'Author'} />
+            <br />
+            <div>{comment.comment}</div>
+            <br />
+            <div>By: {comment.username}</div>
+            <br />
+            <div>Created: {comment.created.slice(0, 10)}</div>
+            <button onClick={() => handleReply(comment.commentId)}>
+              Reply
+            </button>
+            <div>
+              {activeId === comment.commentId && showInput
+                ? displayInput(comment)
+                : ''}
             </div>
-          );
-        })}
-        {/*  <div>
+          </div>
+        );
+      })}
+      {/*  <div>
         <NestedComments commentsArr={comments} />
         </div>
         
       */}
-      </Box>
     </>
   );
 }

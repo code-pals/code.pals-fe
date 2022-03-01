@@ -27,7 +27,6 @@ export default function Homepage() {
   return (
     <>
       <Box>
-        <SearchBar />
         <Flex
           direction="row"
           wrap="wrap"

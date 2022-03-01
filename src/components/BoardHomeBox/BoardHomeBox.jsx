@@ -18,9 +18,9 @@ export default function BoardHomeBox({ board }) {
   return (
     <Center py={6}>
       <Box
-        maxW={'222px'}
-        maxH={'1000px'}
-        w={'full'}
+        w="222px"
+        h="400px"
+        m="10px"
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
         rounded={'md'}
@@ -28,7 +28,7 @@ export default function BoardHomeBox({ board }) {
         overflow={'hidden'}
       >
         <Box
-          h={'105px'}
+          maxH={'120px'}
           bg={'gray.100'}
           mt={-6}
           mx={-6}
@@ -42,7 +42,7 @@ export default function BoardHomeBox({ board }) {
             layout={'fill'}
           />
         </Box>
-        <Text color={'gray.500'}></Text> {board.group_size}
+        <Text color={'gray.500'}></Text>{' '}
         <Stack>
           <Text
             color={'green.500'}
@@ -71,7 +71,7 @@ export default function BoardHomeBox({ board }) {
             </Stack>
           </Link>
         </Stack>
-      </Box>{' '}
+      </Box>
     </Center>
   );
 }
