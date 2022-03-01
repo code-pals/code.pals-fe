@@ -10,8 +10,6 @@ const UserProvider = ({ children }) => {
   const history = useHistory();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
-  
-
 
   useEffect(() => {
     (async () => {
@@ -31,9 +29,8 @@ const UserProvider = ({ children }) => {
       .delete(`${process.env.BE_URL}/api/v1/users/sessions`)
       .withCredentials();
 
-    //localStorage.removeItem('storageUser'); 
-    setUser({})
-    ;
+    //localStorage.removeItem('storageUser');
+    setUser({});
     history.push('/');
   }
 
@@ -42,12 +39,14 @@ const UserProvider = ({ children }) => {
     [user]
   );
 
-  if(loading) {
-    return <h2>Loading...</h2>
+  if (loading) {
+    return <h2>Loading...</h2>;
   } else {
-    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+    return (
+      <UserContext.Provider value={value}>{children}</UserContext.Provider>
+    );
   }
-}
+};
 const useUser = () => {
   const context = useContext(UserContext);
   if (context === undefined) {

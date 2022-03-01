@@ -1,7 +1,8 @@
 async function fetchUser() {
   try {
-    const res = await fetch(`${process.env.BE_URL}/api/v1/users/me/`, {
+    const res = await fetch(`${process.env.BE_URL}/api/v1/users/me`, {
       credentials: 'include',
+      mode: 'cors',
     });
     if (res.statusCode >= 400) {
       return {};
