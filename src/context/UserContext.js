@@ -23,12 +23,12 @@ const UserProvider = ({ children }) => {
   }, []);
 
   async function logIn() {
-    window.location.assign(`${process.env.URL}/api/v1/users/login`);
+    window.location.assign(`${process.env.BE_URL}/api/v1/users/login`);
   }
 
   async function logOut() {
     const res = await request
-      .delete(`${process.env.URL}/api/v1/users/sessions`)
+      .delete(`${process.env.BE_URL}/api/v1/users/sessions`)
       .withCredentials();
 
     //localStorage.removeItem('storageUser'); 

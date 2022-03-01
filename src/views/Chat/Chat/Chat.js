@@ -68,6 +68,7 @@ export default function Chat({ username, roomname, socket }) {
             return (
               <div className='message mess-right'><p>{message.text}</p>
               <span>{message.username}</span>
+              
               </div>
             );
           }
