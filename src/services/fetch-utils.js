@@ -88,3 +88,9 @@ export async function searchPostsAndComments(keyword) {
 
   return response;
 }
+export async function getAllUsers() {
+  const response = await request
+  .get(`${url}/users`);
+
+  return response;
+}
