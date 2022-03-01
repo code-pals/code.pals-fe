@@ -17,9 +17,9 @@ export default function PostHomeBox({ post }) {
     <Center py={6}>
       <Link to={`/postdetails/${post.postId}`}>
         <Box
-          maxW={'222px'}
-          maxH={'1000px'}
-          w={'full'}
+          w="222px"
+          h="400px"
+          m="10px"
           bg={useColorModeValue('white', 'gray.900')}
           boxShadow={'2xl'}
           rounded={'md'}
@@ -27,7 +27,7 @@ export default function PostHomeBox({ post }) {
           overflow={'hidden'}
         >
           <Box
-            h={'105px'}
+            maxH={'120px'}
             bg={'gray.100'}
             mt={-6}
             mx={-6}
@@ -48,9 +48,7 @@ export default function PostHomeBox({ post }) {
               fontWeight={800}
               fontSize={'sm'}
               letterSpacing={1.1}
-            >
-              Blog
-            </Text>
+            ></Text>
             <Heading
               color={useColorModeValue('gray.700', 'white')}
               fontSize={'2xl'}
@@ -65,7 +63,7 @@ export default function PostHomeBox({ post }) {
               <Avatar src={post.avatar} alt={'Author'} />
               <Stack direction={'column'} spacing={0} fontSize={'sm'}>
                 <Text fontWeight={600}>{post.github}</Text>
-                <Text color={'gray.500'}>{post.created.slice(0, 10)}</Text>
+                {/* <Text color={'gray.500'}>{post.created.slice(0, 10)}</Text> */}
               </Stack>
             </Link>
           </Stack>
