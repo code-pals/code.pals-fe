@@ -25,7 +25,8 @@ import JoinBoard from './views/Chat/Board/JoinBoard.js';
 import { io } from 'socket.io-client';
 import BoardChat from './views/Chat/Board/BoardChat.jsx';
 
-const socket = io.connect('http://localhost:7890');
+//const socket = io.connect('http://localhost:7890');
+const socket = io.connect('http://https://codepalz.herokuapp.com/');
 function App() {
   return (
     <div className="App">
