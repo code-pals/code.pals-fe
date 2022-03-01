@@ -28,7 +28,7 @@ const UserProvider = ({ children }) => {
 
   async function logOut() {
     const res = await request
-      .delete(`${process.env.URL}/api/v1/users/sessions`)
+      .delete(`${process.env.BE_URL}/api/v1/users/sessions`)
       .withCredentials();
 
     //localStorage.removeItem('storageUser'); 
