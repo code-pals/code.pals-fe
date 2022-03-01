@@ -1,6 +1,6 @@
 import { Box, Button, Input, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getBoardById } from '../../services/fetch-utils.js';
 import BoardHomeBox from '../../components/BoardHomeBox/BoardHomeBox.jsx';
 
@@ -22,6 +22,9 @@ export default function BoardDetails() {
   return (
     <>
       <BoardHomeBox board={board} goals={board.goal} />
+      <Link href={`/chat/${board.title}`}>
+        <Button>Enter Boardroom!</Button>
+      </Link>
       {/* {board.title}
         {board.summary}
         {board.goal}
