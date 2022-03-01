@@ -23,7 +23,7 @@ const UserProvider = ({ children }) => {
   }, []);
 
   async function logIn() {
-    window.location.assign(`${process.env.BE_URL}/api/v1/users/login`);
+    window.location.assign(`${process.env.URL}/api/v1/users/login`);
   }
 
   async function logOut() {
