@@ -20,8 +20,8 @@ export default function JoinBoard({ socket }) {
 
   return (
     <>
-      <h1>Welcome to the chat.</h1>
-      <h2>{user.github}</h2>
+      <h1>Welcome to the chat, {user.github}</h1>
+      <h2></h2>
       <input
         placeholder="Input Room"
         value={roomname}
