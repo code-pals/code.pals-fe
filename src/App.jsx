@@ -25,11 +25,7 @@ import JoinBoard from './views/Chat/Board/JoinBoard.js';
 import { io } from 'socket.io-client';
 import BoardChat from './views/Chat/Board/BoardChat.jsx';
 
-<<<<<<< HEAD
-const socket = io.connect('http://localhost:7891');
-=======
 const socket = io.connect('http://localhost:7890');
->>>>>>> ee4b45fed393de9e2a1f34ace799bc2982ceed28
 function App() {
   return (
     <div className="App">
@@ -73,7 +69,7 @@ function App() {
               </Route>
               <Route exact path="/chat/:roomname/:username">
                 <BoardChat socket={socket} />
-                </Route>
+              </Route>
               <Route exact path="/boarddetails/:id">
                 <BoardDetails />
               </Route>
