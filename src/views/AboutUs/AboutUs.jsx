@@ -5,7 +5,6 @@ export default function AboutUs() {
   console.log(about);
   return (
     <>
-      <h1>About Us</h1>
       <ul>
         {about.map((profile, i) => {
           return (

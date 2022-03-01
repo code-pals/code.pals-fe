@@ -27,7 +27,7 @@ export default function BoardForm() {
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
   const [goal, setGoal] = useState('');
-  const [groupSize, setGroupSize] = useState(1);
+  const [groupSize, setGroupSize] = useState(10);
   const history = useHistory();
 
   const { user } = useUser();
@@ -45,11 +45,13 @@ export default function BoardForm() {
         };
         const response = await createBoard(boardObj);
         console.log(response.body);
-        history.push(`/boarddetails/${id}`);
+        history.push(`/boarddetails/${response.body.board_id}`);
       } else {
         history.push('/login');
       }
-    } catch {}
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <>
@@ -84,16 +86,33 @@ export default function BoardForm() {
               onChange={(e) => setGoal(e.target.value)}
             />
             <FormLabel htmlFor="amount">What is your group size?</FormLabel>
-            <FormLabel htmlFor="amount">Amount</FormLabel>
-            <NumberInput max={20} min={1}>
-              <NumberInputField
-                id="amount"
-                onChange={(e) => setGroupSize(e.target.value)}
-                value={groupSize}
-              />
+            <NumberInput
+              max={20}
+              min={1}
+              value={groupSize}
+              // onChange={(e) => setGroupSize(e.target.value)}
+            >
+              <NumberInputField name="amount" disabled />
+              {console.log({ groupSize })}
               <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
+                <NumberIncrementStepper
+                  onClick={() =>
+                    setGroupSize((prevState) => {
+                      if (prevState < 20) return prevState + 1;
+                      return 20;
+                    })
+                  }
+                  disabled={groupSize === 1}
+                />
+                <NumberDecrementStepper
+                  onClick={() =>
+                    setGroupSize((prevState) => {
+                      if (prevState > 1) return prevState - 1;
+                      return 1;
+                    })
+                  }
+                  disabled={groupSize === 20}
+                />
               </NumberInputStepper>
             </NumberInput>
             <Button type="submit">Submit</Button>
