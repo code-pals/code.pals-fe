@@ -27,7 +27,7 @@ export default function BoardForm() {
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
   const [goal, setGoal] = useState('');
-  const [groupSize, setGroupSize] = useState(10);
+  const [groupSize, setGroupSize] = useState(1);
   const history = useHistory();
 
   const { user } = useUser();
