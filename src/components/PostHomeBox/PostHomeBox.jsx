@@ -18,6 +18,7 @@ export default function PostHomeBox({ post }) {
       <Link to={`/postdetails/${post.postId}`}>
         <Box
           maxW={'222px'}
+          maxH={'1000px'}
           w={'full'}
           bg={useColorModeValue('white', 'gray.900')}
           boxShadow={'2xl'}
@@ -55,23 +56,21 @@ export default function PostHomeBox({ post }) {
               fontSize={'2xl'}
               fontFamily={'body'}
             >
-              {post.title}
+              Title: {post.title}
             </Heading>
             <Text color={'gray.500'}>Post Question: {post.question} </Text>
           </Stack>
           <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
-            <Avatar src={post.avatar} alt={'Author'} />
-            <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-             {/* <Link to={`/profile`}> */}
-                <Text fontWeight={600}>{post.username}</Text>
-
-              <Text color={'gray.500'}>
-                {post.created.slice(0, 10)} · Comments
-              </Text>
-            </Stack>
+            <Link to={`/profile`}>
+              <Avatar src={post.avatar} alt={'Author'} />
+              <Stack direction={'column'} spacing={0} fontSize={'sm'}>
+                <Text fontWeight={600}>{post.github}</Text>
+                <Text color={'gray.500'}>{post.created.slice(0, 10)}</Text>
+              </Stack>
+            </Link>
           </Stack>
-        </Box></Link>
-      
+        </Box>
+      </Link>
     </Center>
   );
 }

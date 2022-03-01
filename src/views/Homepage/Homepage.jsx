@@ -4,6 +4,8 @@ import { getAllPosts, getAllBoards } from '../../services/fetch-utils.js';
 import SearchBar from '../../components/SearchBar/SearchBar.jsx';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import BoardHomeBox from '../../components/BoardHomeBox/BoardHomeBox.jsx';
+import { Link } from 'react-router-dom';
+import { Flex, Box, spacer } from '@chakra-ui/react';
 
 export default function Homepage() {
   const [posts, setPosts] = useState([]);
@@ -24,17 +26,32 @@ export default function Homepage() {
 
   return (
     <>
-      <SearchBar />
-      {posts.map((post) => (
-        <div key={post.postId}>
-          <PostHomeBox post={post} key={post.postId} />
-        </div>
-      ))}
-      {boards.map((board) => (
-        <div key={board.board_id}>
-          <BoardHomeBox board={board} key={board.board_id}/>
-        </div>
-      ))}
+      <Box>
+        <SearchBar />
+        <Flex
+          direction="row"
+          wrap="wrap"
+          p="40"
+          margin="10px"
+          padding="10px"
+          align={'center'}
+          justify={'center'}
+        >
+          {posts.map((post) => (
+            <div key={post.postId}>
+              <PostHomeBox post={post} key={post.postId} />
+            </div>
+          ))}
+
+          {boards.map((board) => (
+            <Link to={`/boarddetails/${board.board_id}`}>
+              <div key={board.board_id}>
+                <BoardHomeBox board={board} key={board.board_id} />
+              </div>
+            </Link>
+          ))}
+        </Flex>
+      </Box>
     </>
   );
 }
