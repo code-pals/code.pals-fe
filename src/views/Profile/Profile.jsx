@@ -18,7 +18,8 @@ import GithubBox from '../../components/GithubBox/GithubBox.jsx';
 import { UserContext, useUser } from '../../context/UserContext.js';
 import { getAllBoards, getAllPosts } from '../../services/fetch-utils.js';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
-
+import BoardHomeBox from '../../components/BoardHomeBox/BoardHomeBox.jsx';
+import { Link } from 'react-router-dom';
 export default function Profile() {
   const [allPosts, setAllPosts] = useState([]);
   const [userBoards, setUserBoards] = useState([]);
@@ -58,7 +59,17 @@ export default function Profile() {
             <PostHomeBox key={post.postId} post={post} />
           </div>
         ))}
-      <CodeBox /> <CodeBox />
+      {userBoards
+        .filter((board) => board.created_by === user.userId)
+        .map((board) => (
+          <Link to={`/boarddetails/${board.board_id}`}>
+            <div key={board.board_id}>
+              <BoardHomeBox key={board.board_id} board={board} />
+            </div>
+          </Link>
+        ))}
+      {/*         
+      <CodeBox /> <CodeBox /> */}
     </>
   );
 }
