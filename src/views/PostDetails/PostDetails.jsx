@@ -15,13 +15,12 @@ export default function PostDetails() {
   const { user } = useUser();
   const storedUser = JSON.parse(localStorage.getItem('storageUser'));
 
-
   const [post, setPost] = useState('');
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [showInput, setShowInput] = useState(false);
-  const [activeId, setActiveId] = useState('')
+  const [activeId, setActiveId] = useState('');
 
   useEffect(() => {
     const singlePost = async () => {
@@ -50,38 +49,40 @@ export default function PostDetails() {
     console.log('RETURNCOMMENtS', returnComments);
     setComments(returnComments.body);
   }
-  
-  const handleReply = (id) => {
-    setActiveId(id)
-    setShowInput(prev => !prev);
 
-  }
-  
+  const handleReply = (id) => {
+    setActiveId(id);
+    setShowInput((prev) => !prev);
+  };
+
   const [replyComment, setReplyComment] = useState('');
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
       e.preventDefault();
       const replyObj = {
-        commenter: storedUser.userId,
+        commenter: user.userId,
         postId: post.postId,
         comment: replyComment,
         parent: comment.commentId,
         favorited: false,
-      }
-    const response = await createComment(replyObj);
-    const returnReplyComments = await getCommentsByPost(id);
-    console.log('RETURNREPLYCOMMENtS', returnReplyComments);
-    setComments(returnReplyComments.body);
-    }
-    return <form onSubmit={replySubmit}>
-      <input 
-      style={{color: 'black'}}
-      value={replyComment}
-      onChange={(e) => setReplyComment(e.target.value)}
-      />
-      <button type='submit'>Submit</button>
-    </form>
-  }
+      };
+      const response = await createComment(replyObj);
+      const returnReplyComments = await getCommentsByPost(id);
+      console.log('RETURNREPLYCOMMENtS', returnReplyComments);
+      setComments(returnReplyComments.body);
+      setReplyComment('');
+    };
+    return (
+      <form onSubmit={replySubmit}>
+        <input
+          style={{ color: 'black' }}
+          value={replyComment}
+          onChange={(e) => setReplyComment(e.target.value)}
+        />
+        <button type="submit">Submit</button>
+      </form>
+    );
+  };
 
   console.log('replycomment', replyComment);
   return (
@@ -107,17 +108,26 @@ export default function PostDetails() {
         {/* .sort(function(a,b){return a.created - b.created})} */}
         {comments.map((comment) => {
           return (
-        <div key={comment.commentId}style={{display: 'flex'}}>
-          <Avatar src={comment.avatar} alt={'Author'} /><br/>
-          <div>{comment.comment}</div><br/>
-          <div>By: {comment.username}</div><br/>
-          <div>Created: {comment.created.slice(0,10)}</div>
-          <button onClick={()=>handleReply(comment.commentId)}>Reply</button>
-          <div>{activeId === comment.commentId && showInput ? displayInput(comment) : ''}</div>
-        </div>
-          )
+            <div key={comment.commentId} style={{ display: 'flex' }}>
+              <Avatar src={comment.avatar} alt={'Author'} />
+              <br />
+              <div>{comment.comment}</div>
+              <br />
+              <div>By: {comment.username}</div>
+              <br />
+              <div>Created: {comment.created.slice(0, 10)}</div>
+              <button onClick={() => handleReply(comment.commentId)}>
+                Reply
+              </button>
+              <div>
+                {activeId === comment.commentId && showInput
+                  ? displayInput(comment)
+                  : ''}
+              </div>
+            </div>
+          );
         })}
-      {/*  <div>
+        {/*  <div>
         <NestedComments commentsArr={comments} />
         </div>
         
