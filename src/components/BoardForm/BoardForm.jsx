@@ -49,10 +49,10 @@ export default function BoardForm() {
         console.log(response.body);
         history.push(`/boarddetails/${response.body.board_id}`);
 
-        if(params) {
-          const response = await editBoard(params.id, boardObj)
+        if (params) {
+          const response = await editBoard(params.id, boardObj);
           console.log(response);
-          history.push('/profile');
+          history.push(`/boarddetails/${params.id}`);
         }
       } else {
         history.push('/login');
