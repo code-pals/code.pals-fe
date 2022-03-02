@@ -32,6 +32,7 @@ export default function Chat({ username, roomname, socket }) {
     socket.emit('joinRoom', { username: user.github, roomname });
    
   }, [])
+  
   useEffect(() => {
   const getUsers = async() => {
     const response = await getAllUsers();
