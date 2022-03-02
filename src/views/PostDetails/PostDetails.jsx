@@ -121,14 +121,9 @@ export default function PostDetails() {
     setShowForm(prev => !prev);
     
   }
-  console.log
-  console.log('replycomment', replyComment);
-  console.log(post, 'POSTPOST');
+
   console.log('agggcomment', aggComments);
 
-  for( let i=0; i < aggComments.length; i++){
-    console.log(aggComments[i]);
-  }
   return (
     <>
       <PostHomeBox post={post} />
