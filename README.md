@@ -18,7 +18,8 @@ User Flow: </br>
   <li>Sign Up/Login</li> 
   <li>Redirect to Homepage</li> 
   <li>At the post details page, users can view comments on their posts and add comments to other posts. </li>
-  <li>At the board deatila page, users can join a boardroom with a live chat about the board </li>
+  <li>At the board details page, users can join a boardroom with a live chat about the board </li>
+  <li>Users can create a post or board. </li>
   <li>Users can also view their profile page, with their Github information, posts and boards </li>
  </ol>
 </br>
