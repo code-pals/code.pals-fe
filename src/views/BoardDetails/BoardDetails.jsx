@@ -1,4 +1,4 @@
-import { Box, Button, Input, Text } from '@chakra-ui/react';
+import { Box, Button, Input, Text, Center } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getBoardById } from '../../services/fetch-utils.js';
@@ -25,7 +25,9 @@ export default function BoardDetails() {
     <>
       <BoardHomeBox board={board} goals={board.goal} />
       <Link to={`/chat/${board.title}/${user.github}`}>
-        <Button>Enter Boardroom!</Button>
+        <Center>
+          <Button>Enter Boardroom!</Button>
+        </Center>
       </Link>
       {/* {board.title}
         {board.summary}

@@ -24,6 +24,7 @@ import Chat from './views/Chat/Chat/Chat.js';
 import JoinBoard from './views/Chat/Board/JoinBoard.js';
 import { io } from 'socket.io-client';
 import BoardChat from './views/Chat/Board/BoardChat.jsx';
+// import '../node_modules/highlight.js/styles/monokai.css';
 
 const socket = io.connect('http://localhost:7890');
 //const socket = io.connect('https://codepalz.herokuapp.com');

@@ -50,6 +50,7 @@ export default function BoardHomeBox({ board }) {
             fontWeight={800}
             fontSize={'sm'}
             letterSpacing={1.1}
+            mt="10px"
           >
             Group Size: {board.group_size}
           </Text>
@@ -58,7 +59,7 @@ export default function BoardHomeBox({ board }) {
             fontSize={'2xl'}
             fontFamily={'body'}
           >
-            Title: {board.title}
+            {board.title}
           </Heading>
           <Text color={'gray.500'}>Board Summary: {board.summary} </Text>
         </Stack>

@@ -9,6 +9,7 @@ import {
   getCommentsByPost,
   getPostById,
 } from '../../services/fetch-utils.js';
+import CodeBox from '../../components/CodeBox/CodeBox';
 
 export default function PostDetails() {
   const { id } = useParams();
@@ -91,12 +92,14 @@ export default function PostDetails() {
   return (
     <>
       <PostHomeBox post={post} />
+      <CodeBox post={post} />
       <form onSubmit={commentSubmit}>
         <Input
           type="text"
           placeholder="Comments"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
+          w="50%"
         ></Input>
         <Button type="submit">Button</Button>
       </form>

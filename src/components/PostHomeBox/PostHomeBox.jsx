@@ -12,6 +12,8 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
+import Highlight from 'react-highlight';
+
 export default function PostHomeBox({ post }) {
   const { user } = useUser();
 
@@ -56,11 +58,11 @@ export default function PostHomeBox({ post }) {
               fontSize={'2xl'}
               fontFamily={'body'}
             >
-              Title: {post.title}
+              {post.title}
             </Heading>
-            <Code h="50" w="100">
-              {post?.code?.slice(0, 35)}
-            </Code>
+            <Box h="50" w="100">
+              <Highlight>{post?.code?.slice(0, 35)}</Highlight>
+            </Box>
             <Text color={'gray.500'}>Post Question: {post.question} </Text>
           </Stack>
           <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
