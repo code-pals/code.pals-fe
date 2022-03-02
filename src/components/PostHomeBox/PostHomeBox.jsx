@@ -22,7 +22,7 @@ export default function PostHomeBox({ post }) {
       <Link to={`/postdetails/${post.postId}`}>
         <Box
           w="222px"
-          h="420px"
+          h="450px"
           m="10px"
           bg={useColorModeValue('white', 'gray.900')}
           boxShadow={'2xl'}
@@ -40,7 +40,7 @@ export default function PostHomeBox({ post }) {
           >
             <Image
               src={
-                'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+                'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2089&q=80'
               }
               layout={'fill'}
             />
@@ -55,15 +55,19 @@ export default function PostHomeBox({ post }) {
             ></Text>
             <Heading
               color={useColorModeValue('gray.700', 'white')}
-              fontSize={'2xl'}
+              fontSize={'xl'}
               fontFamily={'body'}
             >
               {post.title}
             </Heading>
             <Box h="50" w="100">
-              <Highlight>{post?.code?.slice(0, 5)}</Highlight>
+
+              <Highlight>{post?.code?.slice(0, 20)}</Highlight>
+
             </Box>
-            <Text color={'gray.500'}>Post Question: {post.question} </Text>
+            {/* <Box p="10px">
+              <Text color={'gray.500'}>{post?.question?.slice(0, 10)} </Text>
+            </Box> */}
           </Stack>
           <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
             <Link to={`/profile/${post.github}`}>
