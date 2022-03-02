@@ -1,4 +1,4 @@
-import { Box, Button, Input, Text } from '@chakra-ui/react';
+import { Box, Button, Input, Text, Center } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { deleteBoard, getBoardById } from '../../services/fetch-utils.js';
@@ -26,15 +26,15 @@ export default function BoardDetails() {
   }, [id]);
 
   const handleDelete = async () => {
-    const answer = confirm('Are you sure you want to delete this Board?')
-    if(answer) {
-    const response = await deleteBoard(id);
-    history.push('/');
+    const answer = confirm('Are you sure you want to delete this Board?');
+    if (answer) {
+      const response = await deleteBoard(id);
+      history.push('/');
     }
-  }
+  };
   const handleEdit = async () => {
-    setShowForm(prev => !prev);
-  }
+    setShowForm((prev) => !prev);
+  };
 
   return (
     <>
@@ -43,7 +43,9 @@ export default function BoardDetails() {
       <Button onClick={handleEdit}>Edit Board</Button>
       {showForm && <BoardForm />}
       <Link target={'_blank'} to={`/chat/${board.title}/${user.github}`}>
-        <Button>Enter Boardroom!</Button>
+        <Center>
+          <Button>Enter Boardroom!</Button>
+        </Center>
       </Link>
       {/* {board.title}
         {board.summary}
