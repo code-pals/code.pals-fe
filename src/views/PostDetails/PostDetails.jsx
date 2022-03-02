@@ -30,7 +30,7 @@ export default function PostDetails() {
   const [activeId, setActiveId] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [forceRender, setForceRender] = useState(1);
-  const [aggComments, setAggComments] = useState('');
+  //const [aggComments, setAggComments] = useState('');
 
   useEffect(() => {
     const singlePost = async () => {
@@ -43,17 +43,17 @@ export default function PostDetails() {
       console.log(post);
       setComments(returnComments.body);
       setLoading(false);
-      const aggedComments = await aggregateComments(id);
-      console.log('aggedcommentsuseff', aggedComments);
-      setAggComments(aggedComments);
+      //const aggedComments = await aggregateComments(id);
+      //console.log('aggedcommentsuseff', aggedComments);
+      //setAggComments(aggedComments);
     };
     singlePost();
   }, [id]);
 
-  useEffect(() => {
+ /* useEffect(() => {
     setForceRender((prev) => prev + 1);
   }, [showForm]);
-
+*/
   async function commentSubmit(e) {
     e.preventDefault();
     if (!user.github) {
@@ -123,11 +123,11 @@ export default function PostDetails() {
   console.log;
   console.log('replycomment', replyComment);
   console.log(post, 'POSTPOST');
-  console.log('agggcomment', aggComments);
+ // console.log('agggcomment', aggComments);
 
-  for (let i = 0; i < aggComments.length; i++) {
+  /*for (let i = 0; i < aggComments.length; i++) {
     console.log(aggComments[i]);
-  }
+  }*/
   return (
     <>
       <PostHomeBox post={post} />
