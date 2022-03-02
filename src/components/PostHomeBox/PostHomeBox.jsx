@@ -64,7 +64,7 @@ export default function PostHomeBox({ post }) {
             <Text color={'gray.500'}>Post Question: {post.question} </Text>
           </Stack>
           <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
-            <Link to={`/profile`}>
+            <Link to={`/profile/${post.github}`}>
               <Avatar src={post?.avatar} alt={'Author'} />
               <Stack direction={'column'} spacing={0} fontSize={'sm'}>
                 <Text fontWeight={600}>{post.github}</Text>

@@ -94,3 +94,39 @@ export async function getAllUsers() {
 
   return response;
 }
+export async function deletePost(id) {
+const response = await request
+.delete(`${url}/posts/${id}`)
+.withCredentials();
+
+return response;
+}
+export async function editPost(id , postObj) {
+  const response = await request
+  .patch(`${url}/posts/${id}`)
+  .send(postObj)
+  .withCredentials();
+
+return response;
+}
+export async function deleteBoard(id) {
+  const response = await request
+  .delete(`${url}/boards/${id}`)
+  .withCredentials();
+
+  return response;
+}
+export async function editBoard(id, boardObj) {
+  const response = await request
+  .patch(`${url}/boards/${id}`)
+  .send(boardObj)
+  .withCredentials();
+
+  return response;
+}
+export async function aggregateComments(postId) {
+  const response = await request
+  .get(`${url}/comments/parent/${postId}`);
+
+  return response.body;
+}
