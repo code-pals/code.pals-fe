@@ -28,6 +28,8 @@ To Run locally: </br>
 <li> npm i react-router-dom@5 </li>
 <li>npm i @chakra-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^6 </li>
 <li>npm i @chakra-ui/icons </li>
+<li>npm i highlight.js </li>
+<li>npm i react-highlight </li>
 <li>npm install react-icons --save </li>
 <li>npm i superagent </li>
   <li> Run npm start </li>
