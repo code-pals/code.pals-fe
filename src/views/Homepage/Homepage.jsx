@@ -25,7 +25,7 @@ export default function Homepage() {
   console.log('boards', boards);
 
   return (
-    <><SearchBar/>
+    <>
       <Box>
         <Flex
           direction="row"

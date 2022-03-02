@@ -2,6 +2,7 @@ import {
   Input,
   Box,
   Stack,
+  Flex,
   InputGroup,
   InputLeftElement,
   Icon,
@@ -54,19 +55,29 @@ export default function SearchBar() {
           </Stack>
         </Box>
       </Center>
-      <div>
-      {posts.map((post) => (
-        <div key={post.postId}>
-          <PostHomeBox post={post} key={post.postId} />
-        </div>
-      ))}
-       
-       {comments.map((comment) => (
-        <div key={comment.commentId}>
-          <CommentBox comment={comment} key={comment.commentId} />
-        </div>
-      ))}
-      </div>
+      <Box>
+        <Flex
+          direction="row"
+          wrap="wrap"
+          p="40"
+          margin="10px"
+          padding="10px"
+          align={'center'}
+          justify={'center'}
+        >
+          {posts.map((post) => (
+            <div key={post.postId}>
+              <PostHomeBox post={post} key={post.postId} />
+            </div>
+          ))}
+
+          {comments.map((comment) => (
+            <div key={comment.commentId}>
+              <CommentBox comment={comment} key={comment.commentId} />
+            </div>
+          ))}
+        </Flex>
+      </Box>
     </>
   );
 }
