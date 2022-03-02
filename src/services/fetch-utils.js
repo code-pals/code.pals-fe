@@ -124,3 +124,9 @@ export async function editBoard(id, boardObj) {
 
   return response;
 }
+export async function aggregateComments(postId) {
+  const response = await request
+  .get(`${url}/comments/parent/${postId}`);
+
+  return response.body;
+}

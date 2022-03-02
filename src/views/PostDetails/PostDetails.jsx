@@ -5,6 +5,7 @@ import NestedComments from '../../components/NestedComments/NestedComments.jsx';
 import { useUser } from '../../context/UserContext.js';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import {
+  aggregateComments,
   createComment,
   deletePost,
   getCommentsByPost,
@@ -12,6 +13,7 @@ import {
 } from '../../services/fetch-utils.js';
 import { useHistory } from 'react-router-dom';
 import PostForm from '../../components/PostForm/PostForm.jsx';
+import AggregateComments from './AggregateComments.jsx';
 
 export default function PostDetails() {
   const { id } = useParams();
@@ -27,6 +29,7 @@ export default function PostDetails() {
   const [activeId, setActiveId] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [forceRender, setForceRender] = useState(1);
+  const [aggComments, setAggComments] = useState('');
 
   useEffect(() => {
     const singlePost = async () => {
@@ -39,6 +42,9 @@ export default function PostDetails() {
       console.log(post);
       setComments(returnComments.body);
       setLoading(false);
+      const aggedComments = await aggregateComments(id);
+      console.log('aggedcommentsuseff', aggedComments);
+      setAggComments(aggedComments);
     };
     singlePost();
   }, [id]);
@@ -115,9 +121,14 @@ export default function PostDetails() {
     setShowForm(prev => !prev);
     
   }
-
+  console.log
   console.log('replycomment', replyComment);
   console.log(post, 'POSTPOST');
+  console.log('agggcomment', aggComments);
+
+  for( let i=0; i < aggComments.length; i++){
+    console.log(aggComments[i]);
+  }
   return (
     <>
       <PostHomeBox post={post} />
@@ -157,11 +168,7 @@ export default function PostDetails() {
           </div>
         );
       })}
-      {/*  <div>
-        <NestedComments commentsArr={comments} />
-        </div>
-        
-      */}
+      
     </>
   );
 }
