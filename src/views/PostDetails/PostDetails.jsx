@@ -14,6 +14,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import PostForm from '../../components/PostForm/PostForm.jsx';
 import AggregateComments from './AggregateComments.jsx';
+import CodeBox from '../../components/CodeBox/CodeBox';
 
 export default function PostDetails() {
   const { id } = useParams();
@@ -50,12 +51,12 @@ export default function PostDetails() {
   }, [id]);
 
   useEffect(() => {
-    setForceRender(prev => prev + 1);
-  }, [showForm])
+    setForceRender((prev) => prev + 1);
+  }, [showForm]);
 
   async function commentSubmit(e) {
     e.preventDefault();
-    if(!user.github) {
+    if (!user.github) {
       history.push('/login');
     }
     const commentObj = {
@@ -80,7 +81,7 @@ export default function PostDetails() {
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
       e.preventDefault();
-      if(!user.github) {
+      if (!user.github) {
         history.push('/login');
       }
       const replyObj = {
@@ -109,34 +110,41 @@ export default function PostDetails() {
   };
 
   const handleDelete = async () => {
-    const answer = confirm('Are you sure you want to delete this post?')
-    if(answer) {
-    const response = await deletePost(id);
-    console.log(response);
-    history.push('/');
+    const answer = confirm('Are you sure you want to delete this post?');
+    if (answer) {
+      const response = await deletePost(id);
+      console.log(response);
+      history.push('/');
     }
-
-  }
+  };
   const handleEdit = async (id) => {
-    setShowForm(prev => !prev);
-    
-  }
-
+    setShowForm((prev) => !prev);
+  };
+  console.log;
+  console.log('replycomment', replyComment);
+  console.log(post, 'POSTPOST');
   console.log('agggcomment', aggComments);
 
+  for (let i = 0; i < aggComments.length; i++) {
+    console.log(aggComments[i]);
+  }
   return (
     <>
       <PostHomeBox post={post} />
       <Button onClick={handleDelete}>Delete this Post</Button>
       <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
       <Button>Comments {comments.length}</Button>
-      {showForm && <PostForm setShowForm={setShowForm} setForceRender={setForceRender}/>}
+      {showForm && (
+        <PostForm setShowForm={setShowForm} setForceRender={setForceRender} />
+      )}
+      <CodeBox post={post} />
       <form onSubmit={commentSubmit}>
         <Input
           type="text"
           placeholder="Comments"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
+          w="50%"
         ></Input>
         <Button type="submit">Submit</Button>
       </form>
@@ -163,7 +171,6 @@ export default function PostDetails() {
           </div>
         );
       })}
-      
     </>
   );
 }
