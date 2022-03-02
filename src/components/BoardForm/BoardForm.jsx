@@ -18,10 +18,11 @@ import {
   NumberIncrementStepper,
   Text,
 } from '@chakra-ui/react';
-import { createBoard } from '../../services/fetch-utils.js';
+import { createBoard, editBoard } from '../../services/fetch-utils.js';
 import { useUser } from '../../context/UserContext.js';
 import { useHistory } from 'react-router-dom';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import { useParams } from 'react-router-dom';
 
 export default function BoardForm() {
   const [title, setTitle] = useState('');
@@ -31,6 +32,7 @@ export default function BoardForm() {
   const history = useHistory();
 
   const { user } = useUser();
+  const params = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +48,12 @@ export default function BoardForm() {
         const response = await createBoard(boardObj);
         console.log(response.body);
         history.push(`/boarddetails/${response.body.board_id}`);
+
+        if(params) {
+          const response = await editBoard(params.id, boardObj)
+          console.log(response);
+          history.push('/profile');
+        }
       } else {
         history.push('/login');
       }

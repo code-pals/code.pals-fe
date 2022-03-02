@@ -6,14 +6,18 @@ import { useUser } from '../../context/UserContext.js';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import {
   createComment,
+  deletePost,
   getCommentsByPost,
   getPostById,
 } from '../../services/fetch-utils.js';
+import { useHistory } from 'react-router-dom';
+import PostForm from '../../components/PostForm/PostForm.jsx';
 
 export default function PostDetails() {
   const { id } = useParams();
   const { user } = useUser();
   const storedUser = JSON.parse(localStorage.getItem('storageUser'));
+  const history = useHistory();
 
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
@@ -21,6 +25,8 @@ export default function PostDetails() {
   const [newComment, setNewComment] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [activeId, setActiveId] = useState('');
+  const [showForm, setShowForm] = useState(false);
+  const [forceRender, setForceRender] = useState(1);
 
   useEffect(() => {
     const singlePost = async () => {
@@ -37,8 +43,15 @@ export default function PostDetails() {
     singlePost();
   }, [id]);
 
+  useEffect(() => {
+    setForceRender(prev => prev + 1);
+  }, [showForm])
+
   async function commentSubmit(e) {
     e.preventDefault();
+    if(!user.github) {
+      history.push('/login');
+    }
     const commentObj = {
       commenter: post.postedBy,
       postId: post.postId,
@@ -61,6 +74,9 @@ export default function PostDetails() {
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
       e.preventDefault();
+      if(!user.github) {
+        history.push('/login');
+      }
       const replyObj = {
         commenter: user.userId,
         postId: post.postId,
@@ -86,11 +102,28 @@ export default function PostDetails() {
     );
   };
 
+  const handleDelete = async () => {
+    const answer = confirm('Are you sure you want to delete this post?')
+    if(answer) {
+    const response = await deletePost(id);
+    console.log(response);
+    history.push('/');
+    }
+    
+  }
+  const handleEdit = async (id) => {
+    setShowForm(prev => !prev);
+    
+  }
+
   console.log('replycomment', replyComment);
   console.log(post, 'POSTPOST');
   return (
     <>
       <PostHomeBox post={post} />
+      <Button onClick={handleDelete}>Delete this Post</Button>
+      <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
+      {showForm && <PostForm setShowForm={setShowForm} setForceRender={setForceRender}/>}
       <form onSubmit={commentSubmit}>
         <Input
           type="text"

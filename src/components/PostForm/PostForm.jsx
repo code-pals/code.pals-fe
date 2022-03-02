@@ -16,15 +16,17 @@ import {
   Center,
 } from '@chakra-ui/react';
 import SubmitButton from '../SubmitButton/SubmitButton.jsx';
-import { createPost, getById } from '../../services/fetch-utils.js';
+import { createPost, editPost, getById } from '../../services/fetch-utils.js';
 import { useUser } from '../../context/UserContext.js';
 import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom';
 
-export default function PostForm() {
+export default function PostForm({setShowForm, setForceRender}) {
   const [title, setTitle] = useState('');
   const [code, setCode] = useState('');
   const [question, setQuestion] = useState('');
   const history = useHistory();
+  const params = useParams();
 
   const { user } = useUser();
   console.log(user, 'USER');
@@ -39,15 +41,27 @@ export default function PostForm() {
           code: code,
           question: question,
         };
-        const response = await createPost(postObj);
-        console.log('response', response.body);
-
-        history.push(`/postdetails/${response.body.postId}`);
+          if(!params.id) {
+          
+            const response = await createPost(id, postObj);
+            console.log('response', response.body);
+            history.push(`/postdetails/${response.body.postId}`);
+          }
+          else {
+            console.log('paramid');
+            const editResponse = await editPost(params.id, postObj);
+            console.log(editResponse)
+            setShowForm(false);
+            setForceRender(2);
+            history.push('/profile');
+        }
       } else {
         history.push('/login');
       }
     } catch {}
   };
+console.log('params',params.id);
+ 
   return (
     <>
       <Container centerContent>
