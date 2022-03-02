@@ -24,7 +24,7 @@ export default function BoardDetails() {
   return (
     <>
       <BoardHomeBox board={board} goals={board.goal} />
-      <Link to={`/chat/${board.title}/${user.github}`}>
+      <Link target={'_blank'} to={`/chat/${board.title}/${user.github}`}>
         <Button>Enter Boardroom!</Button>
       </Link>
       {/* {board.title}
