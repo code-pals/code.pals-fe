@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 //get user from database by id
 //and then get the avatar
-
 export default function BoardHomeBox({ board }) {
   const { user } = useUser();
   return (
@@ -64,7 +63,7 @@ export default function BoardHomeBox({ board }) {
           <Text color={'gray.500'}>Board Summary: {board.summary} </Text>
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
-          <Link to="/profile">
+          <Link to={`/profile/${board.github}`}>
             <Avatar src={board.avatar} alt={'Author'} />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
               <Text fontWeight={600}>{board.github}</Text>

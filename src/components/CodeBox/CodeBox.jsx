@@ -9,12 +9,12 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import Highlight from 'react-highlight';
-
 export default function CodeBox({ post }) {
   return (
     <Center py={6}>
       <Box
-        maxW={'445px'}
+        maxW={'90%'}
+        maxH={'100%'}
         w={'full'}
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
@@ -22,15 +22,9 @@ export default function CodeBox({ post }) {
         p={6}
         overflow={'hidden'}
       >
-        <Box
-          h={'210px'}
-          bg={'gray.100'}
-          mt={-6}
-          mx={-6}
-          mb={6}
-          pos={'relative'}
-        >
+        <Box bg={'gray.100'} pos={'relative'}>
           <Highlight>{post?.code}</Highlight>
+
           {/* <Image
             src={
               'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2378&q=80'
@@ -38,7 +32,7 @@ export default function CodeBox({ post }) {
             layout={'fill'}
           /> */}
         </Box>
-        <Stack>
+        {/* <Stack>
           <Text
             color={'green.500'}
             textTransform={'uppercase'}
@@ -46,25 +40,25 @@ export default function CodeBox({ post }) {
             fontSize={'sm'}
             letterSpacing={1.1}
           >
-            {/* Blog */}
+        
           </Text>
-          {/* <Heading
+          <Heading
             color={useColorModeValue('gray.700', 'white')}
             fontSize={'2xl'}
             fontFamily={'body'}
           ></Heading>
           <Text color={'gray.500'}>Title:</Text>
         </Stack>
-        <Stack mt={6} direction={'row'} spacing={4} align={'center'}> */}
-          {/* <Avatar
+        <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
+          <Avatar
             src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
             alt={'Author'}
-          /> */}
-          {/* <Stack direction={'column'} spacing={0} fontSize={'sm'}>
+          />
+          <Stack direction={'column'} spacing={0} fontSize={'sm'}>
             <Text fontWeight={600}>Username</Text>
             <Text color={'gray.500'}>What Are you looking</Text>
-          </Stack> */}
-        </Stack>
+          </Stack>
+        </Stack> */}
       </Box>
     </Center>
   );
