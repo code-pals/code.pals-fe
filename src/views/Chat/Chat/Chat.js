@@ -1,10 +1,11 @@
 import { process } from '../Action/Index'
-import { Avatar } from '@chakra-ui/react';
+import { Avatar, Box, Text, Button, Input, Flex } from '@chakra-ui/react';
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux';
 //import './chat.scss'
 import { useUser } from '../../../context/UserContext';
 import { getAllUsers } from '../../../services/fetch-utils';
+import { Link } from 'react-router-dom';
 
 
 export default function Chat({ username, roomname, socket }) {
@@ -64,33 +65,36 @@ export default function Chat({ username, roomname, socket }) {
       <div className='user-name'>
         <h2>
           Welcome {username} 
-          <span style={{ fontSize: '0.7rem'}}>  to room {roomname}</span>
+          <span>  to room {roomname}</span>
         </h2>
       </div>
       <div className='chat-message'>
         {messages.map((message) => {
           if (message.username === username) {
             return (
-              <div className='message'>
-                <p>{message.text}</p>
-               <Avatar src={user.avatar}/> <span>{message.username}</span>
-              </div>
+              <Flex>
+               <Avatar src={user.avatar}/> 
+               <Box >{message.username}:</Box><br/>
+               <Text pl='15px' font='m' color='blue'>{message.text}</Text>
+              </Flex>
             );
           } else {
             const postUser = allUsers.find((person) => person.github === message.username);
             console.log(postUser);
             return (
-              <div className='message mess-right'><p>{message.text}</p>
-              <Avatar src={postUser.avatar}/><span>{message.username}</span>
-
-              </div>
+              <Flex >
+              <Link to={`/profile/${postUser.github}`}><Avatar src={postUser.avatar}/></Link>
+              <Box >{message.username}:</Box>
+              <Text pl='15px' font='m' color='red'>{message.text}</Text>
+              </Flex>
             );
           }
         })}
         <div ref={messagesEndRef} />
           </div>
       <div className='send'>
-        <input 
+        <Input 
+          w='40%'
           placeholder='enter your message'
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -99,8 +103,8 @@ export default function Chat({ username, roomname, socket }) {
               sendData();
             }
           }}
-           ></input>
-           <button onClick={sendData}>Send</button>
+           ></Input>
+           <Button onClick={sendData}>Send</Button>
       </div>
       </div>
   )

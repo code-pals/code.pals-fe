@@ -1,4 +1,11 @@
-import { Box, Button, Avatar, Input } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Avatar,
+  Input,
+  Center,
+  ButtonGroup,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NestedComments from '../../components/NestedComments/NestedComments.jsx';
@@ -25,12 +32,12 @@ export default function PostDetails() {
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
+  // const [newComment, setNewComment] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [activeId, setActiveId] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [forceRender, setForceRender] = useState(1);
-  const [aggComments, setAggComments] = useState('');
+  //const [aggComments, setAggComments] = useState('');
 
   useEffect(() => {
     const singlePost = async () => {
@@ -43,19 +50,22 @@ export default function PostDetails() {
       console.log(post);
       setComments(returnComments.body);
       setLoading(false);
-      const aggedComments = await aggregateComments(id);
-      console.log('aggedcommentsuseff', aggedComments);
-      setAggComments(aggedComments);
+      //const aggedComments = await aggregateComments(id);
+      //console.log('aggedcommentsuseff', aggedComments);
+      //setAggComments(aggedComments);
     };
     singlePost();
   }, [id]);
 
-  useEffect(() => {
+ /* useEffect(() => {
     setForceRender((prev) => prev + 1);
   }, [showForm]);
-
+*/
   async function commentSubmit(e) {
     e.preventDefault();
+    const form = document.getElementById('comment-form');
+    const formData = new FormData(form);
+    const newComment = formData.get('comment');
     if (!user.github) {
       history.push('/login');
     }
@@ -98,14 +108,18 @@ export default function PostDetails() {
       setReplyComment('');
     };
     return (
-      <form onSubmit={replySubmit}>
-        <input
-          style={{ color: 'black' }}
-          value={replyComment}
-          onChange={(e) => setReplyComment(e.target.value)}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
+      <>
+        <Center>
+          <form onSubmit={replySubmit}>
+            <input
+              style={{ color: 'black' }}
+              value={replyComment}
+              onChange={(e) => setReplyComment(e.target.value)}
+            />
+            <Button type="submit">Submit</Button>
+          </form>
+        </Center>
+      </>
     );
   };
 
@@ -120,55 +134,65 @@ export default function PostDetails() {
   const handleEdit = async (id) => {
     setShowForm((prev) => !prev);
   };
-  console.log;
-  console.log('replycomment', replyComment);
-  console.log(post, 'POSTPOST');
-  console.log('agggcomment', aggComments);
 
-  for (let i = 0; i < aggComments.length; i++) {
-    console.log(aggComments[i]);
-  }
+  // console.log;
+  // console.log('replycomment', replyComment);
+  // console.log(post, 'POSTPOST');
+  // console.log('agggcomment', aggComments);
+
+  // for (let i = 0; i < aggComments.length; i++) {
+  //   console.log(aggComments[i]);
+  // }
+
   return (
     <>
       <PostHomeBox post={post} />
-      <Button onClick={handleDelete}>Delete this Post</Button>
-      <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
-      <Button>Comments {comments.length}</Button>
-      {showForm && (
-        <PostForm setShowForm={setShowForm} setForceRender={setForceRender} />
-      )}
+      <Center>
+        <ButtonGroup spacing="5">
+          <Button onClick={handleDelete}>Delete this Post</Button>
+          <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
+          <Button>Comments {comments.length}</Button>
+        </ButtonGroup>
+      </Center>
+      {showForm && <PostForm setShowForm={setShowForm} />}
       <CodeBox post={post} />
-      <form onSubmit={commentSubmit}>
+      <form id="comment-form" onSubmit={commentSubmit}>
         <Input
           type="text"
           placeholder="Comments"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          w="50%"
+          name="comment"
+          // value={newComment}
+          // onChange={(e) => setNewComment(e.target.value)}
+          w="75%"
         ></Input>
         <Button type="submit">Submit</Button>
-      </form>
+      </form>x``
+   dev2
       <br />
       {/* .sort(function(a,b){return a.created - b.created})} */}
       {comments.map((comment) => {
         return (
-          <div key={comment.commentId} style={{ display: 'flex' }}>
-            <Avatar src={comment.avatar} alt={'Author'} />
-            <br />
-            <div>{comment.comment}</div>
-            <br />
-            <div>By: {comment.username}</div>
-            <br />
-            <div>Created: {comment.created.slice(0, 10)}</div>
-            <Button onClick={() => handleReply(comment.commentId)}>
-              Reply
-            </Button>
-            <div>
-              {activeId === comment.commentId && showInput
-                ? displayInput(comment)
-                : ''}
-            </div>
-          </div>
+          <Box maxW="xxl" pl="10px">
+            <Box key={comment.commentId} style={{ display: 'flex' }}>
+              <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
+              <br />
+              <Box pl="15px" pr="25px">
+                {comment.comment}
+              </Box>
+              <br />
+              <Box pr="25px">By: {comment.github}</Box>
+              <br />
+              <Box pr="25px">{comment.created.slice(0, 10)}</Box>
+              <Button onClick={() => handleReply(comment.commentId)}>
+                Reply
+              </Button>
+              <div>
+                {activeId === comment.commentId && showInput
+                  ? displayInput(comment)
+                  : ''}
+              </div>
+            </Box>
+          </Box>
         );
       })}
     </>
