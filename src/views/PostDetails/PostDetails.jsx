@@ -57,7 +57,7 @@ export default function PostDetails() {
     singlePost();
   }, [id]);
 
- /* useEffect(() => {
+  /* useEffect(() => {
     setForceRender((prev) => prev + 1);
   }, [showForm]);
 */
@@ -134,7 +134,6 @@ export default function PostDetails() {
   const handleEdit = async (id) => {
     setShowForm((prev) => !prev);
   };
-
   // console.log;
   // console.log('replycomment', replyComment);
   // console.log(post, 'POSTPOST');
@@ -166,8 +165,8 @@ export default function PostDetails() {
           w="75%"
         ></Input>
         <Button type="submit">Submit</Button>
-      </form>x``
-   dev2
+      </form>
+      x`` dev2
       <br />
       {/* .sort(function(a,b){return a.created - b.created})} */}
       {comments.map((comment) => {
