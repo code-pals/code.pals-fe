@@ -61,7 +61,7 @@ export default function PostHomeBox({ post }) {
               {post.title}
             </Heading>
             <Box h="50" w="100">
-              <Highlight>{post?.code?.slice(0, 35)}</Highlight>
+              <Highlight>{post?.code?.slice(0, 5)}</Highlight>
             </Box>
             <Text color={'gray.500'}>Post Question: {post.question} </Text>
           </Stack>

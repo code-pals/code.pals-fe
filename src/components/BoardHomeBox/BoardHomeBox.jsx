@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 //get user from database by id
 //and then get the avatar
-
 export default function BoardHomeBox({ board }) {
   const { user } = useUser();
   return (

@@ -9,7 +9,6 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import Highlight from 'react-highlight';
-
 export default function CodeBox({ post }) {
   return (
     <Center py={6}>
@@ -25,6 +24,7 @@ export default function CodeBox({ post }) {
       >
         <Box bg={'gray.100'} pos={'relative'}>
           <Highlight>{post?.code}</Highlight>
+
           {/* <Image
             src={
               'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2378&q=80'

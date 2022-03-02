@@ -32,7 +32,7 @@ export default function PostDetails() {
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
+  // const [newComment, setNewComment] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [activeId, setActiveId] = useState('');
   const [showForm, setShowForm] = useState(false);
@@ -63,6 +63,9 @@ export default function PostDetails() {
 
   async function commentSubmit(e) {
     e.preventDefault();
+    const form = document.getElementById('comment-form');
+    const formData = new FormData(form);
+    const newComment = formData.get('comment');
     if (!user.github) {
       history.push('/login');
     }
@@ -131,14 +134,14 @@ export default function PostDetails() {
   const handleEdit = async (id) => {
     setShowForm((prev) => !prev);
   };
-  console.log;
-  console.log('replycomment', replyComment);
-  console.log(post, 'POSTPOST');
-  console.log('agggcomment', aggComments);
+  // console.log;
+  // console.log('replycomment', replyComment);
+  // console.log(post, 'POSTPOST');
+  // console.log('agggcomment', aggComments);
 
-  for (let i = 0; i < aggComments.length; i++) {
-    console.log(aggComments[i]);
-  }
+  // for (let i = 0; i < aggComments.length; i++) {
+  //   console.log(aggComments[i]);
+  // }
   return (
     <>
       <PostHomeBox post={post} />
@@ -149,16 +152,15 @@ export default function PostDetails() {
           <Button>Comments {comments.length}</Button>
         </ButtonGroup>
       </Center>
-      {showForm && (
-        <PostForm setShowForm={setShowForm} setForceRender={setForceRender} />
-      )}
+      {showForm && <PostForm setShowForm={setShowForm} />}
       <CodeBox post={post} />
-      <form onSubmit={commentSubmit}>
+      <form id="comment-form" onSubmit={commentSubmit}>
         <Input
           type="text"
           placeholder="Comments"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+          name="comment"
+          // value={newComment}
+          // onChange={(e) => setNewComment(e.target.value)}
           w="75%"
         ></Input>
         <Button pl="10px" type="submit">
