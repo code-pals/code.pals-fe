@@ -8,9 +8,11 @@ import {
   Button,
   FormErrorMessage,
   FormHelperText,
+  Textarea,
   Input,
   Image,
   Container,
+  Code,
   Center,
 } from '@chakra-ui/react';
 import SubmitButton from '../SubmitButton/SubmitButton.jsx';
@@ -54,15 +56,21 @@ export default function PostForm() {
             <FormLabel htmlFor="title">Title</FormLabel>
             <Input
               id="title"
+              required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <FormLabel htmlFor="code">Enter your code here:</FormLabel>
-            <Input
-              id="code"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-            />
+            <Code>
+              <Textarea
+                h="300px"
+                w="400px"
+                id="code"
+                required
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+              />
+            </Code>
             {/* <Center>
               <Image
                 h="200px"

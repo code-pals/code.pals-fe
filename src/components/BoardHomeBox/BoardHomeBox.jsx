@@ -19,7 +19,7 @@ export default function BoardHomeBox({ board }) {
     <Center py={6}>
       <Box
         w="222px"
-        h="400px"
+        h="420px"
         m="10px"
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
