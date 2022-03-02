@@ -6,7 +6,9 @@ import {
   Stack,
   Avatar,
   Image,
+  Code,
   useColorModeValue,
+  Textarea,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
@@ -18,7 +20,7 @@ export default function PostHomeBox({ post }) {
       <Link to={`/postdetails/${post.postId}`}>
         <Box
           w="222px"
-          h="400px"
+          h="420px"
           m="10px"
           bg={useColorModeValue('white', 'gray.900')}
           boxShadow={'2xl'}
@@ -56,14 +58,17 @@ export default function PostHomeBox({ post }) {
             >
               Title: {post.title}
             </Heading>
+            <Code h="50" w="100">
+              {post?.code?.slice(0, 35)}
+            </Code>
             <Text color={'gray.500'}>Post Question: {post.question} </Text>
           </Stack>
           <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
             <Link to={`/profile`}>
-              <Avatar src={post.avatar} alt={'Author'} />
+              <Avatar src={post?.avatar} alt={'Author'} />
               <Stack direction={'column'} spacing={0} fontSize={'sm'}>
                 <Text fontWeight={600}>{post.github}</Text>
-                {/* <Text color={'gray.500'}>{post.created.slice(0, 10)}</Text> */}
+                <Text color={'gray.500'}>{post?.created?.slice(0, 10)}</Text>
               </Stack>
             </Link>
           </Stack>
