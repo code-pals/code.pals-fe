@@ -1,4 +1,11 @@
-import { Box, Button, Input, Text, Center } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Input,
+  Text,
+  Center,
+  ButtonGroup,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { deleteBoard, getBoardById } from '../../services/fetch-utils.js';
@@ -39,14 +46,16 @@ export default function BoardDetails() {
   return (
     <>
       <BoardHomeBox board={board} goals={board.goal} />
-      <Button onClick={handleDelete}>Delete Board</Button>
-      <Button onClick={handleEdit}>Edit Board</Button>
-      {showForm && <BoardForm />}
-      <Link target={'_blank'} to={`/chat/${board.title}/${user.github}`}>
-        <Center>
-          <Button>Enter Boardroom!</Button>
-        </Center>
-      </Link>
+      <Center>
+        <ButtonGroup spacing="5">
+          <Button onClick={handleDelete}>Delete Board</Button>
+          <Button onClick={handleEdit}>Edit Board</Button>
+          {showForm && <BoardForm />}
+          <Link target={'_blank'} to={`/chat/${board.title}/${user.github}`}>
+            <Button>Enter Boardroom!</Button>
+          </Link>
+        </ButtonGroup>
+      </Center>
       {/* {board.title}
         {board.summary}
         {board.goal}

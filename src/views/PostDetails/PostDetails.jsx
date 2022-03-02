@@ -1,4 +1,11 @@
-import { Box, Button, Avatar, Input } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Avatar,
+  Input,
+  Center,
+  ButtonGroup,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NestedComments from '../../components/NestedComments/NestedComments.jsx';
@@ -50,7 +57,7 @@ export default function PostDetails() {
     singlePost();
   }, [id]);
 
- /* useEffect(() => {
+  /* useEffect(() => {
     setForceRender((prev) => prev + 1);
   }, [showForm]);
 */
@@ -98,14 +105,18 @@ export default function PostDetails() {
       setReplyComment('');
     };
     return (
-      <form onSubmit={replySubmit}>
-        <input
-          style={{ color: 'black' }}
-          value={replyComment}
-          onChange={(e) => setReplyComment(e.target.value)}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
+      <>
+        <Center>
+          <form onSubmit={replySubmit}>
+            <input
+              style={{ color: 'black' }}
+              value={replyComment}
+              onChange={(e) => setReplyComment(e.target.value)}
+            />
+            <Button type="submit">Submit</Button>
+          </form>
+        </Center>
+      </>
     );
   };
 
@@ -123,7 +134,7 @@ export default function PostDetails() {
   console.log;
   console.log('replycomment', replyComment);
   console.log(post, 'POSTPOST');
- // console.log('agggcomment', aggComments);
+  // console.log('agggcomment', aggComments);
 
   /*for (let i = 0; i < aggComments.length; i++) {
     console.log(aggComments[i]);
@@ -131,9 +142,13 @@ export default function PostDetails() {
   return (
     <>
       <PostHomeBox post={post} />
-      <Button onClick={handleDelete}>Delete this Post</Button>
-      <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
-      <Button>Comments {comments.length}</Button>
+      <Center>
+        <ButtonGroup spacing="5">
+          <Button onClick={handleDelete}>Delete this Post</Button>
+          <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
+          <Button>Comments {comments.length}</Button>
+        </ButtonGroup>
+      </Center>
       {showForm && (
         <PostForm setShowForm={setShowForm} setForceRender={setForceRender} />
       )}
@@ -144,31 +159,36 @@ export default function PostDetails() {
           placeholder="Comments"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
-          w="50%"
+          w="75%"
         ></Input>
         <Button type="submit">Submit</Button>
-      </form>x``
+      </form>
+      x``
       <br />
       {/* .sort(function(a,b){return a.created - b.created})} */}
       {comments.map((comment) => {
         return (
-          <div key={comment.commentId} style={{ display: 'flex' }}>
-            <Avatar src={comment.avatar} alt={'Author'} />
-            <br />
-            <div>{comment.comment}</div>
-            <br />
-            <div>By: {comment.username}</div>
-            <br />
-            <div>Created: {comment.created.slice(0, 10)}</div>
-            <Button onClick={() => handleReply(comment.commentId)}>
-              Reply
-            </Button>
-            <div>
-              {activeId === comment.commentId && showInput
-                ? displayInput(comment)
-                : ''}
-            </div>
-          </div>
+          <Box maxW="xxl" pl="10px">
+            <Box key={comment.commentId} style={{ display: 'flex' }}>
+              <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
+              <br />
+              <Box pl="15px" pr="25px">
+                {comment.comment}
+              </Box>
+              <br />
+              <Box pr="25px">By: {comment.github}</Box>
+              <br />
+              <Box pr="25px">{comment.created.slice(0, 10)}</Box>
+              <Button onClick={() => handleReply(comment.commentId)}>
+                Reply
+              </Button>
+              <div>
+                {activeId === comment.commentId && showInput
+                  ? displayInput(comment)
+                  : ''}
+              </div>
+            </Box>
+          </Box>
         );
       })}
     </>
