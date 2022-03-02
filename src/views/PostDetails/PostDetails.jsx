@@ -97,7 +97,7 @@ export default function PostDetails() {
           value={replyComment}
           onChange={(e) => setReplyComment(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
     );
   };
@@ -109,7 +109,7 @@ export default function PostDetails() {
     console.log(response);
     history.push('/');
     }
-    
+
   }
   const handleEdit = async (id) => {
     setShowForm(prev => !prev);
@@ -123,6 +123,7 @@ export default function PostDetails() {
       <PostHomeBox post={post} />
       <Button onClick={handleDelete}>Delete this Post</Button>
       <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
+      <Button>Comments {comments.length}</Button>
       {showForm && <PostForm setShowForm={setShowForm} setForceRender={setForceRender}/>}
       <form onSubmit={commentSubmit}>
         <Input
@@ -131,7 +132,7 @@ export default function PostDetails() {
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         ></Input>
-        <Button type="submit">Button</Button>
+        <Button type="submit">Submit</Button>
       </form>
       <br />
       {/* .sort(function(a,b){return a.created - b.created})} */}
@@ -145,9 +146,9 @@ export default function PostDetails() {
             <div>By: {comment.username}</div>
             <br />
             <div>Created: {comment.created.slice(0, 10)}</div>
-            <button onClick={() => handleReply(comment.commentId)}>
+            <Button onClick={() => handleReply(comment.commentId)}>
               Reply
-            </button>
+            </Button>
             <div>
               {activeId === comment.commentId && showInput
                 ? displayInput(comment)

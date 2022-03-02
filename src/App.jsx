@@ -41,7 +41,7 @@ function App() {
               <Route exact path="/login">
                 <Login />
               </Route>
-              <Route exact path="/profile">
+              <Route exact path="/profile/:username">
                 <Profile />
               </Route>
               <PrivateRoute exact path="/create">
