@@ -21,7 +21,7 @@ import { useUser } from '../../context/UserContext.js';
 import { useHistory } from 'react-router';
 import { useParams } from 'react-router-dom';
 
-export default function PostForm({setShowForm, setForceRender}) {
+export default function PostForm({ setShowForm, setForceRender }) {
   const [title, setTitle] = useState('');
   const [code, setCode] = useState('');
   const [question, setQuestion] = useState('');
@@ -41,27 +41,26 @@ export default function PostForm({setShowForm, setForceRender}) {
           code: code,
           question: question,
         };
-          if(!params.id) {
-            console.log('no params');
-            const response = await createPost(postObj);
-            console.log('response', response.body);
-            history.push(`/postdetails/${response.body.postId}`);
-          }
-          else if(params.id){
-            console.log('paramid');
-            const editResponse = await editPost(params.id, postObj);
-            console.log(editResponse)
-            setShowForm(false);
-            setForceRender(2);
-            history.push('/profile');
+        if (!params.id) {
+          console.log('no params');
+          const response = await createPost(postObj);
+          console.log('response', response.body);
+          history.push(`/postdetails/${response.body.postId}`);
+        } else if (params.id) {
+          console.log('paramid');
+          const editResponse = await editPost(params.id, postObj);
+          console.log(editResponse);
+          setShowForm(false);
+          setForceRender(2);
+          history.push('/profile');
         }
       } else {
         history.push('/login');
       }
     } catch {}
   };
-console.log('params',params.id);
- 
+  console.log('params', params.id);
+
   return (
     <>
       <Container centerContent>
