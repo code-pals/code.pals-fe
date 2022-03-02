@@ -147,7 +147,7 @@ export default function PostDetails() {
           w="50%"
         ></Input>
         <Button type="submit">Submit</Button>
-      </form>
+      </form>x``
       <br />
       {/* .sort(function(a,b){return a.created - b.created})} */}
       {comments.map((comment) => {
