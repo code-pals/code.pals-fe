@@ -52,7 +52,7 @@ export default function BoardDetails() {
           <Button onClick={handleEdit}>Edit Board</Button>
           {showForm && <BoardForm />}
           <Link target={'_blank'} to={`/chat/${board.title}/${user.github}`}>
-            <Button>Enter Boardroom!</Button>
+            <Button>Enter Chat!</Button>
           </Link>
         </ButtonGroup>
       </Center>
