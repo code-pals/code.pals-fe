@@ -52,11 +52,14 @@ export default function BoardForm() {
           const response = await editBoard(params.id, boardObj);
           console.log(response);
           window.location.reload();
+
+
         }
         else {
           const response = await createBoard(boardObj);
           console.log('boardoformresponse', response.body);
           history.push(`/boarddetails/${response.body.board_id}`);
+
         }
       } else {
         history.push('/login');
@@ -72,7 +75,9 @@ export default function BoardForm() {
           <FormControl as="fieldset">
             <FormLabel htmlFor="title">Project Title</FormLabel>
             <Input
-              w='400px'
+
+              w="400px"
+
               required
               id="title"
               value={title}
@@ -129,7 +134,9 @@ export default function BoardForm() {
                 />
               </NumberInputStepper>
             </NumberInput>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" mt="10px">
+              Submit
+            </Button>
           </FormControl>
         </form>
       </Container>

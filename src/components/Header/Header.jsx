@@ -89,7 +89,7 @@ export default function withAction() {
               <Link to={'/aboutus'} underline="none">
                 About Us
               </Link>
-             
+
               {user.github}
             </HStack>
           </HStack>
@@ -119,7 +119,7 @@ export default function withAction() {
               <MenuList>
                 <Link to={`/profile/${user.github}`} underline="none">
                   {user.github}'s
-                  <br />
+                  <MenuDivider />
                   Profile
                 </Link>
                 {/* <MenuItem>Link 2</MenuItem>
@@ -152,7 +152,9 @@ export default function withAction() {
               <Link to={'/results'} underline="none">
                 Search
               </Link>
-              <Link to={'/chatrooms'} underline="none"  >
+
+              <Link to={'/chatrooms'} underline="none">
+
                 Chat
               </Link>
               <Link to={'/aboutus'} underline="none">

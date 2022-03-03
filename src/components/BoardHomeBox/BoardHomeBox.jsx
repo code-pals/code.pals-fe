@@ -49,7 +49,7 @@ export default function BoardHomeBox({ board }) {
             fontWeight={800}
             fontSize={'sm'}
             letterSpacing={1.1}
-            mt="10px"
+            mt="75px"
           >
             Group Size: {board.group_size}
           </Text>
