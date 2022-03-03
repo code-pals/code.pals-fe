@@ -38,7 +38,7 @@ export default function PostDetails() {
   //const [aggComments, setAggComments] = useState('');
 
   useEffect(() => {
-    const singlePost = async () => {
+    const getPostAndComments = async () => {
       const returnPost = await getPostById(id);
       console.log('RETURNPOST', returnPost);
       console.log(returnPost.body);
@@ -52,7 +52,7 @@ export default function PostDetails() {
       //console.log('aggedcommentsuseff', aggedComments);
       //setAggComments(aggedComments);
     };
-    singlePost();
+    getPostAndComments();
   }, [id]);
 
   async function commentSubmit(e) {
@@ -83,8 +83,6 @@ export default function PostDetails() {
     setShowInput((prev) => !prev);
   };
 
-  const [replyComment, setReplyComment] = useState('');
-
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
       e.preventDefault();
@@ -107,7 +105,7 @@ export default function PostDetails() {
       const response = await createComment(replyObj);
       const returnReplyComments = await getCommentsByPost(id);
       setComments(returnReplyComments.body);
-      setReplyComment('');
+
       replyInput.value = '';
     };
     return (
@@ -139,8 +137,9 @@ export default function PostDetails() {
       <PostHomeBox post={post} />
       <Center>
         <ButtonGroup spacing="5">
-          <Button onClick={handleDelete}>Delete this Post</Button>
-          <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
+          {user.github === post.github && <Button onClick={handleDelete}>Delete this Post</Button>}
+          {user.github === post.github && <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
+          }
           <Button>Comments {comments.length}</Button>
         </ButtonGroup>
       </Center>

@@ -16,60 +16,47 @@ import {
 import CodeBox from '../../components/CodeBox/CodeBox.jsx';
 import GithubBox from '../../components/GithubBox/GithubBox.jsx';
 import { UserContext, useUser } from '../../context/UserContext.js';
-import { getAllBoards, getAllPosts } from '../../services/fetch-utils.js';
+import { getAllBoards, getAllPosts, getBoardsByUsername, getPostsByUsername } from '../../services/fetch-utils.js';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import BoardHomeBox from '../../components/BoardHomeBox/BoardHomeBox.jsx';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 export default function Profile() {
   const [allPosts, setAllPosts] = useState([]);
   const [userBoards, setUserBoards] = useState([]);
   const { user } = useUser();
-  const storedUser = JSON.parse(localStorage.getItem('storageUser'));
-  console.log('storedUser', storedUser);
+  const { username } = useParams();
 
   useEffect(() => {
     const getPostsAndBoards = async () => {
-      const response = await getAllPosts();
-      console.log(response);
-      setAllPosts(response.body);
-      const postsByUser = allPosts.filter((post) => {
-        Number(post.postedBy) === Number(storedUser.userId);
-      });
-      console.log('POSTSBYUSER', postsByUser);
+      const postsByName = await getPostsByUsername(username);
+      console.log(postsByName);
+      setAllPosts(postsByName);
 
-      const resBoards = await getAllBoards();
-      const allBoards = resBoards.body;
-      const boardsByUser = allBoards.filter(
-        (board) => board.created_by === user.userId
-      );
-      setUserBoards(boardsByUser);
+      const boardsByName = await getBoardsByUsername(username);
+      console.log(boardsByName);
+      setUserBoards(boardsByName);
     };
     getPostsAndBoards();
   }, []);
 
-  //const newPosts = allPosts.filter(post => post.postedBy === storedUser.userId);
-  //console.log('newposts', newPosts);
   return (
     <>
-      <GithubBox />
-      {allPosts
-        .filter((post) => post.postedBy === user.userId)
-        .map((post) => (
+      <GithubBox usernamex={username}/>
+      {allPosts.map((post) => (
           <div key={post.postId}>
             <PostHomeBox key={post.postId} post={post} />
           </div>
         ))}
-      {userBoards
-        .filter((board) => board.created_by === user.userId)
-        .map((board) => (
-          <Link to={`/boarddetails/${board.board_id}`}>
+      {userBoards.map((board) => (
+          <Link key={board.board_id}to={`/boarddetails/${board.board_id}`}>
             <div key={board.board_id}>
               <BoardHomeBox key={board.board_id} board={board} />
             </div>
           </Link>
         ))}
-      {/*         
-      <CodeBox /> <CodeBox /> */}
+
     </>
   );
 }

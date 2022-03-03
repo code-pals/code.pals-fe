@@ -18,7 +18,9 @@ export default function NestedComments({commentsArr}) {
   return (
       <>
         {nestedComments.map((comment) => { return (
-            <Comment comment={comment} />
+            <div key={comment.commentId}>
+            <Comment key={comment.commentId}comment={comment} />
+            </div>
         )})}
     </>  
   )

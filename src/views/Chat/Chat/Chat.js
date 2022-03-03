@@ -80,7 +80,7 @@ export default function Chat({ username, roomname, socket }) {
           {messages.map((message) => {
             if (message.username === username) {
               return (
-                <Flex>
+                <Flex key={message.username}>
                   <Avatar src={user.avatar} />
                   <Box>{message.username}:</Box>
                   <br />

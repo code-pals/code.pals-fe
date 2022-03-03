@@ -130,3 +130,21 @@ export async function aggregateComments(postId) {
 
   return response.body;
 }
+export async function getPostsByUsername(username) {
+  const response = await request
+  .get(`${url}/posts/username/${username}`);
+
+  return response.body;
+}
+export async function getBoardsByUsername(username) {
+  const response = await request
+  .get(`${url}/boards/username/${username}`);
+
+  return response.body;
+}
+export async function getUserByName(username) {
+  const response = await request
+  .get(`${url}/users/username/${username}`);
+  
+  return response.body;
+}

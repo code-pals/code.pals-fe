@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function CommentBox({comment}) {
   return (
       <>
-    <Box border='1px' padding='2px'>
+    <Box border='1px' padding='5px' rounded={'md'} >
      <Link to={`/postdetails/${comment.postId}`}><Button><Box>Comment</Box></Button></Link>
     <Avatar src={comment.avatar} alt={'Author'} /><br/>
     <Box>Comment: {comment.comment}</Box><br/>
