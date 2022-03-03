@@ -1,3 +1,4 @@
+import { Button, Heading, Input } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
@@ -11,7 +12,7 @@ export default function JoinBoard({ socket }) {
 
   const sendData = () => {
     if (user.userId !== '' && roomname !== '') {
-     history.push(`/chat/${roomname}/${user.github}`)
+      history.push(`/chat/${roomname}/${user.github}`);
     } else {
       alert('username and roomname are must!!');
       window.location.reload();
@@ -20,17 +21,17 @@ export default function JoinBoard({ socket }) {
 
   return (
     <>
-      <h1>Welcome to the chat, {user.github}</h1>
-      <h2></h2>
-      <input
-        placeholder="Input Room"
-        value={roomname}
-        onChange={(e) => setRoomname(e.target.value)}
-      />
+      <Center>
+        <Heading>Welcome to the chat, {user.github}</Heading>
+        <h2></h2>
+        <Input
+          placeholder="Input Room"
+          value={roomname}
+          onChange={(e) => setRoomname(e.target.value)}
+        />
 
-      
-        <button onClick={sendData}>Join.</button>
- 
+        <Button onClick={sendData}>Join.</Button>
+      </Center>
     </>
   );
 }

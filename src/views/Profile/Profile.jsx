@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Stack,
   Flex,
+  Box,
   Button,
   Text,
   VStack,
@@ -52,24 +53,36 @@ export default function Profile() {
   return (
     <>
       <GithubBox />
-      {allPosts
-        .filter((post) => post.postedBy === user.userId)
-        .map((post) => (
-          <div key={post.postId}>
-            <PostHomeBox key={post.postId} post={post} />
-          </div>
-        ))}
-      {userBoards
-        .filter((board) => board.created_by === user.userId)
-        .map((board) => (
-          <Link to={`/boarddetails/${board.board_id}`}>
-            <div key={board.board_id}>
-              <BoardHomeBox key={board.board_id} board={board} />
-            </div>
-          </Link>
-        ))}
-      {/*         
+      <Box>
+        <Flex
+          direction="row"
+          wrap="wrap"
+          p="40"
+          margin="10px"
+          padding="10px"
+          align={'center'}
+          justify={'center'}
+        >
+          {allPosts
+            .filter((post) => post.postedBy === user.userId)
+            .map((post) => (
+              <div key={post.postId}>
+                <PostHomeBox key={post.postId} post={post} />
+              </div>
+            ))}
+          {userBoards
+            .filter((board) => board.created_by === user.userId)
+            .map((board) => (
+              <Link to={`/boarddetails/${board.board_id}`}>
+                <div key={board.board_id}>
+                  <BoardHomeBox key={board.board_id} board={board} />
+                </div>
+              </Link>
+            ))}
+          {/*         
       <CodeBox /> <CodeBox /> */}
+        </Flex>
+      </Box>
     </>
   );
 }

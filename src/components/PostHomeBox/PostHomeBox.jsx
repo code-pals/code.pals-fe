@@ -61,15 +61,13 @@ export default function PostHomeBox({ post }) {
               {post.title}
             </Heading>
             <Box h="50" w="100">
-
-              <Highlight>{post?.code?.slice(0, 20)}</Highlight>
-
+              <Highlight>{post?.code?.slice(0, 35)}</Highlight>
             </Box>
             {/* <Box p="10px">
               <Text color={'gray.500'}>{post?.question?.slice(0, 10)} </Text>
             </Box> */}
           </Stack>
-          <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
+          <Stack mt="70px" direction={'row'} spacing={4} align={'center'}>
             <Link to={`/profile/${post.github}`}>
               <Avatar src={post?.avatar} alt={'Author'} />
               <Stack direction={'column'} spacing={0} fontSize={'sm'}>

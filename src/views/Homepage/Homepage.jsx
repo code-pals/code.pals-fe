@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-//import CodeBox from '../../components/CodeBox/CodeBox.jsx';
 import { getAllPosts, getAllBoards } from '../../services/fetch-utils.js';
 import SearchBar from '../../components/SearchBar/SearchBar.jsx';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';

@@ -9,6 +9,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import Highlight from 'react-highlight';
+
 export default function CodeBox({ post }) {
   return (
     <Center py={6}>

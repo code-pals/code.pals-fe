@@ -99,7 +99,9 @@ export default function PostForm({ setShowForm, setForceRender }) {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit" mt="10px">
+              Submit
+            </Button>
           </FormControl>
         </form>
       </Container>

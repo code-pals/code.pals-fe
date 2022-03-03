@@ -9,6 +9,8 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  Text,
+  Center,
   MenuItem,
   MenuDivider,
   useDisclosure,
@@ -38,7 +40,7 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
-export default function withAction() {
+export default function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, getUser, logIn, logOut } = useUser();
@@ -113,11 +115,13 @@ export default function withAction() {
                 {user.avatar ? <Avatar size={'sm'} src={user.avatar} /> : ''}
               </MenuButton>
               <MenuList>
-                <Link to={'/profile'} underline="none">
-                  {user.github}'s
-                  <br />
-                  Profile
-                </Link>
+                <Center>
+                  <Link to={`/profile/${user.github}`} underline="none">
+                    <Text>{user.github}'s</Text>
+                    <MenuDivider />
+                    Profile
+                  </Link>
+                </Center>
                 {/* <MenuItem>Link 2</MenuItem>
                 <MenuDivider />
                 <MenuItem>Link 3</MenuItem> */}
