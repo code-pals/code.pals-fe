@@ -1,14 +1,17 @@
 import React from 'react'
 import { Box, Button, Avatar, Input } from '@chakra-ui/react';
-
+import { Link } from 'react-router-dom';
 export default function CommentBox({comment}) {
   return (
       <>
+    <Box border='1px' padding='2px'>
+     <Link to={`/postdetails/${comment.postId}`}><Button><Box>Comment</Box></Button></Link>
     <Avatar src={comment.avatar} alt={'Author'} /><br/>
-    <div>{comment.comment}</div><br/>
-    <div>By: {comment.github}</div>
-    <div>{comment.created}</div>
-
+    <Box>Comment: {comment.comment}</Box><br/>
+    <Box>By: {comment.github}</Box>
+    <Box>{comment?.created?.slice(0,10)}</Box>
+    <Link to={`/postdetails/${comment.postId}`}><Button>Link to Corresponding Post</Button></Link>
+    </Box>
     </>
   )
 }

@@ -51,8 +51,7 @@ export default function PostForm({ setShowForm, setForceRender }) {
           const editResponse = await editPost(params.id, postObj);
           console.log(editResponse);
           setShowForm(false);
-          setForceRender(2);
-          history.push('/profile');
+          history.push('/profile/');
         }
       } else {
         history.push('/login');
