@@ -1,33 +1,59 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Homepage from './views/Homepage/Homepage.jsx';
-import Login from './views/Login/Login';
-import Create from './views/Create/Create.jsx';
-import BoardDetails from './views/BoardDetails/BoardDetails.jsx';
-import PostDetails from './views/PostDetails/PostDetails.jsx';
-import Profile from './views/Profile/Profile.jsx';
-import AboutUs from './views/AboutUs/AboutUs.jsx';
-import Header from './components/Header/Header.jsx';
-import OauthReturn from './views/OauthReturn/OauthReturn.jsx';
+import { render } from '@testing-library/react';
 import { UserProvider } from './context/UserContext.js';
-import CreateProfile from './views/Profile/CreateProfile.jsx';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import SearchBar from './components/SearchBar/SearchBar.jsx';
 import { ChakraProvider } from '@chakra-ui/react';
-import Chat from './views/Chat/Chat/Chat.js';
+import { MemoryRouter, Switch, Route } from 'react-router-dom';
+import Homepage from './views/Homepage/Homepage.jsx';
+import Login from './views/Login/Login.jsx';
+import Profile from './views/Profile/Profile.jsx';
+import Header from './components/Header/Header.jsx';
+import Create from './views/Create/Create.jsx';
+import SearchBar from './components/SearchBar/SearchBar.jsx';
+import AboutUs from './views/AboutUs/AboutUs.jsx';
+import CreateProfile from './views/Profile/CreateProfile.jsx';
+import PostDetails from './views/PostDetails/PostDetails.jsx';
 import JoinBoard from './views/Chat/Board/JoinBoard.js';
-import { io } from 'socket.io-client';
 import BoardChat from './views/Chat/Board/BoardChat.jsx';
+import BoardDetails from './views/BoardDetails/BoardDetails.jsx';
 import ChatRooms from './views/ChatRooms/ChatRooms.jsx';
-//implementing socket.io mocking
-const url = process.env.NODE_ENV === 'test' ? '' : 'http://localhost:7890';
-const socket = io.connect(url);
-//const socket = io.connect('https://codepalz.herokuapp.com');
-function App() {
-  return (
-    <div className="App">
-      <ChakraProvider>
-        <Router>
-          <UserProvider>
+import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
+import OauthReturn from './views/OauthReturn/OauthReturn.jsx';
+import socketIOClient from 'socket.io-client';
+import MockedSocket from 'socket.io-mock';
+
+jest.mock('socket.io-client');
+jest.mock('../src/context/UserContext.js');
+
+describe('it tests the entire app', () => {
+  let socket;
+
+  beforeEach(() => {
+    socket = new MockedSocket();
+    socketIOClient.mockReturnValue(socket);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('renders the homepage', () => {
+    const mockUser = {
+      user_id: 1,
+      github: 'h',
+      email: 's@s.com',
+      username: 'alchemy',
+      pronoun: 'they',
+      experience: 'hard',
+      tech: 'JS',
+      avatar: 'https://placekitten.com/200/300',
+      repos: 123,
+      bio: 'stuff',
+      member_since: '2020',
+      created: Date.now(),
+    };
+    const { container } = render(
+      <MemoryRouter initialEntries={['/']}>
+        <ChakraProvider>
+          <UserProvider mockUser={{ mockUser }}>
             <Header />
             <Switch>
               <Route exact path="/">
@@ -71,10 +97,9 @@ function App() {
               </Route>
             </Switch>
           </UserProvider>
-        </Router>
-      </ChakraProvider>
-    </div>
-  );
-}
-
-export default App;
+        </ChakraProvider>
+      </MemoryRouter>
+    );
+    expect(container).toMatchSnapshot();
+  });
+});
