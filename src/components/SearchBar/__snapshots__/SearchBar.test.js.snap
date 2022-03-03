@@ -56,6 +56,7 @@ exports[`should render SearchBar 1`] = `
             />
           </div>
           <button
+            class="chakra-button css-1gek3pj"
             type="submit"
           >
             Submit
@@ -70,6 +71,15 @@ exports[`should render SearchBar 1`] = `
     <div
       class="css-1mpt2dh"
     />
+    <div
+      class="css-gmuwbf"
+    >
+      <div
+        class="css-0"
+      >
+        <br />
+      </div>
+    </div>
   </div>
 </div>
 `;

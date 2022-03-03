@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-//import CodeBox from '../../components/CodeBox/CodeBox.jsx';
 import { getAllPosts, getAllBoards } from '../../services/fetch-utils.js';
-import SearchBar from '../../components/SearchBar/SearchBar.jsx';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import BoardHomeBox from '../../components/BoardHomeBox/BoardHomeBox.jsx';
 import { Link } from 'react-router-dom';
@@ -35,22 +33,31 @@ export default function Homepage() {
           align={'center'}
           justify={'center'}
         >
-          {posts.sort((d1, d2) => new Date(d2.created).getTime() - new Date(d1.created).getTime()).map((post) => {
-          return (
-            <div key={post.postId}>
-              <PostHomeBox post={post} key={post.postId} />
-            </div>
-          )})}
+          {posts
+            .sort(
+              (d1, d2) =>
+                new Date(d2.created).getTime() - new Date(d1.created).getTime()
+            )
+            .map((post) => {
+              return (
+                <div key={post.postId}>
+                  <PostHomeBox post={post} key={post.postId} />
+                </div>
+              );
+            })}
 
-          {boards.sort((d1, d2) => new Date(d2.created).getTime() - new Date(d1.created).getTime()).map((board) => (
-            <Link key={board.board_id} to={`/boarddetails/${board.board_id}`}>
-              <div key={board.board_id}>
-                <BoardHomeBox board={board} key={board.board_id} />
-              </div>
-            </Link>
-
-
-          ))}
+          {boards
+            .sort(
+              (d1, d2) =>
+                new Date(d2.created).getTime() - new Date(d1.created).getTime()
+            )
+            .map((board) => (
+              <Link key={board.board_id} to={`/boarddetails/${board.board_id}`}>
+                <div key={board.board_id}>
+                  <BoardHomeBox board={board} key={board.board_id} />
+                </div>
+              </Link>
+            ))}
         </Flex>
       </Box>
     </>
