@@ -24,7 +24,7 @@ import Chat from './views/Chat/Chat/Chat.js';
 import JoinBoard from './views/Chat/Board/JoinBoard.js';
 import { io } from 'socket.io-client';
 import BoardChat from './views/Chat/Board/BoardChat.jsx';
-import AggregateComments from './views/PostDetails/AggregateComments.jsx';
+import ChatRooms from './views/ChatRooms/ChatRooms.jsx';
 //fix yml
 const socket = io.connect('http://localhost:7890');
 //const socket = io.connect('https://codepalz.herokuapp.com');
@@ -74,6 +74,9 @@ function App() {
               </Route>
               <Route exact path="/boarddetails/:id">
                 <BoardDetails />
+              </Route>
+              <Route exact path="/chatrooms">
+              <ChatRooms />
               </Route>
             </Switch>
           </UserProvider>
