@@ -71,7 +71,7 @@ export default function Chat({ username, roomname, socket }) {
     <Center>
       <div className="chat">
         <div className="user-name">
-          <Heading as="h4" size="md">
+          <Heading as="h4" size="md" mb="20px">
             Welcome {username}
             <span> to room: '{roomname}'</span>
           </Heading>
