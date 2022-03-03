@@ -10,6 +10,7 @@ import { Flex, Box, spacer } from '@chakra-ui/react';
 export default function Homepage() {
   const [posts, setPosts] = useState([]);
   const [boards, setBoards] = useState([]);
+  const [allItems, setAllItems] = useState([]);
 
   useEffect(() => {
     const getPostsAndBoards = async () => {
@@ -21,8 +22,6 @@ export default function Homepage() {
     };
     getPostsAndBoards();
   }, []);
-  console.log('postsuseffect', posts);
-  console.log('boards', boards);
 
   return (
     <>
@@ -36,18 +35,21 @@ export default function Homepage() {
           align={'center'}
           justify={'center'}
         >
-          {posts.map((post) => (
+          {posts.sort((d1, d2) => new Date(d2.created).getTime() - new Date(d1.created).getTime()).map((post) => {
+          return (
             <div key={post.postId}>
               <PostHomeBox post={post} key={post.postId} />
             </div>
-          ))}
+          )})}
 
-          {boards.map((board) => (
+          {boards.sort((d1, d2) => new Date(d2.created).getTime() - new Date(d1.created).getTime()).map((board) => (
             <Link key={board.board_id} to={`/boarddetails/${board.board_id}`}>
               <div key={board.board_id}>
                 <BoardHomeBox board={board} key={board.board_id} />
               </div>
             </Link>
+
+
           ))}
         </Flex>
       </Box>

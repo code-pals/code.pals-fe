@@ -20,37 +20,26 @@ import {
 } from '../../services/fetch-utils.js';
 import { useHistory } from 'react-router-dom';
 import PostForm from '../../components/PostForm/PostForm.jsx';
-import AggregateComments from './AggregateComments.jsx';
 import CodeBox from '../../components/CodeBox/CodeBox';
 
 export default function PostDetails() {
   const { id } = useParams();
   const { user } = useUser();
-  const storedUser = JSON.parse(localStorage.getItem('storageUser'));
   const history = useHistory();
-
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [activeId, setActiveId] = useState('');
   const [showForm, setShowForm] = useState(false);
-  //const [aggComments, setAggComments] = useState('');
-
+  
   useEffect(() => {
     const getPostAndComments = async () => {
       const returnPost = await getPostById(id);
-      console.log('RETURNPOST', returnPost);
-      console.log(returnPost.body);
       setPost(returnPost.body);
       const returnComments = await getCommentsByPost(id);
-      console.log('RETURNCOMMENtS', returnComments.body);
-      console.log(post);
       setComments(returnComments.body);
       setLoading(false);
-      //const aggedComments = await aggregateComments(id);
-      //console.log('aggedcommentsuseff', aggedComments);
-      //setAggComments(aggedComments);
     };
     getPostAndComments();
   }, [id]);
@@ -112,7 +101,7 @@ export default function PostDetails() {
       <>
         <Center>
           <form id="reply-form" onSubmit={replySubmit}>
-            <Input style={{ color: 'black' }} name="reply" id="reply-input" />
+            <Input style={{ color: 'black' }} name="reply" id="reply-input" required/>
             <Button type="submit">Submit</Button>
           </form>
         </Center>
@@ -152,6 +141,7 @@ export default function PostDetails() {
           name="comment"
           id="comment-input"
           w="75%"
+          required
         ></Input>
         <Button type="submit">Submit</Button>
       </form>

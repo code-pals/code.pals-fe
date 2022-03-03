@@ -83,9 +83,13 @@ export default function withAction() {
               <Link to={'/results'} underline="none">
                 Search
               </Link>
+              <Link to={'/chatrooms'} underline="none">
+                Chat
+              </Link>
               <Link to={'/aboutus'} underline="none">
                 About Us
               </Link>
+             
               {user.github}
             </HStack>
           </HStack>
@@ -113,7 +117,7 @@ export default function withAction() {
                 {user.avatar ? <Avatar size={'sm'} src={user.avatar} /> : ''}
               </MenuButton>
               <MenuList>
-                <Link to={'/profile'} underline="none">
+                <Link to={`/profile/${user.github}`} underline="none">
                   {user.github}'s
                   <br />
                   Profile
@@ -125,6 +129,7 @@ export default function withAction() {
             </Menu>
           </Flex>
         </Flex>
+        
 
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
@@ -146,6 +151,9 @@ export default function withAction() {
               )}
               <Link to={'/results'} underline="none">
                 Search
+              </Link>
+              <Link to={'/chatrooms'} underline="none"  >
+                Chat
               </Link>
               <Link to={'/aboutus'} underline="none">
                 About Us
