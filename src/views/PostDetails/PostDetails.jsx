@@ -61,7 +61,7 @@ export default function PostDetails() {
     const formData = new FormData(form);
     const newComment = formData.get('comment');
     const commentInput = document.getElementById('comment-input');
-    
+
     if (!user.github) {
       history.push('/login');
     }
@@ -75,7 +75,7 @@ export default function PostDetails() {
     const response = await createComment(commentObj);
     const returnComments = await getCommentsByPost(id);
     setComments(returnComments.body);
-    commentInput.value=''
+    commentInput.value = '';
   }
 
   const handleReply = (id) => {
@@ -113,13 +113,8 @@ export default function PostDetails() {
     return (
       <>
         <Center>
-          <form id='reply-form' onSubmit={replySubmit}>
-            <Input
-              style={{ color: 'black' }}
-              name='reply'
-              id='reply-input'
-              
-            />
+          <form id="reply-form" onSubmit={replySubmit}>
+            <Input style={{ color: 'black' }} name="reply" id="reply-input" />
             <Button type="submit">Submit</Button>
           </form>
         </Center>
@@ -157,40 +152,43 @@ export default function PostDetails() {
           placeholder="Comments"
           name="comment"
           id="comment-input"
-
           w="75%"
         ></Input>
         <Button type="submit">Submit</Button>
       </form>
       <br />
       {/* } */}
-      {comments.sort(function(a,b){return a.created - b.created}).map((comment) => {
-        return (
-          <div key={comment.commentId}>
-          <Box key={comment.commentId} maxW="xxl" pl="10px">
-            <Box key={comment.commentId} style={{ display: 'flex' }}>
-              <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
-              <br />
-              <Box pl="15px" pr="25px">
-                {comment.comment}
+      {comments
+        .sort(function (a, b) {
+          return a.created - b.created;
+        })
+        .map((comment) => {
+          return (
+            <div key={comment.commentId}>
+              <Box key={comment.commentId} maxW="xxl" pl="10px">
+                <Box key={comment.commentId} style={{ display: 'flex' }}>
+                  <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
+                  <br />
+                  <Box pl="15px" pr="25px">
+                    {comment.comment}
+                  </Box>
+                  <br />
+                  <Box pr="25px">By: {comment.github}</Box>
+                  <br />
+                  <Box pr="25px">{comment.created.slice(0, 10)}</Box>
+                  <Button onClick={() => handleReply(comment.commentId)}>
+                    Reply
+                  </Button>
+                  <div>
+                    {activeId === comment.commentId && showInput
+                      ? displayInput(comment)
+                      : ''}
+                  </div>
+                </Box>
               </Box>
-              <br />
-              <Box pr="25px">By: {comment.github}</Box>
-              <br />
-              <Box pr="25px">{comment.created.slice(0, 10)}</Box>
-              <Button onClick={() => handleReply(comment.commentId)}>
-                Reply
-              </Button>
-              <div>
-                {activeId === comment.commentId && showInput
-                  ? displayInput(comment)
-                  : ''}
-              </div>
-            </Box>
-          </Box>
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
     </>
   );
 }
