@@ -23,6 +23,7 @@ import {
   getBoardsByUsername,
   getPostsByUsername,
 } from '../../services/fetch-utils.js';
+
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import BoardHomeBox from '../../components/BoardHomeBox/BoardHomeBox.jsx';
 import { Link } from 'react-router-dom';
@@ -49,6 +50,7 @@ export default function Profile() {
 
   return (
     <>
+
       <GithubBox usernamex={username} />
       <Box>
         <Flex
@@ -74,6 +76,7 @@ export default function Profile() {
           ))}
         </Flex>
       </Box>
+
     </>
   );
 }

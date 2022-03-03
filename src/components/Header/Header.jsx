@@ -129,6 +129,7 @@ export default function withAction() {
             </Menu>
           </Flex>
         </Flex>
+        
 
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
@@ -151,7 +152,9 @@ export default function withAction() {
               <Link to={'/results'} underline="none">
                 Search
               </Link>
+
               <Link to={'/chatrooms'} underline="none">
+
                 Chat
               </Link>
               <Link to={'/aboutus'} underline="none">

@@ -75,8 +75,7 @@ export default function PostDetails() {
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
       e.preventDefault();
-
-      if (!user.github) {
+        if (!user.github) {
         history.push('/login');
       }
       const replyForm = document.getElementById('reply-form');
@@ -94,7 +93,6 @@ export default function PostDetails() {
       const response = await createComment(replyObj);
       const returnReplyComments = await getCommentsByPost(id);
       setComments(returnReplyComments.body);
-
       replyInput.value = '';
     };
     return (
