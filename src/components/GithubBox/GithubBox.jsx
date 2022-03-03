@@ -8,10 +8,22 @@ import {
   Image,
 } from '@chakra-ui/react';
 import { useUser } from '../../context/UserContext.js';
+import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import getUser, { getUserByName } from '../../services/fetch-utils'
 
-export default function ProductSimple() {
+export default function GithubBox(usernamex) {
   const { user } = useUser();
-
+  const { username } = useParams();
+  const [profileUser, setProfileUser] = useState('');
+  
+  useEffect(() => {
+      async function getsUser() {
+      const respUser = await getUserByName(username);
+      setProfileUser(respUser);
+      }
+    getsUser()}, [])
+  
   return (
     <>
       <Center py={12}>
@@ -39,7 +51,7 @@ export default function ProductSimple() {
               pos: 'absolute',
               top: 5,
               left: 0,
-              backgroundImage: `url(${user.avatar})`,
+              backgroundImage: `url(${profileUser.avatar})`,
               filter: 'blur(15px)',
               zIndex: -1,
             }}
@@ -54,7 +66,7 @@ export default function ProductSimple() {
               height={230}
               width={282}
               objectFit={'cover'}
-              src={user.avatar}
+              src={profileUser.avatar}
             />
           </Box>
           <Stack pt={10} align={'left'}>
@@ -66,13 +78,13 @@ export default function ProductSimple() {
               Github Stats:
             </Text>
             <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-              {user.github}
+              {profileUser.github}
               <br />
-              Repos: {user.repos}
+              Repos: {profileUser.repos}
             </Heading>
             <Stack direction={'row'} align={'left'}>
               <Text fontWeight={800} fontSize={'xl'}>
-                Member Since: {user.memberSince.slice(0, 10)}
+                Member Since: {profileUser?.memberSince?.slice(0, 10)}
               </Text>
             </Stack>
           </Stack>

@@ -38,7 +38,7 @@ export default function PostDetails() {
   //const [aggComments, setAggComments] = useState('');
 
   useEffect(() => {
-    const singlePost = async () => {
+    const getPostAndComments = async () => {
       const returnPost = await getPostById(id);
       console.log('RETURNPOST', returnPost);
       console.log(returnPost.body);
@@ -52,7 +52,7 @@ export default function PostDetails() {
       //console.log('aggedcommentsuseff', aggedComments);
       //setAggComments(aggedComments);
     };
-    singlePost();
+    getPostAndComments();
   }, [id]);
 
   async function commentSubmit(e) {
@@ -61,7 +61,7 @@ export default function PostDetails() {
     const formData = new FormData(form);
     const newComment = formData.get('comment');
     const commentInput = document.getElementById('comment-input');
-    
+
     if (!user.github) {
       history.push('/login');
     }
@@ -75,15 +75,13 @@ export default function PostDetails() {
     const response = await createComment(commentObj);
     const returnComments = await getCommentsByPost(id);
     setComments(returnComments.body);
-    commentInput.value=''
+    commentInput.value = '';
   }
 
   const handleReply = (id) => {
     setActiveId(id);
     setShowInput((prev) => !prev);
   };
-
-  const [replyComment, setReplyComment] = useState('');
 
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
@@ -107,19 +105,14 @@ export default function PostDetails() {
       const response = await createComment(replyObj);
       const returnReplyComments = await getCommentsByPost(id);
       setComments(returnReplyComments.body);
-      setReplyComment('');
+
       replyInput.value = '';
     };
     return (
       <>
         <Center>
-          <form id='reply-form' onSubmit={replySubmit}>
-            <Input
-              style={{ color: 'black' }}
-              name='reply'
-              id='reply-input'
-              
-            />
+          <form id="reply-form" onSubmit={replySubmit}>
+            <Input style={{ color: 'black' }} name="reply" id="reply-input" />
             <Button type="submit">Submit</Button>
           </form>
         </Center>
@@ -144,8 +137,9 @@ export default function PostDetails() {
       <PostHomeBox post={post} />
       <Center>
         <ButtonGroup spacing="5">
-          <Button onClick={handleDelete}>Delete this Post</Button>
-          <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
+          {user.github === post.github && <Button onClick={handleDelete}>Delete this Post</Button>}
+          {user.github === post.github && <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
+          }
           <Button>Comments {comments.length}</Button>
         </ButtonGroup>
       </Center>
@@ -157,40 +151,43 @@ export default function PostDetails() {
           placeholder="Comments"
           name="comment"
           id="comment-input"
-
           w="75%"
         ></Input>
         <Button type="submit">Submit</Button>
       </form>
       <br />
       {/* } */}
-      {comments.sort(function(a,b){return a.created - b.created}).map((comment) => {
-        return (
-          <div key={comment.commentId}>
-          <Box key={comment.commentId} maxW="xxl" pl="10px">
-            <Box key={comment.commentId} style={{ display: 'flex' }}>
-              <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
-              <br />
-              <Box pl="15px" pr="25px">
-                {comment.comment}
+      {comments
+        .sort(function (a, b) {
+          return a.created - b.created;
+        })
+        .map((comment) => {
+          return (
+            <div key={comment.commentId}>
+              <Box key={comment.commentId} maxW="xxl" pl="10px">
+                <Box key={comment.commentId} style={{ display: 'flex' }}>
+                  <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
+                  <br />
+                  <Box pl="15px" pr="25px">
+                    {comment.comment}
+                  </Box>
+                  <br />
+                  <Box pr="25px">By: {comment.github}</Box>
+                  <br />
+                  <Box pr="25px">{comment.created.slice(0, 10)}</Box>
+                  <Button onClick={() => handleReply(comment.commentId)}>
+                    Reply
+                  </Button>
+                  <div>
+                    {activeId === comment.commentId && showInput
+                      ? displayInput(comment)
+                      : ''}
+                  </div>
+                </Box>
               </Box>
-              <br />
-              <Box pr="25px">By: {comment.github}</Box>
-              <br />
-              <Box pr="25px">{comment.created.slice(0, 10)}</Box>
-              <Button onClick={() => handleReply(comment.commentId)}>
-                Reply
-              </Button>
-              <div>
-                {activeId === comment.commentId && showInput
-                  ? displayInput(comment)
-                  : ''}
-              </div>
-            </Box>
-          </Box>
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
     </>
   );
 }

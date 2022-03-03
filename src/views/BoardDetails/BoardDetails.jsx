@@ -48,18 +48,14 @@ export default function BoardDetails() {
       <BoardHomeBox board={board} goals={board.goal} />
       <Center>
         <ButtonGroup spacing="5">
-          <Button onClick={handleDelete}>Delete Board</Button>
-          <Button onClick={handleEdit}>Edit Board</Button>
+          {user.github === board.github&& <Button onClick={handleDelete}>Delete Board</Button>}
+          {user.github === board.github &&<Button onClick={handleEdit}>Edit Board</Button>}
           {showForm && <BoardForm />}
-          <Link target={'_blank'} to={`/chat/${board.title}/${user.github}`}>
-            <Button>Enter Boardroom!</Button>
-          </Link>
+          {user.github ? <Link target={'_blank'} to={`/chat/${board.title}/${user.github}`}>
+            <Button>Enter Chat!</Button>
+          </Link> : <Link to={'/login'}><Button>Log in to join the chatroom</Button></Link>}
         </ButtonGroup>
       </Center>
-      {/* {board.title}
-        {board.summary}
-        {board.goal}
-        {board.group_size} */}
     </>
   );
 }
