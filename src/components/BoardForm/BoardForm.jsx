@@ -68,6 +68,8 @@ export default function BoardForm() {
           <FormControl as="fieldset">
             <FormLabel htmlFor="title">Project Title</FormLabel>
             <Input
+              w="400px"
+              required
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -123,7 +125,9 @@ export default function BoardForm() {
                 />
               </NumberInputStepper>
             </NumberInput>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" mt="10px">
+              Submit
+            </Button>
           </FormControl>
         </form>
       </Container>
