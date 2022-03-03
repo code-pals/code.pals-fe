@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import NestedComments from '../../components/NestedComments/NestedComments.jsx';
 import { useUser } from '../../context/UserContext.js';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import {
@@ -32,7 +31,7 @@ export default function PostDetails() {
   const [showInput, setShowInput] = useState(false);
   const [activeId, setActiveId] = useState('');
   const [showForm, setShowForm] = useState(false);
-  
+
   useEffect(() => {
     const getPostAndComments = async () => {
       const returnPost = await getPostById(id);
@@ -75,7 +74,7 @@ export default function PostDetails() {
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
       e.preventDefault();
-        if (!user.github) {
+      if (!user.github) {
         history.push('/login');
       }
       const replyForm = document.getElementById('reply-form');
@@ -99,7 +98,12 @@ export default function PostDetails() {
       <>
         <Center>
           <form id="reply-form" onSubmit={replySubmit}>
-            <Input style={{ color: 'black' }} name="reply" id="reply-input" required/>
+            <Input
+              style={{ color: 'black' }}
+              name="reply"
+              id="reply-input"
+              required
+            />
             <Button type="submit">Submit</Button>
           </form>
         </Center>
@@ -111,7 +115,6 @@ export default function PostDetails() {
     const answer = confirm('Are you sure you want to delete this post?');
     if (answer) {
       const response = await deletePost(id);
-      console.log(response);
       history.push('/');
     }
   };
@@ -124,9 +127,12 @@ export default function PostDetails() {
       <PostHomeBox post={post} />
       <Center>
         <ButtonGroup spacing="5">
-          {user.github === post.github && <Button onClick={handleDelete}>Delete this Post</Button>}
-          {user.github === post.github && <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
-          }
+          {user.github === post.github && (
+            <Button onClick={handleDelete}>Delete this Post</Button>
+          )}
+          {user.github === post.github && (
+            <Button onClick={() => handleEdit(id)}>Edit this Post</Button>
+          )}
           <Button>Comments {comments.length}</Button>
         </ButtonGroup>
       </Center>

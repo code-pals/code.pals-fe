@@ -24,17 +24,16 @@ export default function SearchBar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(search === '') {
-      alert('please enter a phrase or keyword')
-    }
-    else{
-    const responseArr = await searchPostsAndComments(search);
-    console.log(responseArr);
-    setComments(responseArr.body[0]);
-    setPosts(responseArr.body[2]);
-    // history.push({
-    //   pathname: '/results',
-    //   state: comments })
+    if (search === '') {
+      alert('please enter a phrase or keyword');
+    } else {
+      const responseArr = await searchPostsAndComments(search);
+      console.log(responseArr);
+      setComments(responseArr.body[0]);
+      setPosts(responseArr.body[2]);
+      // history.push({
+      //   pathname: '/results',
+      //   state: comments })
     }
   };
 
@@ -76,16 +75,20 @@ export default function SearchBar() {
           {posts.map((post) => (
             <div key={post.postId}>
               <PostHomeBox post={post} key={post.postId} />
-              </div>
-          ))}
-          
-
-          {comments.map((comment) => (
-            <Box w='70%' key={comment.commentId}><br/>
-              <CommentBox comment={comment} key={comment.commentId} />
-            </Box>
+            </div>
           ))}
         </Flex>
+        <Center>
+          <Box>
+            <br />
+            {comments.map((comment) => (
+              <Box w="100%" key={comment.commentId}>
+                <br />
+                <CommentBox comment={comment} key={comment.commentId} />
+              </Box>
+            ))}
+          </Box>
+        </Center>
       </Box>
     </>
   );

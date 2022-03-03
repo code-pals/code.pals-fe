@@ -1,17 +1,10 @@
-import {
-  BrowserRouter as Router,
-  // NavLink,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Homepage from './views/Homepage/Homepage.jsx';
 import Login from './views/Login/Login';
 import Create from './views/Create/Create.jsx';
 import BoardDetails from './views/BoardDetails/BoardDetails.jsx';
 import PostDetails from './views/PostDetails/PostDetails.jsx';
 import Profile from './views/Profile/Profile.jsx';
-//import Results from './views/Results/Results.jsx';
-import DirectMessages from './views/DirectMessages/DirectMessages.jsx';
 import AboutUs from './views/AboutUs/AboutUs.jsx';
 import Header from './components/Header/Header.jsx';
 import OauthReturn from './views/OauthReturn/OauthReturn.jsx';
@@ -48,9 +41,6 @@ function App() {
               <PrivateRoute exact path="/create">
                 <Create />
               </PrivateRoute>
-              <PrivateRoute exact path="/messages">
-                <DirectMessages />
-              </PrivateRoute>
               <Route exact path="/results">
                 <SearchBar />
               </Route>
@@ -76,7 +66,7 @@ function App() {
                 <BoardDetails />
               </Route>
               <Route exact path="/chatrooms">
-              <ChatRooms />
+                <ChatRooms />
               </Route>
             </Switch>
           </UserProvider>

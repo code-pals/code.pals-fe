@@ -15,7 +15,7 @@ import {
   Code,
   Center,
 } from '@chakra-ui/react';
-import SubmitButton from '../SubmitButton/SubmitButton.jsx';
+
 import { createPost, editPost, getById } from '../../services/fetch-utils.js';
 import { useUser } from '../../context/UserContext.js';
 import { useHistory } from 'react-router';

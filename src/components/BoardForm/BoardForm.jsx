@@ -1,27 +1,20 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   FormControl,
   FormLabel,
-  HStack,
-  Button,
-  FormErrorMessage,
-  FormHelperText,
-  Image,
   Input,
   Container,
-  Center,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberDecrementStepper,
   NumberIncrementStepper,
-  Text,
+  Button,
 } from '@chakra-ui/react';
 import { createBoard, editBoard } from '../../services/fetch-utils.js';
 import { useUser } from '../../context/UserContext.js';
 import { useHistory } from 'react-router-dom';
-import { ChevronDownIcon } from '@chakra-ui/icons';
 import { useParams } from 'react-router-dom';
 
 export default function BoardForm() {
@@ -38,7 +31,6 @@ export default function BoardForm() {
     e.preventDefault();
     console.log(title, summary, goal, groupSize);
     try {
-      console.log('tryboardform')
       if (user) {
         const boardObj = {
           title: title,
@@ -46,20 +38,13 @@ export default function BoardForm() {
           goal: goal,
           groupSize: groupSize,
         };
-       
 
         if (params.id) {
           const response = await editBoard(params.id, boardObj);
-          console.log(response);
           window.location.reload();
-
-
-        }
-        else {
+        } else {
           const response = await createBoard(boardObj);
-          console.log('boardoformresponse', response.body);
           history.push(`/boarddetails/${response.body.board_id}`);
-
         }
       } else {
         history.push('/login');
@@ -75,9 +60,7 @@ export default function BoardForm() {
           <FormControl as="fieldset">
             <FormLabel htmlFor="title">Project Title</FormLabel>
             <Input
-
               w="400px"
-
               required
               id="title"
               value={title}
@@ -89,15 +72,6 @@ export default function BoardForm() {
               value={summary}
               onChange={(e) => setSummary(e.target.value)}
             />
-            {/* <Center>
-              <Image
-                h="200px"
-                src={
-                  'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80'
-                }
-                layout={'fill'}
-              />
-            </Center> */}
             <FormLabel htmlFor="looking">What is your goal?</FormLabel>
             <Input
               id="goal"
@@ -105,12 +79,7 @@ export default function BoardForm() {
               onChange={(e) => setGoal(e.target.value)}
             />
             <FormLabel htmlFor="amount">What is your group size?</FormLabel>
-            <NumberInput
-              max={20}
-              min={1}
-              value={groupSize}
-              // onChange={(e) => setGroupSize(e.target.value)}
-            >
+            <NumberInput max={20} min={1} value={groupSize}>
               <NumberInputField name="amount" disabled />
               {console.log({ groupSize })}
               <NumberInputStepper>
