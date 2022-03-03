@@ -32,11 +32,9 @@ export default function PostDetails() {
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
-  // const [newComment, setNewComment] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [activeId, setActiveId] = useState('');
   const [showForm, setShowForm] = useState(false);
-  const [forceRender, setForceRender] = useState(1);
   //const [aggComments, setAggComments] = useState('');
 
   useEffect(() => {
@@ -57,15 +55,13 @@ export default function PostDetails() {
     singlePost();
   }, [id]);
 
- /* useEffect(() => {
-    setForceRender((prev) => prev + 1);
-  }, [showForm]);
-*/
   async function commentSubmit(e) {
     e.preventDefault();
     const form = document.getElementById('comment-form');
     const formData = new FormData(form);
     const newComment = formData.get('comment');
+    const commentInput = document.getElementById('comment-input');
+    
     if (!user.github) {
       history.push('/login');
     }
@@ -78,8 +74,8 @@ export default function PostDetails() {
     };
     const response = await createComment(commentObj);
     const returnComments = await getCommentsByPost(id);
-    console.log('RETURNCOMMENtS', returnComments);
     setComments(returnComments.body);
+    commentInput.value=''
   }
 
   const handleReply = (id) => {
@@ -88,33 +84,41 @@ export default function PostDetails() {
   };
 
   const [replyComment, setReplyComment] = useState('');
+
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
       e.preventDefault();
+
       if (!user.github) {
         history.push('/login');
       }
+      const replyForm = document.getElementById('reply-form');
+      const formData = new FormData(replyForm);
+      const newReply = formData.get('reply');
+      const replyInput = document.getElementById('reply-input');
+
       const replyObj = {
         commenter: user.userId,
         postId: post.postId,
-        comment: replyComment,
+        comment: newReply,
         parent: comment.commentId,
         favorited: false,
       };
       const response = await createComment(replyObj);
       const returnReplyComments = await getCommentsByPost(id);
-      console.log('RETURNREPLYCOMMENtS', returnReplyComments);
       setComments(returnReplyComments.body);
       setReplyComment('');
+      replyInput.value = '';
     };
     return (
       <>
         <Center>
-          <form onSubmit={replySubmit}>
-            <input
+          <form id='reply-form' onSubmit={replySubmit}>
+            <Input
               style={{ color: 'black' }}
-              value={replyComment}
-              onChange={(e) => setReplyComment(e.target.value)}
+              name='reply'
+              id='reply-input'
+              
             />
             <Button type="submit">Submit</Button>
           </form>
@@ -135,15 +139,6 @@ export default function PostDetails() {
     setShowForm((prev) => !prev);
   };
 
-  // console.log;
-  // console.log('replycomment', replyComment);
-  // console.log(post, 'POSTPOST');
-  // console.log('agggcomment', aggComments);
-
-  // for (let i = 0; i < aggComments.length; i++) {
-  //   console.log(aggComments[i]);
-  // }
-
   return (
     <>
       <PostHomeBox post={post} />
@@ -161,18 +156,18 @@ export default function PostDetails() {
           type="text"
           placeholder="Comments"
           name="comment"
-          // value={newComment}
-          // onChange={(e) => setNewComment(e.target.value)}
+          id="comment-input"
+
           w="75%"
         ></Input>
         <Button type="submit">Submit</Button>
-      </form>x``
-   dev2
+      </form>
       <br />
-      {/* .sort(function(a,b){return a.created - b.created})} */}
-      {comments.map((comment) => {
+      {/* } */}
+      {comments.sort(function(a,b){return a.created - b.created}).map((comment) => {
         return (
-          <Box maxW="xxl" pl="10px">
+          <div key={comment.commentId}>
+          <Box key={comment.commentId} maxW="xxl" pl="10px">
             <Box key={comment.commentId} style={{ display: 'flex' }}>
               <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
               <br />
@@ -193,6 +188,7 @@ export default function PostDetails() {
               </div>
             </Box>
           </Box>
+          </div>
         );
       })}
     </>
