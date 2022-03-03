@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   Icon,
+  Button,
   Center,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
@@ -50,7 +51,9 @@ export default function SearchBar() {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </InputGroup>
-              <button type="submit">Submit</button>
+              <Button type="submit" mt="10px">
+                Submit
+              </Button>
             </form>
           </Stack>
         </Box>

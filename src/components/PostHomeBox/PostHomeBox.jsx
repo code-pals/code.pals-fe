@@ -20,23 +20,32 @@ export default function PostHomeBox({ post }) {
   return (
     <Center py={6}>
       <Link to={`/postdetails/${post.postId}`}>
-        <Box
-          w="222px"
-          h="450px"
+        <Stack
+          w="300px"
+          h="475px"
           m="10px"
           bg={useColorModeValue('white', 'gray.900')}
           boxShadow={'2xl'}
           rounded={'md'}
-          p={6}
+          // p={6}
+          direction={'column'}
           overflow={'hidden'}
+          spacing={20}
+          style={{
+            // backgroundColor: 'Orange',
+            display: 'flex',
+            // flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
         >
           <Box
             maxH={'120px'}
             bg={'gray.100'}
-            mt={-6}
-            mx={-6}
-            mb={6}
-            pos={'relative'}
+            // mt={-6}
+            // mx={-6}
+            mb={15}
+            // pos={'relative'}
+            // style={{ marginBottom: '.75rem' }}
           >
             <Image
               src={
@@ -45,7 +54,7 @@ export default function PostHomeBox({ post }) {
               layout={'fill'}
             />
           </Box>
-          <Stack>
+          <Stack style={{ margin: 0, padding: 10 }}>
             <Text
               color={'green.500'}
               textTransform={'uppercase'}
@@ -61,15 +70,19 @@ export default function PostHomeBox({ post }) {
               {post.title}
             </Heading>
             <Box h="50" w="100">
-
               <Highlight>{post?.code?.slice(0, 20)}</Highlight>
-
             </Box>
             {/* <Box p="10px">
               <Text color={'gray.500'}>{post?.question?.slice(0, 10)} </Text>
             </Box> */}
           </Stack>
-          <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
+          <Stack
+            mt={6}
+            direction={'row'}
+            spacing={4}
+            align={'center'}
+            style={{ margin: 0, padding: 10 }}
+          >
             <Link to={`/profile/${post.github}`}>
               <Avatar src={post?.avatar} alt={'Author'} />
               <Stack direction={'column'} spacing={0} fontSize={'sm'}>
@@ -78,7 +91,7 @@ export default function PostHomeBox({ post }) {
               </Stack>
             </Link>
           </Stack>
-        </Box>
+        </Stack>
       </Link>
     </Center>
   );
