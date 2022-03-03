@@ -43,7 +43,7 @@ export default function Homepage() {
           ))}
 
           {boards.map((board) => (
-            <Link to={`/boarddetails/${board.board_id}`}>
+            <Link key={board.board_id} to={`/boarddetails/${board.board_id}`}>
               <div key={board.board_id}>
                 <BoardHomeBox board={board} key={board.board_id} />
               </div>

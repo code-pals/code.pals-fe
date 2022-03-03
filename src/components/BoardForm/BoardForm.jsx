@@ -52,7 +52,7 @@ export default function BoardForm() {
         if (params) {
           const response = await editBoard(params.id, boardObj);
           console.log(response);
-          history.push(`/boarddetails/${params.id}`);
+          window.location.reload();
         }
       } else {
         history.push('/login');
