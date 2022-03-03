@@ -38,6 +38,7 @@ export default function BoardForm() {
     e.preventDefault();
     console.log(title, summary, goal, groupSize);
     try {
+      console.log('tryboardform')
       if (user) {
         const boardObj = {
           title: title,
@@ -45,14 +46,17 @@ export default function BoardForm() {
           goal: goal,
           groupSize: groupSize,
         };
-        const response = await createBoard(boardObj);
-        console.log(response.body);
-        history.push(`/boarddetails/${response.body.board_id}`);
+       
 
-        if (params) {
+        if (params.id) {
           const response = await editBoard(params.id, boardObj);
           console.log(response);
           window.location.reload();
+        }
+        else {
+          const response = await createBoard(boardObj);
+          console.log('boardoformresponse', response.body);
+          history.push(`/boarddetails/${response.body.board_id}`);
         }
       } else {
         history.push('/login');
@@ -68,6 +72,8 @@ export default function BoardForm() {
           <FormControl as="fieldset">
             <FormLabel htmlFor="title">Project Title</FormLabel>
             <Input
+              w='400px'
+              required
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
