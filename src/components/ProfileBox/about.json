@@ -1,0 +1,30 @@
+[
+  {
+    "image": "https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+    "name": "Estefani Baughman",
+    "quote": "Lifelong Learner",
+    "linkedin": "https://www.linkedin.com/in/estefani-baughman/",
+    "github": "https://github.com/HonduranCoder"
+  },
+  {
+    "image": "https://images.unsplash.com/photo-1528141603775-81fd11f61682?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+    "name": "Marvin Lambert",
+    "quote": "Frank",
+    "linkedin": "https://www.linkedin.com/in/marvinlambert/",
+    "github": "https://github.com/franklyhollywood"
+  },
+  {
+    "image": "https://images.unsplash.com/photo-1489486501123-5c1af10d0be6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+    "name": "Amit Sheth",
+    "quote": "I'll do it",
+    "linkedin": "https://www.linkedin.com/in/amitsheth9/",
+    "github": "https://github.com/AmitSheth9"
+  },
+  {
+    "image": "https://images.unsplash.com/photo-1590082871875-064201a27373?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1635&q=80",
+    "name": "Elijah Prosperie (",
+    "quote": "Coffee",
+    "linkedin": "https://www.linkedin.com/in/elijahprosperie/",
+    "github": "https://github.com/ProsperieEli"
+  }
+]

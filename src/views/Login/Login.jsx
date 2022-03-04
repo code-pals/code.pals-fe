@@ -10,7 +10,7 @@ import { FaGithub } from 'react-icons/fa';
 import { useUser } from '../../context/UserContext';
 
 export default function Login() {
-  const { user, getUser, logIn, logOut } = useUser();
+  const { logIn } = useUser();
 
   return (
     <Flex

@@ -3,16 +3,17 @@ import { useUser } from '../../context/UserContext';
 
 export default function PrivateRoute({ children, ...rest }) {
   const { user } = useUser();
+  const userObj = localStorage.getItem('storageUser');
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        user ? (
+        user.github ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: '/',
+              pathname: '/login',
               state: { from: location },
             }}
           />

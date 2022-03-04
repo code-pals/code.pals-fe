@@ -8,17 +8,18 @@ import {
   Image,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 //get user from database by id
 //and then get the avatar
-
 export default function BoardHomeBox({ board }) {
   const { user } = useUser();
   return (
     <Center py={6}>
       <Box
-        maxW={'222px'}
-        w={'full'}
+        w="300px"
+        h="475px"
+        m="10px"
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
         rounded={'md'}
@@ -26,7 +27,7 @@ export default function BoardHomeBox({ board }) {
         overflow={'hidden'}
       >
         <Box
-          h={'105px'}
+          maxH={'120px'}
           bg={'gray.100'}
           mt={-6}
           mx={-6}
@@ -40,16 +41,17 @@ export default function BoardHomeBox({ board }) {
             layout={'fill'}
           />
         </Box>
-        <Text color={'gray.500'}></Text> {board.group_size}
+        <Text color={'gray.500'}></Text>{' '}
         <Stack>
           <Text
             color={'green.500'}
-            textTransform={'uppercase'}
+            // textTransform={'uppercase'}
             fontWeight={800}
             fontSize={'sm'}
             letterSpacing={1.1}
+            mt="75px"
           >
-            {board.group_size}
+            Group Size: {board.group_size}
           </Text>
           <Heading
             color={useColorModeValue('gray.700', 'white')}
@@ -58,19 +60,16 @@ export default function BoardHomeBox({ board }) {
           >
             {board.title}
           </Heading>
-          <Text color={'gray.500'}>{board.summary} </Text>{board.goal}
+          <Text color={'gray.500'}>Board Summary: {board.summary} </Text>
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
-          <Avatar
-            src={user.avatar}
-            alt={'Author'}
-          />
-          <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>{board.createdBy}</Text>
-            <Text color={'gray.500'}>
-              {board.created.slice(0, 10)} · Comments
-            </Text>
-          </Stack>
+          <Link to={`/profile/${board.github}`}>
+            <Avatar src={board.avatar} alt={'Author'} />
+            <Stack direction={'column'} spacing={0} fontSize={'sm'}>
+              <Text fontWeight={600}>{board.github}</Text>
+              <Text color={'gray.500'}>{board.created?.slice(0, 10)}</Text>
+            </Stack>
+          </Link>
         </Stack>
       </Box>
     </Center>

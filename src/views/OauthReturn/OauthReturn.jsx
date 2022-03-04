@@ -6,12 +6,13 @@ import { fetchUser } from '../../services/users.js';
 //Once Oauth completes the user will be redirected to this page:
 export default function OauthReturn() {
   let history = useHistory();
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
+
   useEffect(() => {
     (async () => {
-      const user = await fetchUser();
-      console.log(user);
-      setUser(user);
+      const fetchedUser = await fetchUser();
+      setUser(fetchedUser);
+
       history.push('/');
     })();
   }, []);

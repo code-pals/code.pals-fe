@@ -4,7 +4,6 @@ import {
   Flex,
   Avatar,
   HStack,
-  Link,
   IconButton,
   Button,
   Menu,
@@ -14,12 +13,15 @@ import {
   MenuDivider,
   useDisclosure,
   useColorModeValue,
+  useColorMode,
   Stack,
 } from '@chakra-ui/react';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext.js';
 
-const Links = ['Home', 'Create', 'Messages', 'Login', 'About Us'];
+const Links = ['Home', 'Create', 'Messages', 'Login', 'Search', 'About Us'];
 
 const NavLink = ({ children }) => (
   <Link
@@ -30,15 +32,19 @@ const NavLink = ({ children }) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
-    href={'#'}
+    to={'#'}
   >
     {children}
   </Link>
 );
 
 export default function withAction() {
+  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, getUser, logIn, logOut } = useUser();
+  //const storedU = localStorage.getItem('storageUser');
+  //const storedUser = JSON.parse(storedU);
+  //console.log('headerStoredUser', storedUser);
   console.log('USER3', user);
 
   return (
@@ -59,29 +65,31 @@ export default function withAction() {
               spacing={4}
               display={{ base: 'none', md: 'flex' }}
             >
-              <Link href={'/'} underline="none">
+              <Link to={'/'} underline="none">
                 Home
               </Link>
-              {!user.github ? <Link href={'/login'}> Create </Link> :
-              <Link href={'/create'} underline="none">
+              <Link to={'/create'} underline="none">
                 Create
-              </Link>}
-              {!user.github ? <Link href={'/login'}> Messages </Link> :
-              <Link href={'/messages'} underline="none">
-                Messages
-              </Link>}
+              </Link>
               {!user.github ? (
-                <Link href={'/login'} underline="none">
+                <Link to={'/login'} underline="none">
                   Login
                 </Link>
               ) : (
-                <Link href={'/'} underline="none" onClick={logOut}>
+                <Link to={'/'} underline="none" onClick={logOut}>
                   Logout
                 </Link>
               )}
-              <Link href={'/aboutus'} underline="none">
+              <Link to={'/results'} underline="none">
+                Search
+              </Link>
+              <Link to={'/chatrooms'} underline="none">
+                Chat
+              </Link>
+              <Link to={'/aboutus'} underline="none">
                 About Us
               </Link>
+
               {user.github}
             </HStack>
           </HStack>
@@ -95,6 +103,9 @@ export default function withAction() {
             >
               Action
             </Button> */}
+            <Button onClick={toggleColorMode} mr="10px">
+              {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            </Button>
             <Menu>
               <MenuButton
                 as={Button}
@@ -103,16 +114,12 @@ export default function withAction() {
                 cursor={'pointer'}
                 minW={0}
               >
-                <Avatar
-                  size={'sm'}
-                  src={
-                    user.avatar
-                  }
-                />
+                {user.avatar ? <Avatar size={'sm'} src={user.avatar} /> : ''}
               </MenuButton>
               <MenuList>
-                <Link href={'/profile'} underline="none">
-                  {user.github}
+                <Link to={`/profile/${user.github}`} underline="none">
+                  {user.github}'s
+                  <MenuDivider />
                   Profile
                 </Link>
                 {/* <MenuItem>Link 2</MenuItem>
@@ -122,13 +129,40 @@ export default function withAction() {
             </Menu>
           </Flex>
         </Flex>
+        
 
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {Links.map((link) => (
+              <Link to={'/'} underline="none">
+                Home
+              </Link>
+              <Link to={'/create'} underline="none">
+                Create
+              </Link>
+              {!user.github ? (
+                <Link to={'/login'} underline="none">
+                  Login
+                </Link>
+              ) : (
+                <Link to={'/'} underline="none" onClick={logOut}>
+                  Logout
+                </Link>
+              )}
+              <Link to={'/results'} underline="none">
+                Search
+              </Link>
+
+              <Link to={'/chatrooms'} underline="none">
+
+                Chat
+              </Link>
+              <Link to={'/aboutus'} underline="none">
+                About Us
+              </Link>
+              {/* {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
-              ))}
+              ))} */}
             </Stack>
           </Box>
         ) : null}

@@ -7,11 +7,23 @@ import {
   Stack,
   Image,
 } from '@chakra-ui/react';
+import { useUser } from '../../context/UserContext.js';
+import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import getUser, { getUserByName } from '../../services/fetch-utils'
 
-const IMAGE =
-  'https://images.unsplash.com/photo-1618401479427-c8ef9465fbe1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2343&q=80';
-
-export default function ProductSimple() {
+export default function GithubBox(usernamex) {
+  const { user } = useUser();
+  const { username } = useParams();
+  const [profileUser, setProfileUser] = useState('');
+  
+  useEffect(() => {
+      async function getsUser() {
+      const respUser = await getUserByName(username);
+      setProfileUser(respUser);
+      }
+    getsUser()}, [])
+  
   return (
     <>
       <Center py={12}>
@@ -39,7 +51,7 @@ export default function ProductSimple() {
               pos: 'absolute',
               top: 5,
               left: 0,
-              backgroundImage: `url(${IMAGE})`,
+              backgroundImage: `url(${profileUser.avatar})`,
               filter: 'blur(15px)',
               zIndex: -1,
             }}
@@ -54,23 +66,25 @@ export default function ProductSimple() {
               height={230}
               width={282}
               objectFit={'cover'}
-              src={IMAGE}
+              src={profileUser.avatar}
             />
           </Box>
-          <Stack pt={10} align={'center'}>
+          <Stack pt={10} align={'left'}>
             <Text
               color={'gray.500'}
               fontSize={'sm'}
               textTransform={'uppercase'}
             >
-              Github Stats
+              Github Stats:
             </Text>
             <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-              Repos:
+              {profileUser.github}
+              <br />
+              Repos: {profileUser.repos}
             </Heading>
-            <Stack direction={'row'} align={'center'}>
+            <Stack direction={'row'} align={'left'}>
               <Text fontWeight={800} fontSize={'xl'}>
-                Member Since:
+                Member Since: {profileUser?.memberSince?.slice(0, 10)}
               </Text>
             </Stack>
           </Stack>

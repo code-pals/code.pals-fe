@@ -8,26 +8,28 @@ import {
   Button,
   FormErrorMessage,
   FormHelperText,
+  Textarea,
   Input,
   Image,
   Container,
+  Code,
   Center,
 } from '@chakra-ui/react';
-import SubmitButton from '../SubmitButton/SubmitButton.jsx';
-import { createPost, getById } from '../../services/fetch-utils.js';
+
+import { createPost, editPost, getById } from '../../services/fetch-utils.js';
 import { useUser } from '../../context/UserContext.js';
 import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom';
 
-export default function PostForm() {
+export default function PostForm({ setShowForm, setForceRender }) {
   const [title, setTitle] = useState('');
   const [code, setCode] = useState('');
   const [question, setQuestion] = useState('');
   const history = useHistory();
+  const params = useParams();
 
   const { user } = useUser();
   console.log(user, 'USER');
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,41 +41,48 @@ export default function PostForm() {
           code: code,
           question: question,
         };
-        const response = await createPost(postObj);
-        console.log(response.body);
-
-        
-        history.push('/')
+        if (!params.id) {
+          console.log('no params');
+          const response = await createPost(postObj);
+          console.log('response', response.body);
+          history.push(`/postdetails/${response.body.postId}`);
+        } else if (params.id) {
+          console.log('paramid');
+          const editResponse = await editPost(params.id, postObj);
+          console.log(editResponse);
+          setShowForm(false);
+          window.location.reload();
+        }
       } else {
         history.push('/login');
       }
     } catch {}
   };
+  console.log('params', params.id);
+
   return (
     <>
       <Container centerContent>
         <form onSubmit={handleSubmit}>
           <FormControl as="fieldset">
-            <FormLabel as="legend">Create A Post or Board</FormLabel>
-            <RadioGroup defaultValue="Itachi">
-              <HStack spacing="24px">
-                <Radio value="Post">Post</Radio>
-                <Radio value="Board">Board</Radio>
-              </HStack>
-            </RadioGroup>
-            <FormHelperText>Select</FormHelperText>
             <FormLabel htmlFor="title">Title</FormLabel>
             <Input
               id="title"
+              required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <FormLabel htmlFor="code">Enter your code here:</FormLabel>
-            <Input
-              id="code"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-            />
+            <Code>
+              <Textarea
+                h="300px"
+                w="400px"
+                id="code"
+                required
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+              />
+            </Code>
             {/* <Center>
               <Image
                 h="200px"
@@ -89,7 +98,9 @@ export default function PostForm() {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit" mt="10px">
+              Submit
+            </Button>
           </FormControl>
         </form>
       </Container>
