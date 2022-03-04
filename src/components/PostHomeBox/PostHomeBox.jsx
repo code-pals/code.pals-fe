@@ -39,7 +39,7 @@ export default function PostHomeBox({ post }) {
           }}
         >
           <Box
-            maxH={'120px'}
+            h={'120px'}
             bg={'gray.100'}
             // mt={-6}
             // mx={-6}
@@ -55,14 +55,15 @@ export default function PostHomeBox({ post }) {
             />
           </Box>
           <Stack style={{ margin: 0, padding: 10 }}>
-            <Text
+            {/* <Text
               color={'green.500'}
               textTransform={'uppercase'}
               fontWeight={800}
               fontSize={'sm'}
               letterSpacing={1.1}
-            ></Text>
+            ></Text> */}
             <Heading
+              pt="50px"
               color={useColorModeValue('gray.700', 'white')}
               fontSize={'xl'}
               fontFamily={'body'}
@@ -72,9 +73,11 @@ export default function PostHomeBox({ post }) {
             <Box h="50" w="100">
               <Highlight>{post?.code?.slice(0, 20)}</Highlight>
             </Box>
-             {/* <Box p="10px">
-              <Text color={'gray.500'}>{post?.question?.slice(0, 10)} </Text>
-            </Box>  */}
+            <Box>
+              <Text pt="50px" color={'gray.500'}>
+                {post?.question?.slice(0, 50)}{' '}
+              </Text>
+            </Box>
           </Stack>
           <Stack
             mt={6}
