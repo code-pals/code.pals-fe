@@ -19,7 +19,8 @@ import { io } from 'socket.io-client';
 import BoardChat from './views/Chat/Board/BoardChat.jsx';
 import ChatRooms from './views/ChatRooms/ChatRooms.jsx';
 //implementing socket.io mocking
-const url = process.env.NODE_ENV === 'test' ? '' : 'http://localhost:7890';
+const url =
+  process.env.NODE_ENV === 'test' ? '' : 'https://codepalz.herokuapp.com';
 const socket = io.connect(url);
 //const socket = io.connect('https://codepalz.herokuapp.com');
 function App() {
