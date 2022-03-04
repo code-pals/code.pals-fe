@@ -14,6 +14,8 @@ import { useUser } from '../../context/UserContext';
 //and then get the avatar
 export default function BoardHomeBox({ board }) {
   const { user } = useUser();
+
+  console.log('boardhomebox', board);
   return (
     <Center py={6}>
       <Box

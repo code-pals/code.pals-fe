@@ -68,6 +68,7 @@ export default function Profile() {
             </div>
           ))}
           {userBoards.map((board) => (
+            
             <Link key={board.board_id} to={`/boarddetails/${board.board_id}`}>
               <div key={board.board_id}>
                 <BoardHomeBox key={board.board_id} board={board} />
