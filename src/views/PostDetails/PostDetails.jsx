@@ -42,77 +42,79 @@ export default function PostDetails() {
       const returnComments = await getCommentsByPost(id);
       setComments(returnComments.body);
       const comms = returnComments.body;
-      const fav = comms.find((comment) => comment.commentId === returnPost.body.favorite);
+      const fav = comms.find(
+        (comment) => comment.commentId === returnPost.body.favorite
+      );
       setFavComment(fav);
       setLoading(false);
-    }
-    getPostAndComments()}, []);  
+    };
+    getPostAndComments();
+  }, []);
 
   useEffect(() => {
-    const edited = async() => {
+    const edited = async () => {
       const returnPost = await getPostById(id);
-      setPost(returnPost.body);}
-    edited()}, [showForm])
+      setPost(returnPost.body);
+    };
+    edited();
+  }, [showForm]);
 
   async function commentSubmit(e) {
     e.preventDefault();
     if (!user.github) {
       history.push('/login');
-    }
-    else {
-    const form = document.getElementById('comment-form');
-    const formData = new FormData(form);
-    const newComment = formData.get('comment');
-    const commentInput = document.getElementById('comment-input');
+    } else {
+      const form = document.getElementById('comment-form');
+      const formData = new FormData(form);
+      const newComment = formData.get('comment');
+      const commentInput = document.getElementById('comment-input');
 
-    const commentObj = {
-      commenter: post.postedBy,
-      postId: post.postId,
-      comment: newComment,
-      parent: null,
-      favorited: false,
-    };
-    const response = await createComment(commentObj);
-    const returnComments = await getCommentsByPost(id);
-    setComments(returnComments.body);
-    commentInput.value = '';}
+      const commentObj = {
+        commenter: post.postedBy,
+        postId: post.postId,
+        comment: newComment,
+        parent: null,
+        favorited: false,
+      };
+      const response = await createComment(commentObj);
+      const returnComments = await getCommentsByPost(id);
+      setComments(returnComments.body);
+      commentInput.value = '';
+    }
   }
 
   const handleDelete = async () => {
     const answer = confirm('Are you sure you want to delete this post?');
     if (answer) {
       const response = await deletePost(id);
-      history.push('/');}
+      history.push('/');
+    }
   };
 
   const handleEdit = async (id) => {
     setShowForm((prev) => !prev);
   };
-  
-  
+
   const commentMap = {};
-  comments.forEach(comment => commentMap[comment.commentId] = comment);
-  for ( let i =0; i < comments.length; i++){
-    if(comments[i].parent !== null){
-          const parent = commentMap[comments[i].parent];
-        if(parent.children && !parent.children.includes(comments[i])){
-          parent.children.push(comments[i]);
-        }
-        else if(!parent.children){
-          parent.children =[comments[i]];
-        }
+  comments.forEach((comment) => (commentMap[comment.commentId] = comment));
+  for (let i = 0; i < comments.length; i++) {
+    if (comments[i].parent !== null) {
+      const parent = commentMap[comments[i].parent];
+      if (parent.children && !parent.children.includes(comments[i])) {
+        parent.children.push(comments[i]);
+      } else if (!parent.children) {
+        parent.children = [comments[i]];
+      }
     }
-  } 
-  const nestedComments = comments.filter(comment => {
-      return comment.parent === null;
-  })
+  }
+  const nestedComments = comments.filter((comment) => {
+    return comment.parent === null;
+  });
 
   return (
     <>
       <PostHomeBox post={post} />
-      
-     
-      
+
       <Center>
         <ButtonGroup spacing="5">
           {user.github === post.github && (
@@ -125,14 +127,29 @@ export default function PostDetails() {
         </ButtonGroup>
       </Center>
 
-      {showForm && <PostForm setShowForm={setShowForm} key={showForm}/>}
+      {showForm && <PostForm setShowForm={setShowForm} key={showForm} />}
 
       <CodeBox post={post} />
 
-      {favComment && <Box border='1px solid brown' borderRadius='25px' p='10px' m='15px' w='75%'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="0px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
-      </Box></Box>}
-      
-      <br/><br/>
+      {favComment && (
+        <Box
+          border="1px solid brown"
+          borderRadius="25px"
+          p="10px"
+          m="15px"
+          w="75%"
+        >
+          Favorite Comment
+          <Box style={{ display: 'flex' }}>
+            {' '}
+            <Avatar pr="0px" src={favComment.avatar} alt={'Author'} />
+            <Box>{favComment.comment}</Box>
+          </Box>
+        </Box>
+      )}
+
+      <br />
+      <br />
       <form id="comment-form" onSubmit={commentSubmit}>
         <Input
           type="text"
@@ -144,13 +161,22 @@ export default function PostDetails() {
         ></Input>
         <Button type="submit">Submit</Button>
       </form>
-      
+
       <br />
       {/* } */}
-      {nestedComments.sort((a,b)=> a-b).map((comment) => {
+      {nestedComments
+        .sort((a, b) => a - b)
+        .map((comment) => {
           return (
             <Box key={comment.commentId}>
-              <PostCommentBox comment = {comment} post = {post} comments={comments} setComments = {setComments} favComment={favComment} setFavComment={setFavComment} />
+              <PostCommentBox
+                comment={comment}
+                post={post}
+                comments={comments}
+                setComments={setComments}
+                favComment={favComment}
+                setFavComment={setFavComment}
+              />
             </Box>
           );
         })}
