@@ -71,15 +71,7 @@ export default function withAction() {
               <Link to={'/create'} underline="none">
                 Create
               </Link>
-              {!user.github ? (
-                <Link to={'/login'} underline="none">
-                  Login
-                </Link>
-              ) : (
-                <Link to={'/'} underline="none" onClick={logOut}>
-                  Logout
-                </Link>
-              )}
+              
               <Link to={'/results'} underline="none">
                 Search
               </Link>
@@ -89,6 +81,15 @@ export default function withAction() {
               <Link to={'/aboutus'} underline="none">
                 About Us
               </Link>
+              {!user.github ? (
+                <Link to={'/login'} underline="none">
+                  Login
+                </Link>
+              ) : (
+                <Link to={'/'} underline="none" onClick={logOut}>
+                  Logout
+                </Link>
+              )}
 
               {user.github}
             </HStack>
@@ -140,15 +141,7 @@ export default function withAction() {
               <Link to={'/create'} underline="none">
                 Create
               </Link>
-              {!user.github ? (
-                <Link to={'/login'} underline="none">
-                  Login
-                </Link>
-              ) : (
-                <Link to={'/'} underline="none" onClick={logOut}>
-                  Logout
-                </Link>
-              )}
+              
               <Link to={'/results'} underline="none">
                 Search
               </Link>
@@ -160,6 +153,15 @@ export default function withAction() {
               <Link to={'/aboutus'} underline="none">
                 About Us
               </Link>
+              {!user.github ? (
+                <Link to={'/login'} underline="none">
+                  Login
+                </Link>
+              ) : (
+                <Link to={'/'} underline="none" onClick={logOut}>
+                  Logout
+                </Link>
+              )}
               {/* {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))} */}

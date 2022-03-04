@@ -38,8 +38,9 @@ export default function BoardForm() {
           goal: goal,
           groupSize: groupSize,
         };
-
+        //if form is being edited
         if (params.id) {
+          console.log('boardobjparam', boardObj);
           const response = await editBoard(params.id, boardObj);
           window.location.reload();
         } else {

@@ -41,12 +41,14 @@ export default function PostForm({ setShowForm, setForceRender }) {
           code: code,
           question: question,
         };
+        //regular post form
         if (!params.id) {
           console.log('no params');
           const response = await createPost(postObj);
           console.log('response', response.body);
           history.push(`/postdetails/${response.body.postId}`);
-        } else if (params.id) {
+        } //if editing post form  
+        else if (params.id) {
           console.log('paramid');
           const editResponse = await editPost(params.id, postObj);
           console.log(editResponse);
