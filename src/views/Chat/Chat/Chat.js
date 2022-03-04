@@ -43,8 +43,8 @@ export default function Chat({ username, roomname, socket }) {
   useEffect(() => {
     const getUsers = async () => {
       const response = await getAllUsers();
-      console.log(response);
-      setAllUsers(response);
+      console.log(response.body);
+      setAllUsers(response.body);
     };
 
     getUsers();
@@ -93,7 +93,7 @@ export default function Chat({ username, roomname, socket }) {
               const postUser = allUsers.find(
                 (person) => person.github === message.username
               );
-              console.log(postUser);
+              console.log('postuser', postUser);
               return (
                 <Flex>
                   <Link to={`/profile/${postUser.github}`}>
