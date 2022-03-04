@@ -71,7 +71,7 @@ export default function PostDetails() {
     setShowInput((prev) => !prev);
   };
 
-  //display comment reply form 
+  //display comment reply form
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
       e.preventDefault();
@@ -161,7 +161,7 @@ export default function PostDetails() {
             <Box key={comment.commentId}>
               <Box maxW="xxl" pl="10px">
                 <Box style={{ display: 'flex' }}>
-                  <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
+                  <Avatar src={comment.avatar} alt={'Author'} />
                   <br />
                   <Box pl="15px" pr="25px">
                     {comment.comment}
@@ -183,10 +183,10 @@ export default function PostDetails() {
             </Box>
           );
         })}
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+      <br />
+      <br />
+      <br />
+      <br />
     </>
   );
 }
