@@ -1,7 +1,7 @@
 import request from 'superagent';
 
-const url = 'http://localhost:7890/api/v1';
-//const url = 'https://codepalz.herokuapp.com/api/v1';
+//const url = 'http://localhost:7890/api/v1';
+const url = 'https://codepalz.herokuapp.com/api/v1';
 
 export async function getAllPosts() {
   const response = await request.get(`${url}/posts`);
@@ -119,7 +119,7 @@ export async function editBoard(id, boardObj) {
     .send(boardObj)
     .withCredentials();
 
-    console.log('editboardres', response);
+  console.log('editboardres', response);
 
   return response;
 }
@@ -136,7 +136,7 @@ export async function getPostsByUsername(username) {
 export async function getBoardsByUsername(username) {
   const response = await request.get(`${url}/boards/username/${username}`);
 
-  console.log('profileboardsfetch', response.body)
+  console.log('profileboardsfetch', response.body);
 
   return response.body;
 }

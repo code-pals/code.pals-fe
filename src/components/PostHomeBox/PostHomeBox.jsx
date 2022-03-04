@@ -68,14 +68,14 @@ export default function PostHomeBox({ post }) {
               fontSize={'xl'}
               fontFamily={'body'}
             >
-              {post.title}
+              {post?.title?.slice(0, 34)}
             </Heading>
             <Box h="50" w="100">
               <Highlight>{post?.code?.slice(0, 20)}</Highlight>
             </Box>
             <Box>
               <Text pt="50px" color={'gray.500'}>
-                {post?.question?.slice(0, 50)}{' '}
+                {post?.question?.slice(0, 35)}{' '}
               </Text>
             </Box>
           </Stack>

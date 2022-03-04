@@ -49,12 +49,6 @@ exports[`it tests the entire app renders the homepage 1`] = `
             Create
           </a>
           <a
-            href="/login"
-            underline="none"
-          >
-            Login
-          </a>
-          <a
             href="/results"
             underline="none"
           >
@@ -71,6 +65,12 @@ exports[`it tests the entire app renders the homepage 1`] = `
             underline="none"
           >
             About Us
+          </a>
+          <a
+            href="/login"
+            underline="none"
+          >
+            Login
           </a>
         </nav>
       </div>
