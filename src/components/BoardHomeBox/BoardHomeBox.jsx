@@ -9,13 +9,10 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
-//get user from database by id
-//and then get the avatar
-export default function BoardHomeBox({ board }) {
-  const { user } = useUser();
 
-  console.log('boardhomebox', board);
+export default function BoardHomeBox({ board }) {
+
+  console.log('boardhomeboxobj', board);
   return (
     <Center py={6}>
       <Box
@@ -66,10 +63,10 @@ export default function BoardHomeBox({ board }) {
         </Stack>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
           <Link to={`/profile/${board.github}`}>
-            <Avatar src={board.avatar} alt={'Author'} />
+            <Avatar src={board?.avatar} alt={'Author'} />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-              <Text fontWeight={600}>{board.github}</Text>
-              <Text color={'gray.500'}>{board.created?.slice(0, 10)}</Text>
+              <Text fontWeight={600}>{board?.github}</Text>
+              <Text color={'gray.500'}>{board?.created?.slice(0, 10)}</Text>
             </Stack>
           </Link>
         </Stack>

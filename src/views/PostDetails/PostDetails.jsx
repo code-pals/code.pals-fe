@@ -71,6 +71,7 @@ export default function PostDetails() {
     setShowInput((prev) => !prev);
   };
 
+  //display comment reply form 
   const displayInput = (comment) => {
     const replySubmit = async (e) => {
       e.preventDefault();
@@ -157,9 +158,9 @@ export default function PostDetails() {
         })
         .map((comment) => {
           return (
-            <div key={comment.commentId}>
-              <Box key={comment.commentId} maxW="xxl" pl="10px">
-                <Box key={comment.commentId} style={{ display: 'flex' }}>
+            <Box key={comment.commentId}>
+              <Box maxW="xxl" pl="10px">
+                <Box style={{ display: 'flex' }}>
                   <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
                   <br />
                   <Box pl="15px" pr="25px">
@@ -179,9 +180,13 @@ export default function PostDetails() {
                   </div>
                 </Box>
               </Box>
-            </div>
+            </Box>
           );
         })}
+        <br/>
+        <br/>
+        <br/>
+        <br/>
     </>
   );
 }
