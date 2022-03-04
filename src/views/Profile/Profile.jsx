@@ -38,7 +38,6 @@ export default function Profile() {
   useEffect(() => {
     const getPostsAndBoards = async () => {
       const postsByName = await getPostsByUsername(username);
-      console.log(postsByName);
       setAllPosts(postsByName);
 
       const boardsByName = await getBoardsByUsername(username);
@@ -67,14 +66,14 @@ export default function Profile() {
               <PostHomeBox key={post.postId} post={post} />
             </div>
           ))}
-          {userBoards.map((board) => (
-            
-            <Link key={board.board_id} to={`/boarddetails/${board.board_id}`}>
-              <div key={board.board_id}>
+          {userBoards.map((board => {
+            console.log('boardinsideprofilemap', board)
+            return <Link key={board.board_id} to={`/boarddetails/${board.board_id}`}>
+              <Box key={board.board_id}>
                 <BoardHomeBox key={board.board_id} board={board} />
-              </div>
+              </Box>
             </Link>
-          ))}
+          }))}
         </Flex>
       </Box>
 

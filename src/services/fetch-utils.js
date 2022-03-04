@@ -119,6 +119,8 @@ export async function editBoard(id, boardObj) {
     .send(boardObj)
     .withCredentials();
 
+  console.log('editboardres', response);
+
   return response;
 }
 export async function aggregateComments(postId) {
@@ -133,6 +135,8 @@ export async function getPostsByUsername(username) {
 }
 export async function getBoardsByUsername(username) {
   const response = await request.get(`${url}/boards/username/${username}`);
+
+  console.log('profileboardsfetch', response.body);
 
   return response.body;
 }
