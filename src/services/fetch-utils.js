@@ -23,7 +23,6 @@ export async function getAllBoards() {
 
 export async function getBoardById(id) {
   const response = await request.get(`${url}/boards/${id}`);
-  console.log(response.body, 'BOARDBYID');
   return response;
 }
 
@@ -34,7 +33,6 @@ export async function getCommentsByBoard(id) {
 }
 
 export async function searchBoardsAndComments(keyword) {
-  console.log(keyword, 'keys');
   const response = await request.get(`${url}/comments?keyword=${keyword}`);
 
   return response;
@@ -53,7 +51,6 @@ export async function getUserById(id) {
   return response;
 }
 export async function postUserData(id, user) {
-  console.log(user);
   const response = await request
     .patch(`${url}/users/profile/${id}`)
     .send(user)
@@ -83,7 +80,6 @@ export async function createComment(comment) {
   return response;
 }
 export async function searchPostsAndComments(keyword) {
-  console.log(keyword, 'keys');
   const response = await request.get(`${url}/comments?keyword=${keyword}`);
 
   return response;
@@ -119,8 +115,6 @@ export async function editBoard(id, boardObj) {
     .send(boardObj)
     .withCredentials();
 
-  console.log('editboardres', response);
-
   return response;
 }
 export async function aggregateComments(postId) {
@@ -135,8 +129,6 @@ export async function getPostsByUsername(username) {
 }
 export async function getBoardsByUsername(username) {
   const response = await request.get(`${url}/boards/username/${username}`);
-
-  console.log('profileboardsfetch', response.body);
 
   return response.body;
 }
