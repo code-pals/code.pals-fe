@@ -28,8 +28,6 @@ const UserProvider = ({ children }) => {
     const res = await request
       .delete(`${process.env.BE_URL}/api/v1/users/sessions`)
       .withCredentials();
-
-    //localStorage.removeItem('storageUser');
     setUser({});
     history.push('/');
   }
