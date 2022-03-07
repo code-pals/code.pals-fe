@@ -11,8 +11,6 @@ import {
 import { Link } from 'react-router-dom';
 
 export default function BoardHomeBox({ board }) {
-
-  console.log('boardhomeboxobj', board);
   return (
     <Center py={6}>
       <Box
@@ -44,7 +42,6 @@ export default function BoardHomeBox({ board }) {
         <Stack>
           <Text
             color={'green.500'}
-            // textTransform={'uppercase'}
             fontWeight={800}
             fontSize={'sm'}
             letterSpacing={1.1}

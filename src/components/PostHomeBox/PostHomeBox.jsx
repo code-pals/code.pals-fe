@@ -32,21 +32,11 @@ export default function PostHomeBox({ post }) {
           overflow={'hidden'}
           spacing={20}
           style={{
-            // backgroundColor: 'Orange',
             display: 'flex',
-            // flexDirection: 'column',
             justifyContent: 'space-between',
           }}
         >
-          <Box
-            h={'120px'}
-            bg={'gray.100'}
-            // mt={-6}
-            // mx={-6}
-            mb={15}
-            // pos={'relative'}
-            // style={{ marginBottom: '.75rem' }}
-          >
+          <Box h={'120px'} bg={'gray.100'} mb={15}>
             <Image
               src={
                 'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2089&q=80'
@@ -55,13 +45,6 @@ export default function PostHomeBox({ post }) {
             />
           </Box>
           <Stack style={{ margin: 0, padding: 10 }}>
-            {/* <Text
-              color={'green.500'}
-              textTransform={'uppercase'}
-              fontWeight={800}
-              fontSize={'sm'}
-              letterSpacing={1.1}
-            ></Text> */}
             <Heading
               pt="50px"
               color={useColorModeValue('gray.700', 'white')}

@@ -64,9 +64,6 @@ export default function Chat({ username, roomname, socket }) {
 
   useEffect(scrollToBottom, [messages]);
 
-  console.log(messages, 'messages');
-  console.log('sockettext', socket.text);
-  console.log('chat component', username, roomname, socket);
   return (
     <Center>
       <div className="chat">
