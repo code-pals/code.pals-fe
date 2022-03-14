@@ -14,6 +14,10 @@ import {
   useColorModeValue,
   useColorMode,
   Stack,
+  Tabs,
+  TabList,
+  Tab,
+  Center,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';

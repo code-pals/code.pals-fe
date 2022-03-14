@@ -72,6 +72,48 @@ exports[`it tests the entire app renders the homepage 1`] = `
           >
             Login
           </a>
+          <div
+            class="css-1lekzkb"
+          >
+            <div
+              class="css-gmuwbf"
+            >
+              <div
+                class="chakra-tabs css-13o7eu2"
+              >
+                <div
+                  aria-orientation="horizontal"
+                  class="chakra-tabs__tablist css-fgp5ep"
+                  role="tablist"
+                >
+                  <button
+                    aria-controls="tabs-1--tabpanel-0"
+                    aria-selected="true"
+                    class="chakra-tabs__tab css-2urs29"
+                    data-index="0"
+                    id="tabs-1--tab-0"
+                    role="tab"
+                    tabindex="0"
+                    type="button"
+                  >
+                    One
+                  </button>
+                  <button
+                    aria-controls="tabs-1--tabpanel-1"
+                    aria-selected="false"
+                    class="chakra-tabs__tab css-2urs29"
+                    data-index="1"
+                    id="tabs-1--tab-1"
+                    role="tab"
+                    tabindex="-1"
+                    type="button"
+                  >
+                    Two
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </nav>
       </div>
       <div
@@ -93,11 +135,11 @@ exports[`it tests the entire app renders the homepage 1`] = `
           </svg>
         </button>
         <button
-          aria-controls="menu-list-2"
+          aria-controls="menu-list-3"
           aria-expanded="false"
           aria-haspopup="menu"
           class="chakra-button chakra-menu__menu-button css-hikdd6"
-          id="menu-button-2"
+          id="menu-button-3"
           type="button"
         >
           <span
@@ -111,7 +153,7 @@ exports[`it tests the entire app renders the homepage 1`] = `
           <div
             aria-orientation="vertical"
             class="chakra-menu__menu-list css-1ozmk1d"
-            id="menu-list-2"
+            id="menu-list-3"
             role="menu"
             style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
             tabindex="-1"
