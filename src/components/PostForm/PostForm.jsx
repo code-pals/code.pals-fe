@@ -29,7 +29,7 @@ export default function PostForm({ setShowForm, setForceRender }) {
   const params = useParams();
 
   const { user } = useUser();
-  console.log(user, 'USER');
+  console.log(user, 'USER');  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,8 +52,9 @@ export default function PostForm({ setShowForm, setForceRender }) {
           console.log('paramid');
           const editResponse = await editPost(params.id, postObj);
           console.log(editResponse);
-          setShowForm(false);
-          window.location.reload();
+          
+          setShowForm((prev) => !prev);
+          //window.location.reload();
         }
       } else {
         history.push('/login');

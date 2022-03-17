@@ -6,6 +6,7 @@ import {
   Center,
   ButtonGroup,
   Flex,
+  useForceUpdate,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -30,8 +31,6 @@ export default function PostDetails() {
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
-  // const [showInput, setShowInput] = useState(false);
-  // const [activeId, setActiveId] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [favComment, setFavComment] = useState('');
 
@@ -40,35 +39,31 @@ export default function PostDetails() {
       const returnPost = await getPostById(id);
       setPost(returnPost.body);
       const returnComments = await getCommentsByPost(id);
-      console.log('rtrn', returnComments.body);
       setComments(returnComments.body);
       const comms = returnComments.body;
-      console.log('comms', comms);
       const fav = comms.find((comment) => comment.commentId === returnPost.body.favorite);
       setFavComment(fav);
-      console.log('favue', fav);
-      console.log('comments', comments);
-      
       setLoading(false);
-    };
-    getPostAndComments();
-  }, [id]);  
+    }
+    getPostAndComments()}, []);  
 
-
-  const favorite = () => {
-    
-  }
+  useEffect(() => {
+    const edited = async() => {
+      const returnPost = await getPostById(id);
+      setPost(returnPost.body);}
+    edited()}, [showForm])
 
   async function commentSubmit(e) {
     e.preventDefault();
+    if (!user.github) {
+      history.push('/login');
+    }
+    else {
     const form = document.getElementById('comment-form');
     const formData = new FormData(form);
     const newComment = formData.get('comment');
     const commentInput = document.getElementById('comment-input');
 
-    if (!user.github) {
-      history.push('/login');
-    }
     const commentObj = {
       commenter: post.postedBy,
       postId: post.postId,
@@ -79,62 +74,16 @@ export default function PostDetails() {
     const response = await createComment(commentObj);
     const returnComments = await getCommentsByPost(id);
     setComments(returnComments.body);
-    commentInput.value = '';
+    commentInput.value = '';}
   }
-
-  // const handleReply = (id) => {
-  //   setActiveId(id);
-  //   setShowInput((prev) => !prev);
-  // };
-
-  // //display comment reply form 
-  // const displayInput = (comment) => {
-  //   const replySubmit = async (e) => {
-  //     e.preventDefault();
-  //     if (!user.github) {
-  //       history.push('/login');
-  //     }
-  //     const replyForm = document.getElementById('reply-form');
-  //     const formData = new FormData(replyForm);
-  //     const newReply = formData.get('reply');
-  //     const replyInput = document.getElementById('reply-input');
-
-  //     const replyObj = {
-  //       commenter: user.userId,
-  //       postId: post.postId,
-  //       comment: newReply,
-  //       parent: comment.commentId,
-  //       favorited: false,
-  //     };
-  //     const response = await createComment(replyObj);
-  //     const returnReplyComments = await getCommentsByPost(id);
-  //     setComments(returnReplyComments.body);
-  //     replyInput.value = '';
-  //   };
-  //   return (
-  //     <>
-  //       <Center>
-  //         <form id="reply-form" onSubmit={replySubmit}>
-  //           <Input
-  //             style={{ color: 'black' }}
-  //             name="reply"
-  //             id="reply-input"
-  //             required
-  //           />
-  //           <Button type="submit">Submit</Button>
-  //         </form>
-  //       </Center>
-  //     </>
-  //   );
-  // };
 
   const handleDelete = async () => {
     const answer = confirm('Are you sure you want to delete this post?');
     if (answer) {
       const response = await deletePost(id);
-      history.push('/');
-    }
+      history.push('/');}
   };
+
   const handleEdit = async (id) => {
     setShowForm((prev) => !prev);
   };
@@ -142,8 +91,10 @@ export default function PostDetails() {
   return (
     <>
       <PostHomeBox post={post} />
-      {post.favorite && <Box border='1px'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="10px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
+      
+      {favComment && <Box border='1px'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="0px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
       </Box></Box>}
+      
       <Center>
         <ButtonGroup spacing="5">
           {user.github === post.github && (
@@ -155,8 +106,11 @@ export default function PostDetails() {
           <Button>Comments {comments.length}</Button>
         </ButtonGroup>
       </Center>
-      {showForm && <PostForm setShowForm={setShowForm} />}
+
+      {showForm && <PostForm setShowForm={setShowForm} key={showForm}/>}
+
       <CodeBox post={post} />
+      
       <form id="comment-form" onSubmit={commentSubmit}>
         <Input
           type="text"
@@ -168,6 +122,7 @@ export default function PostDetails() {
         ></Input>
         <Button type="submit">Submit</Button>
       </form>
+      
       <br />
       {/* } */}
       {comments
@@ -177,28 +132,7 @@ export default function PostDetails() {
         .map((comment) => {
           return (
             <Box key={comment.commentId}>
-              <PostCommentBox comment = {comment} post = {post} setComments = {setComments} />
-              {/* <Box maxW="xxl" pl="10px">
-                <Box style={{ display: 'flex' }}>
-                  <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
-                  <br />
-                  <Box pl="15px" pr="25px">
-                    {comment.comment}
-                  </Box>
-                  <br />
-                  <Box pr="25px">By: {comment.github}</Box>
-                  <br />
-                  <Box pr="25px">{comment.created.slice(0, 10)}</Box>
-                  <Button onClick={() => handleReply(comment.commentId)}>
-                    Reply
-                  </Button>
-                  <div>
-                    {activeId === comment.commentId && showInput
-                      ? displayInput(comment)
-                      : ''}
-                  </div>
-                </Box>
-              </Box> */}
+              <PostCommentBox comment = {comment} post = {post} comments={comments} setComments = {setComments} favComment={favComment} setFavComment={setFavComment} />
             </Box>
           );
         })}

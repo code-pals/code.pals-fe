@@ -32,6 +32,15 @@ export default function BoardDetails() {
     singleBoard();
   }, [id]);
 
+  useEffect(() => {
+    const editedBoard = async () => {
+      const returnBoard = await getBoardById(id);
+      setBoard(returnBoard.body);
+    };
+    editedBoard();
+  }, [showForm]);
+ 
+
   const handleDelete = async () => {
     const answer = confirm('Are you sure you want to delete this Board?');
     if (answer) {
@@ -60,7 +69,7 @@ export default function BoardDetails() {
           )}
         </ButtonGroup>
       </Center>
-      {showForm && <BoardForm />}
+      {showForm && <BoardForm setShowForm={setShowForm}/>}
       <Center>
         {user.github ? (
           <Link target={'_blank'} to={`/chat/${board.title}/${user.github}`}>
