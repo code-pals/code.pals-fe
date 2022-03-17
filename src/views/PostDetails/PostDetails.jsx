@@ -5,6 +5,7 @@ import {
   Input,
   Center,
   ButtonGroup,
+  Flex,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -20,6 +21,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import PostForm from '../../components/PostForm/PostForm.jsx';
 import CodeBox from '../../components/CodeBox/CodeBox';
+import PostCommentBox from '../../components/CommentBox/PostCommentBox.jsx';
 
 export default function PostDetails() {
   const { id } = useParams();
@@ -28,20 +30,34 @@ export default function PostDetails() {
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
-  const [showInput, setShowInput] = useState(false);
-  const [activeId, setActiveId] = useState('');
+  // const [showInput, setShowInput] = useState(false);
+  // const [activeId, setActiveId] = useState('');
   const [showForm, setShowForm] = useState(false);
+  const [favComment, setFavComment] = useState('');
 
   useEffect(() => {
     const getPostAndComments = async () => {
       const returnPost = await getPostById(id);
       setPost(returnPost.body);
       const returnComments = await getCommentsByPost(id);
+      console.log('rtrn', returnComments.body);
       setComments(returnComments.body);
+      const comms = returnComments.body;
+      console.log('comms', comms);
+      const fav = comms.find((comment) => comment.commentId === returnPost.body.favorite);
+      setFavComment(fav);
+      console.log('favue', fav);
+      console.log('comments', comments);
+      
       setLoading(false);
     };
     getPostAndComments();
-  }, [id]);
+  }, [id]);  
+
+
+  const favorite = () => {
+    
+  }
 
   async function commentSubmit(e) {
     e.preventDefault();
@@ -66,51 +82,51 @@ export default function PostDetails() {
     commentInput.value = '';
   }
 
-  const handleReply = (id) => {
-    setActiveId(id);
-    setShowInput((prev) => !prev);
-  };
+  // const handleReply = (id) => {
+  //   setActiveId(id);
+  //   setShowInput((prev) => !prev);
+  // };
 
-  //display comment reply form 
-  const displayInput = (comment) => {
-    const replySubmit = async (e) => {
-      e.preventDefault();
-      if (!user.github) {
-        history.push('/login');
-      }
-      const replyForm = document.getElementById('reply-form');
-      const formData = new FormData(replyForm);
-      const newReply = formData.get('reply');
-      const replyInput = document.getElementById('reply-input');
+  // //display comment reply form 
+  // const displayInput = (comment) => {
+  //   const replySubmit = async (e) => {
+  //     e.preventDefault();
+  //     if (!user.github) {
+  //       history.push('/login');
+  //     }
+  //     const replyForm = document.getElementById('reply-form');
+  //     const formData = new FormData(replyForm);
+  //     const newReply = formData.get('reply');
+  //     const replyInput = document.getElementById('reply-input');
 
-      const replyObj = {
-        commenter: user.userId,
-        postId: post.postId,
-        comment: newReply,
-        parent: comment.commentId,
-        favorited: false,
-      };
-      const response = await createComment(replyObj);
-      const returnReplyComments = await getCommentsByPost(id);
-      setComments(returnReplyComments.body);
-      replyInput.value = '';
-    };
-    return (
-      <>
-        <Center>
-          <form id="reply-form" onSubmit={replySubmit}>
-            <Input
-              style={{ color: 'black' }}
-              name="reply"
-              id="reply-input"
-              required
-            />
-            <Button type="submit">Submit</Button>
-          </form>
-        </Center>
-      </>
-    );
-  };
+  //     const replyObj = {
+  //       commenter: user.userId,
+  //       postId: post.postId,
+  //       comment: newReply,
+  //       parent: comment.commentId,
+  //       favorited: false,
+  //     };
+  //     const response = await createComment(replyObj);
+  //     const returnReplyComments = await getCommentsByPost(id);
+  //     setComments(returnReplyComments.body);
+  //     replyInput.value = '';
+  //   };
+  //   return (
+  //     <>
+  //       <Center>
+  //         <form id="reply-form" onSubmit={replySubmit}>
+  //           <Input
+  //             style={{ color: 'black' }}
+  //             name="reply"
+  //             id="reply-input"
+  //             required
+  //           />
+  //           <Button type="submit">Submit</Button>
+  //         </form>
+  //       </Center>
+  //     </>
+  //   );
+  // };
 
   const handleDelete = async () => {
     const answer = confirm('Are you sure you want to delete this post?');
@@ -126,6 +142,8 @@ export default function PostDetails() {
   return (
     <>
       <PostHomeBox post={post} />
+      {post.favorite && <Box border='1px'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="10px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
+      </Box></Box>}
       <Center>
         <ButtonGroup spacing="5">
           {user.github === post.github && (
@@ -159,7 +177,8 @@ export default function PostDetails() {
         .map((comment) => {
           return (
             <Box key={comment.commentId}>
-              <Box maxW="xxl" pl="10px">
+              <PostCommentBox comment = {comment} post = {post} setComments = {setComments} />
+              {/* <Box maxW="xxl" pl="10px">
                 <Box style={{ display: 'flex' }}>
                   <Avatar pr="10px" src={comment.avatar} alt={'Author'} />
                   <br />
@@ -179,7 +198,7 @@ export default function PostDetails() {
                       : ''}
                   </div>
                 </Box>
-              </Box>
+              </Box> */}
             </Box>
           );
         })}

@@ -20,8 +20,8 @@ import BoardChat from './views/Chat/Board/BoardChat.jsx';
 import ChatRooms from './views/ChatRooms/ChatRooms.jsx';
 //implementing socket.io mocking
 const url =
-  process.env.NODE_ENV === 'test' ? '' : 'https://codepalz.herokuapp.com';
-// process.env.NODE_ENV === 'test' ? '' : 'http://localhost:7890';
+//  process.env.NODE_ENV === 'test' ? '' : 'https://codepalz.herokuapp.com';
+ process.env.NODE_ENV === 'test' ? '' : 'http://localhost:7890';
 const socket = io.connect(url);
 //const socket = io.connect('https://codepalz.herokuapp.com');
 function App() {
