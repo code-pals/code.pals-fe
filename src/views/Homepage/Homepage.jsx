@@ -4,6 +4,7 @@ import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import BoardHomeBox from '../../components/BoardHomeBox/BoardHomeBox.jsx';
 import { Link } from 'react-router-dom';
 import { Flex, Box, spacer } from '@chakra-ui/react';
+import TrialPostBox from '../../components/PostHomeBox/TrialPostBox.jsx';
 
 export default function Homepage() {
   const [posts, setPosts] = useState([]);
@@ -42,6 +43,7 @@ export default function Homepage() {
               return (
                 <div key={post.postId}>
                   <PostHomeBox post={post} key={post.postId} />
+                  <TrialPostBox post={post} />
                 </div>
               );
             })}
