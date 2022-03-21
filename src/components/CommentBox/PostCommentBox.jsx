@@ -12,6 +12,7 @@ import { useUser } from '../../context/UserContext';
 import { createComment, favoriteComment, getCommentById } from '../../services/fetch-utils';
 import { getCommentsByPost } from '../../services/fetch-utils';
 import { useParams } from 'react-router-dom';
+import NestedComments from '../NestedComments/NestedComments';
 
 export default function PostCommentBox({ comment, post, comments, setComments, setFavComment }) {
     const [showInput, setShowInput] = useState(false);
@@ -103,6 +104,9 @@ export default function PostCommentBox({ comment, post, comments, setComments, s
           : ''}
       </div>
     </Box>
-  </Box></div>
+  </Box>
+  
+  
+  </div>
   )
 }

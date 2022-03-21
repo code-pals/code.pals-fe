@@ -1,4 +1,5 @@
 import React from 'react'
+import { Avatar, Flex } from '@chakra-ui/react'
 
 export default function Comment({comment}) {
 
@@ -6,11 +7,15 @@ export default function Comment({comment}) {
         return <Comment comment={comment} />
     })
   return (
-<div> nested comments
-    <div>{comment.comment}</div>
-    <div>{comment.username}</div>
-    <div>{comment.parent}</div>
-    {nestedComments}
-</div>
+<Box> 
+    
+    <Avatar src={comment.avatar} />
+    <div>User: {comment.github}</div><br/>
+    <div>Comment: {comment.comment}</div><br/>
+    <div>Parent Comment: {comment.parent}</div><br/>
+    <div></div>
+    <div>Comment ID: {comment.commentId}</div>
+    nested comments: {nestedComments}
+</Box>
   )
 }

@@ -43,7 +43,6 @@ export default function Homepage() {
               return (
                 <div key={post.postId}>
                   <PostHomeBox post={post} key={post.postId} />
-                  <TrialPostBox post={post} />
                 </div>
               );
             })}

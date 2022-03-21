@@ -35,10 +35,10 @@ export default function TrialPostBox({ post }) {
 
         </Box>
 
-         <Box h='235px' border='1px'  overflow={'hidden'}>
+         <Box h='155px' border='5px solid black' bg='yellow' overflow={'hidden'}>
          {/* <Highlight>{post?.code?.slice(0, 50)}</Highlight> */}
          <SyntaxHighlighter language="javascript" showLineNumbers={true} style={a11yDark} wrapLines={true}>
-            {post?.code?.slice(0,150)}
+            {post?.code}
          </SyntaxHighlighter>
 
 

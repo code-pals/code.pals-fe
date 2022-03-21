@@ -23,6 +23,7 @@ import { useHistory } from 'react-router-dom';
 import PostForm from '../../components/PostForm/PostForm.jsx';
 import CodeBox from '../../components/CodeBox/CodeBox';
 import PostCommentBox from '../../components/CommentBox/PostCommentBox.jsx';
+import NestedComments from '../../components/NestedComments/NestedComments.jsx';
 
 export default function PostDetails() {
   const { id } = useParams();
@@ -92,8 +93,7 @@ export default function PostDetails() {
     <>
       <PostHomeBox post={post} />
       
-      {favComment && <Box border='1px'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="0px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
-      </Box></Box>}
+     
       
       <Center>
         <ButtonGroup spacing="5">
@@ -110,7 +110,11 @@ export default function PostDetails() {
       {showForm && <PostForm setShowForm={setShowForm} key={showForm}/>}
 
       <CodeBox post={post} />
+
+      {favComment && <Box border='1px'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="0px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
+      </Box></Box>}
       
+      <br/><br/>
       <form id="comment-form" onSubmit={commentSubmit}>
         <Input
           type="text"
@@ -140,6 +144,9 @@ export default function PostDetails() {
         <br/>
         <br/>
         <br/>
+        <div>NESTED COMMENTS PRACTICE
+    <NestedComments id={id} />
+  </div>
     </>
   );
 }
