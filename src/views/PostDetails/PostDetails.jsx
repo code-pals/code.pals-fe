@@ -23,6 +23,7 @@ import { useHistory } from 'react-router-dom';
 import PostForm from '../../components/PostForm/PostForm.jsx';
 import CodeBox from '../../components/CodeBox/CodeBox';
 import PostCommentBox from '../../components/CommentBox/PostCommentBox.jsx';
+import NestedComments from '../../components/NestedComments/NestedComments.jsx';
 
 export default function PostDetails() {
   const { id } = useParams();

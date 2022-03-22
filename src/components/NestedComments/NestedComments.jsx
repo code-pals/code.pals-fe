@@ -13,7 +13,7 @@ export default function NestedComments({commentsArr}) {
     });
     
     const nestedComments = commentsArr.filter(comment => {
-        return comment.parentId === null;
+        return comment.parent === null;
     })
   return (
       <>
