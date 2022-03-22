@@ -88,6 +88,24 @@ export default function PostDetails() {
   const handleEdit = async (id) => {
     setShowForm((prev) => !prev);
   };
+  
+  
+  const commentMap = {};
+  comments.forEach(comment => commentMap[comment.commentId] = comment);
+  for ( let i =0; i < comments.length; i++){
+    if(comments[i].parent !== null){
+          const parent = commentMap[comments[i].parent];
+        if(parent.children && !parent.children.includes(comments[i])){
+          parent.children.push(comments[i]);
+        }
+        else if(!parent.children){
+          parent.children =[comments[i]];
+        }
+    }
+  } 
+  const nestedComments = comments.filter(comment => {
+      return comment.parent === null;
+  })
 
   return (
     <>
@@ -129,11 +147,7 @@ export default function PostDetails() {
       
       <br />
       {/* } */}
-      {comments
-        .sort(function (a, b) {
-          return a.created - b.created;
-        })
-        .map((comment) => {
+      {nestedComments.sort((a,b)=> a-b).map((comment) => {
           return (
             <Box key={comment.commentId}>
               <PostCommentBox comment = {comment} post = {post} comments={comments} setComments = {setComments} favComment={favComment} setFavComment={setFavComment} />

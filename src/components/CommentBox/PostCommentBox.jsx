@@ -81,9 +81,12 @@ export default function PostCommentBox({ comment, post, comments, setComments, s
     );
   };
 
+  const nestedComments = (comment.children || []).map(comment => {
+    return <PostCommentBox comment = {comment} post = {post} comments={comments} setComments = {setComments} setFavComment={setFavComment} />
+})
 
   return (
-    <div><Box maxW="xxl" pl="10px">{}
+    <div><Box maxW="xxl" pl="10px" border='1px solid beige' padding='15px' w='80%' m='15px' borderRadius='25px'>{}
     <Box style={{ display: 'flex' }}>
       <Avatar pr="0px" src={comment.avatar} alt={'Author'} />
       <br />
@@ -107,6 +110,8 @@ export default function PostCommentBox({ comment, post, comments, setComments, s
   </Box>
   
   
+     <Box ml='55px' padding='1px'>{nestedComments}</Box>
+
   </div>
   )
 }
