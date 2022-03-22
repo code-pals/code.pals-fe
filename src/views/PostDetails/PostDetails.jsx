@@ -23,6 +23,7 @@ import { useHistory } from 'react-router-dom';
 import PostForm from '../../components/PostForm/PostForm.jsx';
 import CodeBox from '../../components/CodeBox/CodeBox';
 import PostCommentBox from '../../components/CommentBox/PostCommentBox.jsx';
+import NestedComments from '../../components/NestedComments/NestedComments.jsx';
 
 export default function PostDetails() {
   const { id } = useParams();
@@ -87,13 +88,30 @@ export default function PostDetails() {
   const handleEdit = async (id) => {
     setShowForm((prev) => !prev);
   };
+  
+  
+  const commentMap = {};
+  comments.forEach(comment => commentMap[comment.commentId] = comment);
+  for ( let i =0; i < comments.length; i++){
+    if(comments[i].parent !== null){
+          const parent = commentMap[comments[i].parent];
+        if(parent.children && !parent.children.includes(comments[i])){
+          parent.children.push(comments[i]);
+        }
+        else if(!parent.children){
+          parent.children =[comments[i]];
+        }
+    }
+  } 
+  const nestedComments = comments.filter(comment => {
+      return comment.parent === null;
+  })
 
   return (
     <>
       <PostHomeBox post={post} />
       
-      {favComment && <Box border='1px'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="0px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
-      </Box></Box>}
+     
       
       <Center>
         <ButtonGroup spacing="5">
@@ -110,7 +128,11 @@ export default function PostDetails() {
       {showForm && <PostForm setShowForm={setShowForm} key={showForm}/>}
 
       <CodeBox post={post} />
+
+      {favComment && <Box border='1px solid brown' borderRadius='25px' p='10px' m='15px' w='80%'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="0px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
+      </Box></Box>}
       
+      <br/><br/>
       <form id="comment-form" onSubmit={commentSubmit}>
         <Input
           type="text"
@@ -125,11 +147,7 @@ export default function PostDetails() {
       
       <br />
       {/* } */}
-      {comments
-        .sort(function (a, b) {
-          return a.created - b.created;
-        })
-        .map((comment) => {
+      {nestedComments.sort((a,b)=> a-b).map((comment) => {
           return (
             <Box key={comment.commentId}>
               <PostCommentBox comment = {comment} post = {post} comments={comments} setComments = {setComments} favComment={favComment} setFavComment={setFavComment} />

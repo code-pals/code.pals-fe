@@ -12,6 +12,7 @@ import { useUser } from '../../context/UserContext';
 import { createComment, favoriteComment, getCommentById } from '../../services/fetch-utils';
 import { getCommentsByPost } from '../../services/fetch-utils';
 import { useParams } from 'react-router-dom';
+import NestedComments from '../NestedComments/NestedComments';
 
 export default function PostCommentBox({ comment, post, comments, setComments, setFavComment }) {
     const [showInput, setShowInput] = useState(false);
@@ -80,9 +81,12 @@ export default function PostCommentBox({ comment, post, comments, setComments, s
     );
   };
 
+  const nestedComments = (comment.children || []).map(comment => {
+    return <PostCommentBox comment = {comment} post = {post} comments={comments} setComments = {setComments} setFavComment={setFavComment} />
+})
 
   return (
-    <div><Box maxW="xxl" pl="10px">{}
+    <div><Box maxW="xxl" pl="10px" border='1px solid beige' padding='25px' w='75%' m='15px' borderRadius='25px'>{}
     <Box style={{ display: 'flex' }}>
       <Avatar pr="0px" src={comment.avatar} alt={'Author'} />
       <br />
@@ -103,6 +107,11 @@ export default function PostCommentBox({ comment, post, comments, setComments, s
           : ''}
       </div>
     </Box>
-  </Box></div>
+  </Box>
+  
+  
+     <Box ml='95px' padding='1px'>{nestedComments}</Box>
+
+  </div>
   )
 }
