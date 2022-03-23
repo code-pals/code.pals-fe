@@ -78,6 +78,9 @@ export default function PostDetails() {
     commentInput.value = '';}
   }
 
+
+
+
   const handleDelete = async () => {
     const answer = confirm('Are you sure you want to delete this post?');
     if (answer) {
@@ -150,14 +153,16 @@ export default function PostDetails() {
       {nestedComments.sort((a,b)=> a-b).map((comment) => {
           return (
             <Box key={comment.commentId}>
+
               <PostCommentBox comment = {comment} post = {post} comments={comments} setComments = {setComments} favComment={favComment} setFavComment={setFavComment} />
+
             </Box>
           );
         })}
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+      <br />
+      <br />
+      <br />
+      <br />
     </>
   );
 }

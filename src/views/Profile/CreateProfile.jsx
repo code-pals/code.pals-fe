@@ -39,7 +39,6 @@ export default function CreateProfile() {
     const id = user.userId;
     console.log(id);
     const response = await postUserData(id, userObj);
-    console.log(response);
     alert('backend stuff goes here');
     history.replace('/profile');
   }
@@ -82,25 +81,6 @@ export default function CreateProfile() {
                     <option value="option3">6 plus</option>
                   </Select>
                   <br />
-                  {/* <CheckboxGroup colorScheme="green">
-                    <Stack spacing={[1, 5]} direction={['column', 'row']}>
-                      <Checkbox value="JavaScript">JavaScript</Checkbox>
-                      <Checkbox value="C++">C++</Checkbox>
-                      <Checkbox value="Python">Python</Checkbox>
-                      <Checkbox value="C#">C#</Checkbox>
-                      <Checkbox value="React">React</Checkbox>
-                    </Stack>
-                    <br />
-                    <Stack spacing={[1, 5]} direction={['column', 'row']}>
-                      <Checkbox value="Java">Java</Checkbox>
-                      <Checkbox value="Ruby">Ruby</Checkbox>
-                      <Checkbox value="SQL">SQL</Checkbox>
-                      <Checkbox value="HTML">HTML</Checkbox>
-                      <Checkbox value="CSS">CSS</Checkbox>
-                      <Checkbox value=".net">.Net</Checkbox>
-                    </Stack>
-                  </CheckboxGroup>*/}
-
                   <br />
                   <Button
                     bg={'blue.400'}

@@ -16,7 +16,7 @@ export default function Results() {
   console.log('state', state);
   return (
     <>
-      <SearchBar />;{/* <CodeBox /> */}
+      <SearchBar />
     </>
   );
 }

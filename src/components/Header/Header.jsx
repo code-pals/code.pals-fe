@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import {
   Box,
   Flex,
@@ -41,11 +40,7 @@ const NavLink = ({ children }) => (
 export default function withAction() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { user, getUser, logIn, logOut } = useUser();
-  //const storedU = localStorage.getItem('storageUser');
-  //const storedUser = JSON.parse(storedU);
-  //console.log('headerStoredUser', storedUser);
-  console.log('USER3', user);
+  const { user, logOut } = useUser();
 
   return (
     <>
@@ -71,7 +66,7 @@ export default function withAction() {
               <Link to={'/create'} underline="none">
                 Create
               </Link>
-              
+
               <Link to={'/results'} underline="none">
                 Search
               </Link>
@@ -95,15 +90,6 @@ export default function withAction() {
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
-            {/* <Button
-              variant={'solid'}
-              colorScheme={'teal'}
-              size={'sm'}
-              mr={4}
-              leftIcon={<AddIcon />}
-            >
-              Action
-            </Button> */}
             <Button onClick={toggleColorMode} mr="10px">
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
@@ -123,14 +109,10 @@ export default function withAction() {
                   <MenuDivider />
                   Profile
                 </Link>
-                {/* <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem> */}
               </MenuList>
             </Menu>
           </Flex>
         </Flex>
-        
 
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
@@ -141,13 +123,12 @@ export default function withAction() {
               <Link to={'/create'} underline="none">
                 Create
               </Link>
-              
+
               <Link to={'/results'} underline="none">
                 Search
               </Link>
 
               <Link to={'/chatrooms'} underline="none">
-
                 Chat
               </Link>
               <Link to={'/aboutus'} underline="none">
@@ -162,9 +143,6 @@ export default function withAction() {
                   Logout
                 </Link>
               )}
-              {/* {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))} */}
             </Stack>
           </Box>
         ) : null}
