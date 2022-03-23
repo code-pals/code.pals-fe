@@ -3,8 +3,8 @@ import { getAllPosts, getAllBoards } from '../../services/fetch-utils.js';
 import PostHomeBox from '../../components/PostHomeBox/PostHomeBox.jsx';
 import BoardHomeBox from '../../components/BoardHomeBox/BoardHomeBox.jsx';
 import { Link } from 'react-router-dom';
-import { Flex, Box, spacer } from '@chakra-ui/react';
-import TrialPostBox from '../../components/PostHomeBox/TrialPostBox.jsx';
+// import { Flex, Box, spacer } from '@chakra-ui/react';
+// import TrialPostBox from '../../components/PostHomeBox/TrialPostBox.jsx';
 import {
   Flex,
   Box,
