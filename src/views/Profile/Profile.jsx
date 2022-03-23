@@ -41,7 +41,6 @@ export default function Profile() {
       setAllPosts(postsByName);
 
       const boardsByName = await getBoardsByUsername(username);
-      console.log(boardsByName);
       setUserBoards(boardsByName);
     };
     getPostsAndBoards();
@@ -49,7 +48,6 @@ export default function Profile() {
 
   return (
     <>
-
       <GithubBox usernamex={username} />
       <Box>
         <Flex
@@ -66,17 +64,17 @@ export default function Profile() {
               <PostHomeBox key={post.postId} post={post} />
             </div>
           ))}
-          {userBoards.map((board => {
-            console.log('boardinsideprofilemap', board)
-            return <Link key={board.board_id} to={`/boarddetails/${board.board_id}`}>
-              <Box key={board.board_id}>
-                <BoardHomeBox key={board.board_id} board={board} />
-              </Box>
-            </Link>
-          }))}
+          {userBoards.map((board) => {
+            return (
+              <Link key={board.board_id} to={`/boarddetails/${board.board_id}`}>
+                <Box key={board.board_id}>
+                  <BoardHomeBox key={board.board_id} board={board} />
+                </Box>
+              </Link>
+            );
+          })}
         </Flex>
       </Box>
-
     </>
   );
 }

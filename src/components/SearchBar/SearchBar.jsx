@@ -28,16 +28,11 @@ export default function SearchBar() {
       alert('please enter a phrase or keyword');
     } else {
       const responseArr = await searchPostsAndComments(search);
-      console.log(responseArr);
       setComments(responseArr.body[0]);
       setPosts(responseArr.body[2]);
-      // history.push({
-      //   pathname: '/results',
-      //   state: comments })
     }
   };
 
-  console.log(comments, posts);
   return (
     <>
       <Center>

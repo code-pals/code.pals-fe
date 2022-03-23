@@ -154,10 +154,10 @@ export default function PostDetails() {
             </Box>
           );
         })}
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+      <br />
+      <br />
+      <br />
+      <br />
     </>
   );
 }

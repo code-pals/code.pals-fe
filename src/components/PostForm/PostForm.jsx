@@ -2,9 +2,6 @@ import { useState, useEffect } from 'react';
 import {
   FormControl,
   FormLabel,
-  RadioGroup,
-  HStack,
-  Radio,
   Button,
   FormErrorMessage,
   FormHelperText,
@@ -43,13 +40,10 @@ export default function PostForm({ setShowForm, setForceRender }) {
         };
         //regular post form
         if (!params.id) {
-          console.log('no params');
           const response = await createPost(postObj);
-          console.log('response', response.body);
           history.push(`/postdetails/${response.body.postId}`);
-        } //if editing post form  
+        } //if editing post form
         else if (params.id) {
-          console.log('paramid');
           const editResponse = await editPost(params.id, postObj);
           console.log(editResponse);
           
@@ -61,7 +55,6 @@ export default function PostForm({ setShowForm, setForceRender }) {
       }
     } catch {}
   };
-  console.log('params', params.id);
 
   return (
     <>
@@ -86,15 +79,6 @@ export default function PostForm({ setShowForm, setForceRender }) {
                 onChange={(e) => setCode(e.target.value)}
               />
             </Code>
-            {/* <Center>
-              <Image
-                h="200px"
-                src={
-                  'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80'
-                }
-                layout={'fill'}
-              />
-            </Center> */}
             <FormLabel htmlFor="looking">What is your question?</FormLabel>
             <Input
               id="looking"

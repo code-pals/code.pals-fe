@@ -38,9 +38,6 @@ export default function ProfileBox({ name, quote, image, linkedin, github }) {
           <Heading fontSize={'2xl'} fontFamily={'body'}>
             {name}
           </Heading>
-          {/* <Text fontWeight={600} color={'gray.500'} size="sm" mb={4}>
-            @lindsey_jam3s
-          </Text> */}
           <Text
             textAlign={'center'}
             color={useColorModeValue('gray.700', 'gray.400')}
