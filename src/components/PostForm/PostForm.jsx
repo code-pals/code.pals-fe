@@ -26,7 +26,7 @@ export default function PostForm({ setShowForm, setForceRender }) {
   const params = useParams();
 
   const { user } = useUser();
-  console.log(user, 'USER');
+  console.log(user, 'USER');  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,8 +45,10 @@ export default function PostForm({ setShowForm, setForceRender }) {
         } //if editing post form
         else if (params.id) {
           const editResponse = await editPost(params.id, postObj);
-          setShowForm(false);
-          window.location.reload();
+          console.log(editResponse);
+          
+          setShowForm((prev) => !prev);
+          //window.location.reload();
         }
       } else {
         history.push('/login');

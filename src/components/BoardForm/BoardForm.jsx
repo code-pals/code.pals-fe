@@ -17,7 +17,7 @@ import { useUser } from '../../context/UserContext.js';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-export default function BoardForm() {
+export default function BoardForm({ setShowForm }) {
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
   const [goal, setGoal] = useState('');
@@ -42,7 +42,7 @@ export default function BoardForm() {
         if (params.id) {
           console.log('boardobjparam', boardObj);
           const response = await editBoard(params.id, boardObj);
-          window.location.reload();
+          setShowForm((prev) => !prev);
         } else {
           const response = await createBoard(boardObj);
           history.push(`/boarddetails/${response.body.board_id}`);

@@ -137,3 +137,18 @@ export async function getUserByName(username) {
 
   return response.body;
 }
+export async function favoriteComment(commentId, postObj) {
+  console.log('postObj', postObj);
+  const response = await request
+  .patch(`${url}/posts/favorite/${commentId}`)
+  .send(postObj);
+
+  console.log('fav response', response);
+  return response;
+}
+export async function getCommentById(commentId) {
+  const response = await request
+  .get(`${url}/comments/comment/${commentId}`);
+
+  return response;
+}
