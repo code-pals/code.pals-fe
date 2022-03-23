@@ -1,7 +1,7 @@
 import request from 'superagent';
 
-//const url = 'http://localhost:7890/api/v1';
-const url = 'https://codepalz.herokuapp.com/api/v1';
+const url = 'http://localhost:7890/api/v1';
+//const url = 'https://codepalz.herokuapp.com/api/v1';
 
 export async function getAllPosts() {
   const response = await request.get(`${url}/posts`);
@@ -140,15 +140,14 @@ export async function getUserByName(username) {
 export async function favoriteComment(commentId, postObj) {
   console.log('postObj', postObj);
   const response = await request
-  .patch(`${url}/posts/favorite/${commentId}`)
-  .send(postObj);
+    .patch(`${url}/posts/favorite/${commentId}`)
+    .send(postObj);
 
   console.log('fav response', response);
   return response;
 }
 export async function getCommentById(commentId) {
-  const response = await request
-  .get(`${url}/comments/comment/${commentId}`);
+  const response = await request.get(`${url}/comments/comment/${commentId}`);
 
   return response;
 }
