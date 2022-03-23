@@ -129,7 +129,7 @@ export default function PostDetails() {
 
       <CodeBox post={post} />
 
-      {favComment && <Box border='1px solid brown' borderRadius='25px' p='10px' m='15px' w='80%'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="0px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
+      {favComment && <Box border='1px solid brown' borderRadius='25px' p='10px' m='15px' w='75%'>Favorite Comment<Box style={{ display: 'flex' }}> <Avatar pr="0px" src={favComment.avatar} alt={'Author'} /><Box>{favComment.comment}</Box>
       </Box></Box>}
       
       <br/><br/>
